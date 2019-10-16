@@ -1,0 +1,153 @@
+%% LaTeX-Beamer template for KIT design
+%% by Erik Burger, Christian Hammer
+%% title picture by Klaus Krogmann
+%%
+%% version 2.1
+%%
+%% mostly compatible to KIT corporate design v2.0
+%% http://intranet.kit.edu/gestaltungsrichtlinien.php
+%%
+%% Problems, bugs and comments to
+%% burger@kit.edu
+
+\documentclass[18pt]{beamer}
+
+%% SLIDE FORMAT
+
+% use 'beamerthemekit' for standard 4:3 ratio
+% for widescreen slides (16:9), use 'beamerthemekitwide'
+% for widescreen slide without sidebar use 'beamerthemekitwidenosidebar'
+
+\usepackage{templates/beamerthemekit}
+%\usepackage{templates/beamerthemekitwide}
+%\usepackage{templates/beamerthemekitwidenosidebar}
+
+% use this to disable the latex beamer navigation symbols
+%\beamertemplatenavigationsymbolsempty
+
+
+%% TITLE PICTURE
+
+% if a custom picture is to be used on the title page, copy it into the 'logos'
+% directory, in the line below, replace 'mypicture' with the 
+% filename (without extension) and uncomment the following line
+% (picture proportions: 63 : 20 for standard, 169 : 40 for wide
+% *.eps format if you use latex+dvips+ps2pdf, 
+% *.jpg/*.png/*.pdf if you use pdflatex)
+
+%\titleimage{mypicture}
+
+%% TITLE LOGO
+
+% for a custom logo on the front page, copy your file into the 'logos'
+% directory, insert the filename in the line below and uncomment it
+
+\titlelogo{Logo_TECO}
+
+% (*.eps format if you use latex+dvips+ps2pdf,
+% *.jpg/*.png/*.pdf if you use pdflatex)
+
+%% TikZ INTEGRATION
+
+% use these packages for PCM symbols and UML classes
+% \usepackage{templates/tikzkit}
+% \usepackage{templates/tikzuml}
+
+% the presentation starts here
+
+\title[Proposal Bachelorarbeit]{Proposal zur Bachelorarbeit:\\ Titel der Bachelorarbeit}
+\subtitle{Professor: Michael Beigl, Betreuer: Tobias Röddiger}
+\author{David Laubenstein}
+
+\institute{Lehrstuhl Pervasive Computing Systems}
+
+% Bibliography
+
+\usepackage[citestyle=authoryear,bibstyle=numeric,hyperref,backend=biber]{biblatex}
+\addbibresource{templates/example.bib}
+\bibhang1em
+
+\begin{document}
+
+% change the following line to "ngerman" for German style date and logos
+\selectlanguage{ngerman}
+
+%title page
+\begin{frame}
+\titlepage
+\end{frame}
+
+% --------------------------- 1. Folie PIBA ----------------------------------
+
+\section{PIBA}
+\subsection{Problem}
+\begin{frame}{Problem}
+Problem: Was ist das Problem? (allgemeinverständlich für Informatiker, nach Möglichkeit graphisch)
+Idee: Was ist ihr Lösungsansatz?
+Vorteile (Benefit): Was ist der Vorteil ihres Lösungsansatzes? (auch ggü. anderen Ansätzen)
+Aktionen (Action): Welche Schritte wollen Sie gehen?
+\end{frame}
+
+\subsection{Idee}
+\begin{frame}{Idee}
+Problem: Was ist das Problem? (allgemeinverständlich für Informatiker, nach Möglichkeit graphisch)
+Idee: Was ist ihr Lösungsansatz?
+Vorteile (Benefit): Was ist der Vorteil ihres Lösungsansatzes? (auch ggü. anderen Ansätzen)
+Aktionen (Action): Welche Schritte wollen Sie gehen?
+\end{frame}
+
+\subsection{Benefit}
+\begin{frame}{Benefit}
+Problem: Was ist das Problem? (allgemeinverständlich für Informatiker, nach Möglichkeit graphisch)
+Idee: Was ist ihr Lösungsansatz?
+Vorteile (Benefit): Was ist der Vorteil ihres Lösungsansatzes? (auch ggü. anderen Ansätzen)
+Aktionen (Action): Welche Schritte wollen Sie gehen?
+\end{frame}
+
+\subsection{Action}
+\begin{frame}{Action}
+Problem: Was ist das Problem? (allgemeinverständlich für Informatiker, nach Möglichkeit graphisch)
+Idee: Was ist ihr Lösungsansatz?
+Vorteile (Benefit): Was ist der Vorteil ihres Lösungsansatzes? (auch ggü. anderen Ansätzen)
+Aktionen (Action): Welche Schritte wollen Sie gehen?
+\end{frame}
+
+% ----------------------- 2. Folie Umsetzung ihres Lösungsansatzes -------------
+\section{Umsetzung ihres Lösungsansatzes}
+\begin{frame}{Umsetzung ihres Lösungsansatzes}
+\begin{exampleblock}{Example 1}
+\begin{itemize}
+\item Bullet point 1
+\item Bullet point 2
+\item \dots
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+
+% ----------------------- 3. Folie Geplante Evaluation -------------
+\section{Geplante Evaluation}
+\begin{frame}{Geplante Evaluation}
+\begin{exampleblock}{Example 1}
+Geplante Evaluation (Form, Ziel, Metriken, Fragestellungen, ggf. Hypothesen)
+\end{exampleblock}
+\end{frame}
+
+% ----------------------- 4. Folie Zusammenfassung -------------
+\section{Zusammenfassung}
+\begin{frame}{Zusammenfassung}
+\begin{exampleblock}{Example 1}
+4. Folie: Zusammenfassung, dazu einfach Folie 1 nochmals auflegen (Übersicht; gibt auch bei der anschließenden Diskussion nochmal einen Überblick
+\end{exampleblock}
+\end{frame}
+
+\appendix
+\beginbackup
+
+\begin{frame}[allowframebreaks]{References}
+\printbibliography
+\end{frame}
+
+\backupend
+
+\end{document}
