@@ -19,6 +19,7 @@
 % for widescreen slide without sidebar use 'beamerthemekitwidenosidebar'
 
 \usepackage{templates/beamerthemekit}
+\usepackage{graphicx}
 %\usepackage{templates/beamerthemekitwide}
 %\usepackage{templates/beamerthemekitwidenosidebar}
 
@@ -42,7 +43,7 @@
 % for a custom logo on the front page, copy your file into the 'logos'
 % directory, insert the filename in the line below and uncomment it
 
-\titlelogo{Logo_TECO}
+\titlelogo{logo_teco}
 
 % (*.eps format if you use latex+dvips+ps2pdf,
 % *.jpg/*.png/*.pdf if you use pdflatex)
@@ -68,8 +69,6 @@
 \bibhang1em
 
 \begin{document}
-
-% change the following line to "ngerman" for German style date and logos
 \selectlanguage{ngerman}
 
 %title page
@@ -82,69 +81,112 @@
 \section{PIBA}
 \subsection{Problem}
 \begin{frame}{Problem}
-Problem: Was ist das Problem? (allgemeinverständlich für Informatiker, nach Möglichkeit graphisch)
-Idee: Was ist ihr Lösungsansatz?
-Vorteile (Benefit): Was ist der Vorteil ihres Lösungsansatzes? (auch ggü. anderen Ansätzen)
-Aktionen (Action): Welche Schritte wollen Sie gehen?
+%insert picture from sleepApneaDeclaration
+    \includegraphics[scale=0.4]{logos/was-passiert-bei-schlafapnoe}
+\end{frame}
+
+\begin{frame}{Problem}
+%insert picture from sleeping labor
+    \includegraphics[scale=0.12]{logos/sleepLabor}
 \end{frame}
 
 \subsection{Idee}
 \begin{frame}{Idee}
-Problem: Was ist das Problem? (allgemeinverständlich für Informatiker, nach Möglichkeit graphisch)
-Idee: Was ist ihr Lösungsansatz?
-Vorteile (Benefit): Was ist der Vorteil ihres Lösungsansatzes? (auch ggü. anderen Ansätzen)
-Aktionen (Action): Welche Schritte wollen Sie gehen?
+%insert picture from Earbuds for solution to diagnose this 
+    \begin{columns}[T] % align columns
+	\begin{column}{.48\textwidth}
+	    \includegraphics[scale=0.15]{logos/esense}
+	\end{column}%
+	\hfill%
+	\begin{column}{.48\textwidth}
+	    \includegraphics[scale=0.25]{logos/esense2}
+	\end{column}%
+    \end{columns}
 \end{frame}
 
 \subsection{Benefit}
 \begin{frame}{Benefit}
-Problem: Was ist das Problem? (allgemeinverständlich für Informatiker, nach Möglichkeit graphisch)
-Idee: Was ist ihr Lösungsansatz?
-Vorteile (Benefit): Was ist der Vorteil ihres Lösungsansatzes? (auch ggü. anderen Ansätzen)
-Aktionen (Action): Welche Schritte wollen Sie gehen?
+    \begin{itemize}
+	\item faster
+	\item easier
+	\item cheaper
+    \end{itemize}
 \end{frame}
 
 \subsection{Action}
 \begin{frame}{Action}
-Problem: Was ist das Problem? (allgemeinverständlich für Informatiker, nach Möglichkeit graphisch)
-Idee: Was ist ihr Lösungsansatz?
-Vorteile (Benefit): Was ist der Vorteil ihres Lösungsansatzes? (auch ggü. anderen Ansätzen)
-Aktionen (Action): Welche Schritte wollen Sie gehen?
+Phasen der Bachelorarbeit
+    \begin{columns}[T] % align columns
+	\begin{column}{.48\textwidth}
+	    \begin{itemize}
+	    	\item Nutzerstudie (4 Wochen)
+	    	\item Evaluation von maschinellen Lernverfahren (4 Wochen)
+	    	\item Schreibphase (4 Wochen)
+	    \end{itemize}
+	\end{column}%
+	\hfill%
+	\begin{column}{.48\textwidth}
+	    \includegraphics[scale=0.25]{logos/esense2}
+	\end{column}%
+    \end{columns}
 \end{frame}
 
 % ----------------------- 2. Folie Umsetzung ihres Lösungsansatzes -------------
 \section{Umsetzung ihres Lösungsansatzes}
 \begin{frame}{Umsetzung ihres Lösungsansatzes}
-\begin{exampleblock}{Example 1}
+Fragestellungen zur Nutzerstudie
 \begin{itemize}
-\item Bullet point 1
-\item Bullet point 2
-\item \dots
+	\item Was will ich messen
+	\item Was sind geeignete Probanden
+	\item Welche Informationen über die Probanden will ich sammeln
+	\begin{itemize}
+		\item Gewicht, BMI, all. Fitness, Schlafrythmus, ...
+	\end{itemize}
+	\item Umfragen
+	\begin{itemize}
+		\item Interview/ Umfrage zur Nutzerstudie
+	\end{itemize}
 \end{itemize}
-\end{exampleblock}
+Evaluation von maschinellen Lernverfahren zur Klassifikation
+\begin{itemize}
+	\item Welche maschinellen Lernverfahren gibt es?
+	\item Wie werden meine Daten gelabelt?
+	\item 
+\end{itemize}
 \end{frame}
 
 
 % ----------------------- 3. Folie Geplante Evaluation -------------
 \section{Geplante Evaluation}
 \begin{frame}{Geplante Evaluation}
-\begin{exampleblock}{Example 1}
-Geplante Evaluation (Form, Ziel, Metriken, Fragestellungen, ggf. Hypothesen)
-\end{exampleblock}
+\begin{itemize}
+	\item Vergleich verschiedener maschineller Lernverfahren
+	\item Vergleich mit aktuellem Industriestandard (Schlaflabor)
+\end{itemize}
 \end{frame}
 
 % ----------------------- 4. Folie Zusammenfassung -------------
 \section{Zusammenfassung}
 \begin{frame}{Zusammenfassung}
-\begin{exampleblock}{Example 1}
-4. Folie: Zusammenfassung, dazu einfach Folie 1 nochmals auflegen (Übersicht; gibt auch bei der anschließenden Diskussion nochmal einen Überblick
-\end{exampleblock}
+\begin{itemize}
+	\item Problem: Diagnose -> Schlafapnoe
+	\begin{itemize}
+		\item Earbuds als Schlaflaborersatz
+	\end{itemize}
+	\item Nutzerstudie
+	\item Maschinelle Lernverfahren zur Klassifikation
+	\item Evaluation
+\end{itemize}
 \end{frame}
 
 \appendix
 \beginbackup
 
 \begin{frame}[allowframebreaks]{References}
+\begin{itemize}
+	\item https://www.deutsche-familienversicherung.de/ratgeber/artikel/das-schlafapnoe-syndrom/
+	\item https://www.extratipp.com/bilder/2017/06/16/8406482/1320911264-schlaflabor-hofheim-krankenhaus-schlafen-traeumen-atemaussetzer-selbsttest-testbericht.jpg
+\end{itemize}
 \printbibliography
 \end{frame}
 

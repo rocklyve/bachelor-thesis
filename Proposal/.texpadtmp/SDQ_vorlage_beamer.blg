@@ -1,9 +1,0 @@
-[0] Config.pm:304> INFO - This is Biber 2.12
-[0] Config.pm:307> INFO - Logfile is '/Users/rocklyve/git/uni/bachelor-thesis/Proposal/.texpadtmp/SDQ_vorlage_beamer.blg'
-[36] biber-darwin:315> INFO - === Wed Oct 16, 2019, 13:56:51
-[56] Biber.pm:371> INFO - Reading '/Users/rocklyve/git/uni/bachelor-thesis/Proposal/.texpadtmp/SDQ_vorlage_beamer.bcf'
-[129] Biber.pm:889> INFO - Found 0 citekeys in bib section 0
-[134] Utils.pm:193> WARN - The file '/Users/rocklyve/git/uni/bachelor-thesis/Proposal/.texpadtmp/SDQ_vorlage_beamer.bcf' does not contain any citations!
-[139] bbl.pm:636> INFO - Writing '/Users/rocklyve/git/uni/bachelor-thesis/Proposal/.texpadtmp/SDQ_vorlage_beamer.bbl' with encoding 'UTF-8'
-[139] bbl.pm:739> INFO - Output to /Users/rocklyve/git/uni/bachelor-thesis/Proposal/.texpadtmp/SDQ_vorlage_beamer.bbl
-[140] Biber.pm:110> INFO - WARNINGS: 1
