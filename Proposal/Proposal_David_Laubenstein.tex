@@ -56,7 +56,7 @@
 
 % the presentation starts here
 
-\title[Proposal Bachelorarbeit]{Proposal zur Bachelorarbeit:\\ Titel der Bachelorarbeit}
+\title[Proposal Bachelorarbeit]{Proposal: Klassifikation von respiratorischen Ereignissen mit Earables und maschinellem Lernen}
 \subtitle{Professor: Michael Beigl, Betreuer: Tobias Röddiger}
 \author{David Laubenstein}
 
@@ -107,10 +107,11 @@
 \subsection{Benefit}
 \begin{frame}{Benefit}
     \begin{itemize}
-	\item faster
-	\item easier
-	\item cheaper
-    \end{itemize}
+		\item Test kann unkompliziert zuhause durchgeführt werden
+		\begin{itemize}
+			\item kein Schlaflabor mehr nötig
+		\end{itemize}
+	\end{itemize}
 \end{frame}
 
 \subsection{Action}
@@ -119,21 +120,24 @@ Phasen der Bachelorarbeit
     \begin{columns}[T] % align columns
 	\begin{column}{.48\textwidth}
 	    \begin{itemize}
-	    	\item Nutzerstudie (4 Wochen)
-	    	\item Evaluation von maschinellen Lernverfahren (4 Wochen)
-	    	\item Schreibphase (4 Wochen)
+	    	\item Nutzerstudie, Datensatz
+	    	\item Evaluation von maschinellen Lernverfahren
+	    	\item Schreibphase
 	    \end{itemize}
 	\end{column}%
 	\hfill%
 	\begin{column}{.48\textwidth}
-	    \includegraphics[scale=0.25]{logos/esense2}
+		\includegraphics<1>[width=1.0\textwidth]{logos/esense2}
+		\includegraphics<2>[height=1.2\textwidth]{logos/smartphone}
+		\includegraphics<3>[width=1.0\textwidth]{logos/machineLearning}
+		\includegraphics<4>[width=1.0\textwidth]{logos/writeBA}
 	\end{column}%
     \end{columns}
 \end{frame}
 
 % ----------------------- 2. Folie Umsetzung ihres Lösungsansatzes -------------
-\section{Umsetzung ihres Lösungsansatzes}
-\begin{frame}{Umsetzung ihres Lösungsansatzes}
+\section{Fragestellungen}
+\begin{frame}{Fragestellungen}
 Fragestellungen zur Nutzerstudie
 \begin{itemize}
 	\item Was will ich messen
@@ -145,13 +149,16 @@ Fragestellungen zur Nutzerstudie
 	\item Umfragen
 	\begin{itemize}
 		\item Interview/ Umfrage zur Nutzerstudie
+		\begin{itemize}
+			\item Tragekomfort der Earables?
+			\item Wohlbefinden währrend der Studie
+		\end{itemize}
 	\end{itemize}
 \end{itemize}
 Evaluation von maschinellen Lernverfahren zur Klassifikation
 \begin{itemize}
-	\item Welche maschinellen Lernverfahren gibt es?
 	\item Wie werden meine Daten gelabelt?
-	\item 
+	\item Welche maschinellen Lernverfahren gibt es?
 \end{itemize}
 \end{frame}
 
@@ -169,11 +176,11 @@ Evaluation von maschinellen Lernverfahren zur Klassifikation
 \section{Zusammenfassung}
 \begin{frame}{Zusammenfassung}
 \begin{itemize}
-	\item Problem: Diagnose -> Schlafapnoe
+	\item Problem: Diagnose von Schlafstörungen
 	\begin{itemize}
-		\item Earbuds als Schlaflaborersatz
+		\item Earables als Schlaflaborersatz
 	\end{itemize}
-	\item Nutzerstudie
+	\item Nutzerstudie, Datensatz
 	\item Maschinelle Lernverfahren zur Klassifikation
 	\item Evaluation
 \end{itemize}
