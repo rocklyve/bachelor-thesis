@@ -57,7 +57,7 @@
 % the presentation starts here
 
 \title[Proposal Bachelorarbeit]{Proposal: Klassifikation von respiratorischen Ereignissen mit Earables und maschinellem Lernen}
-\subtitle{Professor: Michael Beigl, Betreuer: Tobias Röddiger}
+\subtitle{Professor: Prof. Dr. Michael Beigl, Betreuer: Tobias Röddiger}
 \author{David Laubenstein}
 
 \institute{Lehrstuhl Pervasive Computing Systems}
@@ -109,8 +109,8 @@
 	\end{itemize}
 \end{frame}
 
-\subsection{Action}
-\begin{frame}{Action}
+\subsection{Aktion}
+\begin{frame}{Aktion}
 Phasen der Bachelorarbeit
     \begin{columns}[T] % align columns
 	\begin{column}{.48\textwidth}
@@ -131,28 +131,42 @@ Phasen der Bachelorarbeit
 \end{frame}
 
 % ----------------------- 2. Folie Umsetzung ihres Lösungsansatzes -------------
-\section{Fragestellungen}
-\begin{frame}{Fragestellungen}
-Fragestellungen zur Nutzerstudie
+\section{Übersicht zur Nutzerstudie}
+\begin{frame}{Übersicht zur Nutzerstudie}
 \begin{itemize}
-	\item Welche Informationen über die Probanden sollen gesammelt werden
+	\item Welche Informationen über die Probanden sollen gesammelt werden?
 	\begin{itemize}
 		\item Art des Earable-Aufsatzes
-		\item allg. Information über Proband
-		\begin{itemize}
-			\item Geschlecht, Gewicht, all. Fitness, Schlafrythmus, ... 
-		\end{itemize}
-		\item Interview nach Nutzerstudie
-		\begin{itemize}
-			\item Tragekomfort der Earables?
-			\item Wohlbefinden währrend der Studie
-		\end{itemize}
+		\item allg. Information über Proband (Größe, Gewicht, allg. Fitness, ...)
+		\item Interview nach Nutzerstudie (Tragekomfort, Wohlbefinden)
 	\end{itemize}
+	\item Welche Informationen sollen persistiert werden?
+	\begin{itemize}
+		\item IMU
+		\item Mikrofon (eSense Earbales)
+		\item Kamera (Ohraufnahme)
+		\item PSG-System
+	\end{itemize}
+	\item Zeitliche Synchronisation der Daten
+	\item Simulation von zentralem Apnoe durch "Luft anhalten"
 \end{itemize}
-Evaluation von maschinellen Lernverfahren zur Klassifikation
-\begin{itemize}
-	\item Welche maschinellen Lernverfahren gibt es?
-\end{itemize}
+\end{frame}
+
+\begin{frame}{Übersicht zu maschinellen Lernverfahren}
+	Maschinelle Lernverfahren zur Klassifikation
+	\begin{itemize}
+		\item Berechnung von Features auf dem Datensatz
+		\item Evaluation verschiedener Klassifikatoren
+		\begin{itemize}
+			\item SVM
+			\item Random Forest
+		\end{itemize}
+		\item Vorherige Datenschlitze einbeziehen/ Features lernen
+		\begin{itemize}
+			\item RNN $\rightarrow$ LSTM
+		\end{itemize}
+		\item Über weiter Ideen/ Vorschläge vom Institut würde ich mich freuen!
+	\end{itemize}
 \end{frame}
 
 
@@ -193,6 +207,11 @@ Evaluation von maschinellen Lernverfahren zur Klassifikation
 			\item Proband hält Luft an
 			\item simuliert zentrales Apnoe
 		\end{itemize}
+		\item Synchronisation PSG-System mit Earables und Kamera
+		\begin{itemize}
+			\item Lichtsignal vom Handy an Lichtsensor von PSG-System
+			\item Klatschen des Probanden bei Messbeginn
+		\end{itemize}
 	\end{itemize}
 	\end{frame}
 	
@@ -200,12 +219,15 @@ Evaluation von maschinellen Lernverfahren zur Klassifikation
 Pro Liegeposition wird folgender Ablauf durchgeführt:
 \begin{itemize}
 	\item 60 Sekunden atmen
-	\item 10 Sekunden luft anhalten
+	\item 10 Sekunden Luft anhalten
+	\item Regeneration
 	\item 60 Sekunden atmen
-	\item 20 Sekunden luft anhalten
+	\item 20 Sekunden Luft anhalten
+	\item Regeneration
 	\item 60 Sekunden atmen
-	\item 30 Sekunden luft anhalten
-	\item 120 Sekunden atmen
+	\item 30 Sekunden Luft anhalten
+	\item Regeneration
+	\item 60 Sekunden atmen
 \end{itemize}
 \end{frame}
 
