@@ -1,0 +1,2 @@
+id, patientID, age, size, weight, gender, sleepRythm, earpodSize, coffein, earSizeHeight, earSizeWidth, positionSequence, matratzenArt 
+E5652ACB-B7EC-472F-9EF5-029731D2C596, 002, 0, 0, 0.0, , nil, nil, 0, Optional(0.0), Optional(0.0), nil, 
