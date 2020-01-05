@@ -44,33 +44,31 @@
   <internal package="biblatex" priority="9" active="0">
     <generic>latex</generic>
     <provides type="dynamic">
-      <file>MasterThesis.aux</file>
-      <file>MasterThesis-blx.bib</file>
+      <file>MasterThesis.bcf</file>
     </provides>
     <requires type="dynamic">
       <file>MasterThesis.bbl</file>
     </requires>
     <requires type="static">
+      <file>blx-dm.def</file>
       <file>blx-compat.def</file>
-      <file>biblatex_legacy.def</file>
+      <file>biblatex.def</file>
       <file>blx-natbib.def</file>
-      <file>numeric.bbx</file>
       <file>standard.bbx</file>
+      <file>numeric.bbx</file>
       <file>numeric.cbx</file>
       <file>biblatex.cfg</file>
       <file>english.lbx</file>
     </requires>
   </internal>
   <external package="biblatex" priority="5" active="0">
-    <generic>bibtex</generic>
+    <generic>biber</generic>
     <cmdline>
-      <binary>bibtexu</binary>
-      <option>--wolfgang</option>
-      <option>--min_crossrefs 2</option>
+      <binary>biber</binary>
       <infile>MasterThesis</infile>
     </cmdline>
     <input>
-      <file>MasterThesis.aux</file>
+      <file>MasterThesis.bcf</file>
     </input>
     <output>
       <file>MasterThesis.bbl</file>
@@ -79,15 +77,11 @@
       <file>MasterThesis.bbl</file>
     </provides>
     <requires type="dynamic">
-      <file>MasterThesis.aux</file>
-      <file>MasterThesis-blx.bib</file>
+      <file>MasterThesis.bcf</file>
     </requires>
     <requires type="editable">
       <file>Literature.bib</file>
       <file>Websites.bib</file>
-    </requires>
-    <requires type="static">
-      <file>biblatex.bst</file>
     </requires>
   </external>
 </requests>

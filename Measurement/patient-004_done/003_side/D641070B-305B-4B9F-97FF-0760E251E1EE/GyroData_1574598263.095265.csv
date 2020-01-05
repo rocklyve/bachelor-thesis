@@ -1,0 +1,4 @@
+# name,gyro
+# unit,m/s^2
+# id,2
+time,gyroX,gyroY,gyroZ,lightOn,task,measurementID 

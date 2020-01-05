@@ -1,0 +1,4 @@
+# name,acc
+# unit,m/s^2
+# id,3
+time,accX,accY,accZ,lightOn,task,measurementID 

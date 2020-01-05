@@ -1,0 +1,2 @@
+id, patientID, age, size, weight, gender, sleepRythm, earpodSize, coffein, earSizeHeight, earSizeWidth, positionSequence, matratzenArt 
+D46977FA-46CF-41D2-A972-EDEAEBB9C9E5, 001, 55, 166, 56.0, w, 2, App.MeasurementModel.EarpodSize.medium, 1, 0.0, 0.0, 0, Normal
