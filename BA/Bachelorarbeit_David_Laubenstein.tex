@@ -132,16 +132,16 @@
 % Es werden nur die Teile eingebunden, die hier 
 % aufgefuehrt sind!
 \includeonly{%
-titlepage,%
-statement,% Ist in KA Pflicht für Diplomarbeiten
-introduction,% Motivation, Zielsetzung, Gliederung
-background,% Grundlagen 
-analysis,   % Problembeschreibung (Detail) und Related Work
-design,   % Beschreibung der Problemlösung (Konzepte, allg. Architektur, ...)
-implementation,  % Beschreibung der Umsetzung/Implementierung
-evaluation,      % Nachweis und Auswertung
-futurework,% Future Work
-summary  % Zusammenfassung der Ergebnisse 
+src/titlepage,%
+src/statement,% Ist in KA Pflicht für Diplomarbeiten
+src/introduction,% Motivation, Zielsetzung, Gliederung
+src/background,% Grundlagen 
+src/analysis,   % Problembeschreibung (Detail) und Related Work
+src/design,   % Beschreibung der Problemlösung (Konzepte, allg. Architektur, ...)
+src/implementation,  % Beschreibung der Umsetzung/Implementierung
+src/evaluation,      % Nachweis und Auswertung
+src/futurework,% Future Work
+src/summary  % Zusammenfassung der Ergebnisse 
 }
 \bibliography{Literature, Websites}
 \usepgfplotslibrary{groupplots}
@@ -154,7 +154,7 @@ summary  % Zusammenfassung der Ergebnisse
 \frontmatter
 \pagenumbering{roman}
 \ifnotdraft{
- \include{titlepage}
+ \include{src/titlepage}
  \blankpage % Leerseite auf Titelrückseite
  %
  % Die folgende Erklärung ist für Diplomarbeiten Pflicht
@@ -199,14 +199,14 @@ summary  % Zusammenfassung der Ergebnisse
 \null
 \newpage
 \pagenumbering{arabic}
-\include{introduction}  % Einleitung
-\include{background}  % Grundlagen
-\include{analysis}     % Analyse
-\include{design}     % Entwurf
-\include{implementation}    % Implementierung
-\include{evaluation}        % Evaluierung
-\include{futurework}  % Future Work
-\include{summary}   % Zusammenfassung und Ausblick
+\include{src/introduction}  % Einleitung
+\include{src/background}  % Grundlagen
+\include{src/analysis}     % Analyse
+\include{src/design}     % Entwurf
+\include{src/implementation}    % Implementierung
+\include{src/evaluation}        % Evaluierung
+\include{src/futurework}  % Future Work
+\include{src/summary}   % Zusammenfassung und Ausblick
 
 %% ++++++++++++++++++++++++++++++++++++++++++
 %% Anhang
