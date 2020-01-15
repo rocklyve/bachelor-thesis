@@ -1,7 +1,75 @@
 %% analyse.tex
 %% $Id: analyse.tex 28 2007-01-18 16:31:32Z bless $
 
-\chapter{Analysis}
-\label{ch:Analysis}
+\chapter{Schlafanalyse}
+\label{ch:Schlafanalyse}
 
+\section{Earable Plattform}
+Zur Erfassung der Daten werden eSense-Earpods der Firma ``Nokia Bell Labs Cambridge'' verwendet.	
+Es ist ein Mikrofon und Lautsprecher verbaut, welche beide über Bluetooth angebunden werden können. 
+Das für diese Bachelorarbeit interessanteste Element ist eine 6-Achsen IMU (Inertial Motion Unit), welche Teil dieses Kopfhörers ist.
+Eine IMU ist eine inertiale Messeinheit, womit Gyroskop- und Beschleunigungsdaten aufgezeichnet und mittels BLE (Bluetooth Low Energy) auf das Smartphone übertragen werden können. 
+Es handelt sich um einen 3-Achsen Beschleunigungssensor, sowie einen 3-Achsen Gyroskop.
+Die Messrate dieser Sensoren ist variabel einstellbar, wurde im folgenden auf $50 \si{\hertz}$ festgelegt.
 
+\todo{Beschreibe noch die Filter, die auf die Daten angewandt werden per Default... steht in der Doku des eSense Kopfhörers}
+
+\todo{import picture of esense earpods}
+
+\todo{soll ich hier schreiben, dass die Kopfhörer noch nicht im Handel sind?}
+
+\todo{Welche Vor-/Nachteile gibt es diese zu nutzen? Was soll auf genommen werden?}
+
+\subsection{Datenexport}
+App -> Link to app section
+(csv + m4a -> zip) -> Airdrop -> in folder verschoben
+
+\section{Polysomnographie-Systeme}
+Als Referenz zu den eSense-Earpods wird ein Polysomnographie-System (PSG-System) verwendet. 
+Ein solches System zeichnet Messungen für physiologische Funktionen des Körpers währrend des Schlafs auf und kann somit mögliche Schlafstörungen diagnostizieren.
+Es werden kontinuierlich verschiedene Körperfunktionen überwacht, wodurch nach einer Messung ein umfangreiches und individuelles Schlafprofil erstellt werden kann.
+
+\todo{Beschreibe, welche Sensoren alles existieren, was für ein PSG-System verwendet wird und welche Sensoren bei mir aufgezeichnet werden.}
+
+Das PSG-System dient in dieser Bachelorarbeit dazu, die vom Kopfhörer gemessenen Werte zu bestätigen, ist also der Ground-Truth der Nutzerstudie.
+
+\subsection{Datenexport}
+\todo{beschreibe, wie die daten verfügbar sind und wie die schlussendlich dann persistiert werden von mir}
+
+\begin{itemize}
+    \item Wie funktionieren Polysomnographie Systeme?
+    \item WielassensichdieDatenaufzeichnenundwelcheFormatewerdenbereitgestellt? 
+    \item WelcheAbtastratenwerdenverwendet?WelcheSensorenwerdenappliziert?
+    \item WiekönnendieSensordatensynchronisiertwerden(Earables/PSG)?
+\end{itemize}
+
+\section{Datensynchronisation}
+\todo{Beschreibe, wie die Daten synchron abgestimmt wurden}
+
+\section{Zusatzinformationen der Nutzer}
+\begin{itemize}
+    \item Welche Faktoren sollen im Rahmen der Nutzerstudie erfasst werden, um Aussagen treffen zu können? 
+    \item z.B.Alter,Gewicht,Fitness,Schlafrhythmus
+    \item WiewerdendieEarablesgetragen(verschiedeneAufsätze,vermessen/filmendesOhrs,etc.)?
+\end{itemize}
+
+\todo{Beschreibe, welche Daten aufgezeichnet wurden, jedoch mit beschreiben, dass sie nur da sind, falls was erkannt und bestätigt wernden sollte, wie z.B dass jmd krasser geatmet hat weil er dick ist, oder so...}
+
+\section{Maschinelle Lernverfahren}
+\begin{itemize}
+    \item Welche maschinellen Lernverfahren kommen in Frage?
+    \item WelcheVor-undNachteilekönnendieseVerfahrenbieten? 
+    \item WiemüssenDatenaufbereitetwerden?
+\end{itemize}
+
+Klassifikation der Daten
+\begin{itemize}
+    \item Random Forest
+    \item SVM
+\end{itemize}
+
+\subsection{Datenaufbreitung für Klassifikation}
+
+5 sec zeitschlitze, welche immer um 1 sec verschoben sind
+
+feature extractor tsfresh auf 5 sec zeitintervall angewandt...
