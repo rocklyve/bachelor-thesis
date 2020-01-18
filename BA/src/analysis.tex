@@ -55,7 +55,7 @@ Im folgenden werden alle Sensoren aufgelistet, welche für die Studie aufgezeich
 
 \begin{itemize}
     \item Abdomen
-    \item \textbf{Lichtsignal ($129 \si{\hertz}$)}: Am PSG-System befindet sich ein Lichtsensor. Wird verwendet um die Signale von PSG-System und den eSense-Earpods zu synchronisieren
+    \item \textbf{Lichtsignal ($128 \si{\hertz}$)}: Am PSG-System befindet sich ein Lichtsensor. Wird verwendet um die Signale von PSG-System und den eSense-Earpods zu synchronisieren
     \item Flow
     \item Movement
     \item Pleth
@@ -76,6 +76,10 @@ Mittels Python kann man \textit{edf}-Dateien auslesen und weiterverarbeiten.
 Pro Studie wurden alle 3 Positionsabläufe in einem einzigen Messvorgang aufgezeichnet. Somit müssen die 3 Einzelmessugen aus der \textit{edf}-Datei herausgezogen werden.
 Für weitere Details siehe Kapitel \ref{ch:impl} \todo{change ref to ref, where edf-analyzation is explained}
 
+\section{Kamera}
+\label{ch:sa:camera}
+\todo{describe the camera usage}
+
 \section{Datensynchronisation}
 \label{ch:sa:data_synchronisation}
 \todo{Beschreibe, wie die Daten synchron abgestimmt wurden}
@@ -88,12 +92,9 @@ Die Lichtblitze der Messung können nun mit den Lichtblitzen der eSense-Daten sy
 
 \section{Zusatzinformationen der Nutzer}
 \label{ch:sa:additionalUserStudiesInformation}
-Vor dem Start der Datenaufzeichnung wurden Informationen über die Aufzeichnung und über den Teilnehmer gesammelt. Dies soll lediglich dazu dienen, spätere unklarheiten im Datensatz erklären zu können.
-\begin{itemize}
-    \item Welche Faktoren sollen im Rahmen der Nutzerstudie erfasst werden, um Aussagen treffen zu können? 
-    \item z.B.Alter,Gewicht,Fitness,Schlafrhythmus
-    \item WiewerdendieEarablesgetragen(verschiedeneAufsätze,vermessen/filmendesOhrs,etc.)?
-\end{itemize}
+Vor dem Start der Datenaufzeichnung wurden Informationen über die Aufzeichnung und über den Teilnehmer gesammelt. 
+Dies soll lediglich dazu dienen, spätere Unklarheiten im Datensatz erklären zu können.
+Es werden Informationen zum Körper der Person abgefragt (Alter, Größe, Gewicht, Geschlecht, Schlafrhythmus), den Earpodaufsatz, die Matratzenart, sowie Maße des Ohrs.
 
 \todo{Beschreibe, welche Daten aufgezeichnet wurden, jedoch mit beschreiben, dass sie nur da sind, falls was erkannt und bestätigt wernden sollte, wie z.B dass jmd krasser geatmet hat weil er dick ist, oder so...}
 
