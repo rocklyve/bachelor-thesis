@@ -11,7 +11,7 @@
 % ------------------------------------------------------------------
 % Weitere packages: (Dokumentation dazu durch "latex <package>.dtx")
 %\usepackage{bibgerm}
-%\usepackage[backend=biber]{biblatex} 
+\usepackage[backend=biber, style=numeric]{biblatex} 
 \usepackage{csquotes} 
 \usepackage{tabularx}
 \usepackage{booktabs}
@@ -38,7 +38,7 @@
 %\usepackage[plainpages=true]{hyperref}
 \usepackage[space]{grffile}
 %\usepackage[numbers,sort&compress]{natbib}
-\usepackage[backend=bibtexu,natbib=true,hyperref=true,doi=false,url=false]{biblatex}
+% \usepackage[backend=bibtexu,natbib=true,hyperref=true,doi=false,url=false]{biblatex}
 % \usepackage{varioref}
 % \usepackage{verbatim}
 \usepackage{float}    %z.B. \floatstyle{ruled}\restylefloat{figure}
@@ -143,10 +143,10 @@ src/evaluation,      % Nachweis und Auswertung
 src/futurework,% Future Work
 src/summary  % Zusammenfassung der Ergebnisse 
 }
-\bibliography{Literature, Websites}
+\bibliography{Bibliography}
 \usepgfplotslibrary{groupplots}
 \usetikzlibrary{pgfplots.groupplots}
-%\addbibresource{diplarb.bib}
+\addbibresource{Bibliography.bib}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
@@ -230,7 +230,7 @@ src/summary  % Zusammenfassung der Ergebnisse
 %\bibliographystyle{itmabbrv} % mit abgekürzten Vornamen der Autoren
 %\bibliographystyle{gerplain} % abbrvnat unsrtnat
 % spezielle Zitierstile: Labels mit vier Buchstaben und Jahreszahl
-%\bibliographystyle{itmalpha}  % ausgeschriebene Vornamen der Autoren
+% \bibliographystyle{itmalpha}  % ausgeschriebene Vornamen der Autoren
 \printbibliography
 %% ++++++++++++++++++++++++++++++++++++++++++
 %% Index
