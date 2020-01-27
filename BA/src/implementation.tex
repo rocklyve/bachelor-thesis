@@ -1,11 +1,20 @@
 \chapter{Implementierung}
 \label{ch:Implementierung}
 
+In diesem Kapitel wird erläutert, wie die Daten des Datensatzes gesammelt, zur weiteren Verarbeitung vorbereitet und schließlich analysiert werden.
+Der Fokus hierbei liegt auf der Implementierung, für mehr Details, siehe Kapitel \todo{link to ref} %verlinke auf kapitel, wo erklärt wird, was wie gemacht wird
+
 \section{App}
 \subsection{Plattform}
-iOS - swift
-frameworks: ... following
+Die Smartphone-App wurde mit der Sprache Swift für Apple-Smartphones entwickelt. 
+Mit der Software XCode lässt sich eine mit Swift geschriebe App kompilieren und auf dem Smarphone installieren.
+\todo{insert table of frameworks}
 
+Zur Einbindung externer Frameworks wird der Dependency-Manager \textit{Accio} und \textit{Carthage} verwendet.
+Folgende Frameworks sind in der App eingebunden worden:
+\todo{insert table of frameworks with description}
+
+Durch das Framework \textit{Imperio} ist es möglich,
 \todo{erklaere imperio pattern?}
 
 \subsection{Messungsaufbau}
@@ -18,6 +27,11 @@ manuelle ble connection, daten werden manuell herausgezogen, in Datenbank persis
 \todo{screenshots of app}
 
 \section{Anbindung an Auswertungspipeline}
+Zum aktuellen Stand liegen die Daten der eSense-Earpods und vom PSG-System vor. 
+Zu Beginn müssen die PSG-Daten, welche als eine Messung für alle 3 Positionen pro Studienteilnehmer persistiert wurde, in 3 einzelne Messungen aufgeteilt werden.
+Die Daten des PSG-Systems liegen als \textit{edf}-Datei vor. 
+Diese können mittels python und der Library \textit{edfrd} (siehe \todo{verlinke zu tools})
+
 Wie werden Daten ausgelesen und in richtige Form gebracht
 
 von app exportiert als zip, danach verarbeitung erklaeren
