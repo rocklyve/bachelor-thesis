@@ -3,31 +3,44 @@
 
 \chapter{Schlafanalyse}
 \label{ch:sa}
+Zur Analyse eines respiratorischen Ereignisses findet im Zuge dieser Bachelorarbeit eine Nutzerstudie statt, um einen Datensatz zu erstellen, welcher daraufhin analysiert werden kann. Im Folgenden wird erläutert, welche Geräte verwendet werden und wie diese gesammelten Informationen zusammengetragen werden, damit der entstehende Datensatz in einem strukturierten Zustand vorliegt.
 
 \section{Earable Plattform}
 \label{ch:sa:ep}
 Zur Erfassung der Daten werden eSense-Earpods der Firma ``Nokia Bell Labs Cambridge'' verwendet.	
-Es ist ein Mikrofon und Lautsprecher verbaut, welche beide über Bluetooth angebunden werden können. 
-Des weiteren ist das für diese Bachelorarbeit interessanteste Element, eine 6-Achsen IMU (Inertial Motion Unit) enthalten.
+Die Earpods beinhalten zwei Mikrofone und ein Lautsprecher, welche beide über Bluetooth angebunden werden können.
+Pro Earpod ist ein Mikrofon verbaut
+Des weiteren ist das für diese Bachelorarbeit interessanteste Element, eine 6-Achsen IMU (Inertial Motion Unit) teil der Earpods.
 Eine IMU ist eine inertiale Messeinheit, womit Gyroskop- und Beschleunigungsdaten aufgezeichnet und mittels BLE (Bluetooth Low Energy) auf das Smartphone übertragen werden können. 
 Es handelt sich um einen 3-Achsen Beschleunigungssensor, sowie einen 3-Achsen Gyroskop.
-Die Messrate dieser Sensoren ist variabel einstellbar, wurde im folgenden auf $50 \si{\hertz}$ festgelegt.
+Die IMU ist lediglich im linken Earpod verbaut.
+Die Messrate dieser Sensoren ist variabel einstellbar und wurde im folgenden auf $50 \si{\hertz}$ festgelegt.
+Die IMU ist ebenfalls konfigurierbar und wurde nicht verändert. Diese Messbereich ist beim Beschleunigungssensor $\pm 4g$ und beim Gyroskop $\pm 500deg/s$.
+Die Messdaten der IMU sind bereits gefiltert, wenn sie per BLE übertragen werden.
+Hier ist die Konfiguration ebenfall schon vorkonfiguriert, bei der ein Tiefpassfilter mit einer Bandbreite von $5\si{\hertz}$ des Beschleunigungssensors, sowie ebenfalls $5\si{\hertz}$ des Gyroskops angewandt wird.
 
-\todo{Beschreibe noch die Filter, die auf die Daten angewandt werden per Default... steht in der Doku des eSense Kopfhörers}
-
-\todo{import picture of esense earpods}
-
-\todo{soll ich hier schreiben, dass die Kopfhörer noch nicht im Handel sind?}
-
-\todo{Welche Vor-/Nachteile gibt es diese zu nutzen? Was soll auf genommen werden?}
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}{.49\textwidth}
+      \includegraphics[width=1\textwidth]{eSense/eSense_earpod_rotation}
+      \caption{Achsen der IMU in den eSense Earpods}
+      \label{analysis:eSense:rotation}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \includegraphics[width=0.9\textwidth]{eSense/eSense_how_to_wear}
+      \caption{Trageposition der eSense Earpods}
+      \label{analysis:eSense:how_to_wear}
+    \end{subfigure}
+    \label{analysis:eSense:images}
+  \end{figure}
 
 \subsection{Was wird aufgezeichnet?}
 \label{ch:sa:ep:what_to_record}
-Zu vollständigen Aufzeichnung eines Datensatzes werden die IMU-Daten, welche via BLE auf das Smartphone übertragen werden, in einer Datenbank abgespeichert.
-Insgesamt werden hierbei pro empfangene Dateneinheit 6 Werte persistiert, die \textit{x, y} und \textit{z} Richtung vom Beschleunigungssensor, bzw vom Gyroskop. 
+Zu vollständigen Aufzeichnung eines Datensatzes werden die Daten der IMU, in einer Datenbank abgespeichert.
+Insgesamt werden hierbei pro empfangene Dateneinheit 6 Werte persistiert, die \textit{x, y} und \textit{z} Richtung des Beschleunigungssensors, bzw des Gyroskops. 
 Des weiteren wird die aktuelle Zeit, die aktuell auszuführende Aktion des Studienablaufs und die Information, ob die LED des Smartphones an oder aus ist, zu jeder empfangenen Dateneinheit hinzugefügt.
 Das Mikrofon wird ebenfalls aufgezeichnet und nach der Messsung abgespeichert.
-Vor dem Beginn einer Messung wird der Studienteilnehmer gebeten, ein paar Zusatzinformationen (siehe \ref{ch:sa:additionalUserStudiesInformation}) anzugeben.
+Vor dem Beginn einer Messung wird der Studienteilnehmer gebeten, ein paar Zusatzinformationen (siehe Kapitel \ref{ch:sa:additionalUserStudiesInformation}) anzugeben.
 Diese werden vor dem Start der Messung am Smartphone ausgefüllt und ebenfalls in der Datenbank gespeichert.
 
 \subsection{Datenexport}
@@ -42,23 +55,43 @@ Alle Dateien des temporären Ordners werden in einer zip-Datei verpackt und kön
 \section{Polysomnographie-Systeme}
 \label{ch:sa:psg}
 Als Referenz zu den eSense-Earpods wird ein Polysomnographie-System (PSG-System) verwendet. 
+Das Gerät SOMNOscreen{\texttrademark} plus bietet alle nötigen Sensoren und findet in der Wissenschaft Anerkennung. \todo{wissenschaftlich anerkannt... wo ist der beweis, dass das stimmt?}
 Ein solches System zeichnet Messungen für physiologische Funktionen des Körpers währrend des Schlafs auf und kann somit mögliche Schlafstörungen diagnostizieren.
+Im Gegensatz zur Polygraphie kann die Polysomnographie explizit zwischen obstruktivem und zentralem Apnoe unterscheiden \cite{schlafmedizin_1x1}.
 Es werden kontinuierlich verschiedene Körperfunktionen überwacht, wodurch nach einer Messung ein umfangreiches und individuelles Schlafprofil erstellt werden kann.
 
-Das Polysomnographie-System zeichnet währrend der Studie ebenfalls Daten auf und soll die Resultate, welche durch die eSense-Earpods gesammelt und analysiert werden, verifizieren. Somit dienen die Daten, welche durch das PSG-System gesammelt werden, als \glqq Ground-Truth\grqq.
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}{.4\textwidth}
+        \begin{center}
+            \includegraphics[width=1\textwidth]{study/psg_system_picture}
+        \end{center}
+        \caption{{SOMNOscreen \texttrademark} plus}
+    \end{subfigure}
+    \begin{subfigure}{.58\textwidth}
+        \begin{center}
+            \includegraphics[width=0.92\textwidth]{study/psg_system_flow.png}
+        \end{center}
+        \caption{Polysomnographie: Ablauf}
+    \end{subfigure}
+    \caption{PSG-System im Einsatz und die visuelle Darstellung\protect\footnotemark}
+    \label{analysis:psg:picture}
+  \end{figure}
+  \footnotetext{siehe Quelle: \cite{somnscreen_plus_product_description}}
+
+
+Das PSG-System zeichnet währrend der Studie ebenfalls Daten auf und soll die Resultate, welche durch die eSense-Earpods gesammelt und analysiert werden, verifizieren. Somit dienen die Daten, welche durch das PSG-System gesammelt werden, als \glqq Ground-Truth\grqq.
 \todo{1x1 literatur seite 100 lesen und hinzufügen}
 
-\todo{erkläre, wie man das PSG-System konfigurieren kann, dass es ein programm gibt, wo man eine Montage definieren kann, was ich gewählt habe, warum}
-
-Im folgenden werden alle Sensoren aufgelistet, welche für die Studie aufgezeichnet wurden. Die nicht persistierten Daten werden im folgenden ignoriert.
-
-\todo{übersetze tabelle und erkläre, was die sachen sind, wo sie genau gemessen werden, Licht dient als referenz}
+Mittels der {\glqq DOMINO Schlafdiagnostik\grqq} Software kann eine Montage erstellt werden. 
+Eine Montage ist eine Konfiguration, bei der man festlegen kann, welche Sensoren gemessen und persistiert werden sollen. Zudem kann man die Abtastrate in $\si{\hertz}$ festlegen.
+Im folgenden werden alle Sensoren aufgelistet, welche für die Studie aufgezeichnet wurden und somit die Montage darstellen. Die nicht persistierten Daten werden im folgenden ignoriert.
 
 \begin{itemize}
     \item \textbf{Bauchsignal (\texttt{abdomen}) ($32 \si{\hertz}$)}: Gibt die Veränderung des Volumens am Bauch an.
     \item \textbf{Lichtsignal (\texttt{light}) ($128 \si{\hertz}$)}: wird verwendet, um die Signale vom PSG-System und den eSense-Earpods zu synchronisieren
     \item \textbf{Drucksignal (\texttt{flow}) ($256 \si{\hertz}$)}: Hier wird der Druck gemessen, der durch die Nase kommt. Der Sensor ist direkt an der Nase befestigt.
-    \item \textbf{Bewegungssignal (\texttt{movement}) ($32 \si{\hertz}$)}: \todo{describe}
+    \item \textbf{Bewegungssignal (\texttt{movement}) ($32 \si{\hertz}$)}: \todo{misst bewegung anhand von Beschleunigungsdaten}
     \item \textbf{Sauerstoffsättigung (\texttt{pleth}) ($128 \si{\hertz}$)}: \todo{describe}
     \item \textbf{Pulssignal (\texttt{pulse}) ($32 \si{\hertz}$)}: Am Finger des Patienten wird dieser Sensor angebracht und misst den Puls.
     \item \textbf{Schnarchmikrofonsignal (\texttt{schnarch}) ($256 \si{\hertz}$)}: Dieser Sensor wird am Kehlkopf befestigt und soll das Schnarchen messen.
@@ -71,7 +104,7 @@ Im folgenden werden alle Sensoren aufgelistet, welche für die Studie aufgezeich
 \subsection{Datenexport}
 \label{ch:sa:psg:export}
 
-Im PSG-System befindet sich eine CF-Karte (\textit{Compact-Flash}). Diese kann mihilfe der vom PSG-System bereitgestellten Software \glqq \todo{inser Name of software}\grqq ausgelesen werden.
+Im PSG-System befindet sich eine CF-Karte (\textit{Compact-Flash}). Diese kann mihilfe der vom PSG-System bereitgestellten {\glqq DOMINO Schlafdiagnostik\grqq} Software ausgelesen werden.
 Die Software stellt eine Ansicht dar, womit man die Signale untereinander in einer Timeline betrachten kann. Die aufgezeichneten Signale können als \textit{edf}-Datei exportiert werden.
 Mittels Python kann man \textit{edf}-Dateien auslesen und weiterverarbeiten.
 Pro Studie wurden alle 3 Positionsabläufe in einem einzigen Messvorgang aufgezeichnet. Somit müssen die 3 Einzelmessugen aus der \textit{edf}-Datei herausgezogen werden.
@@ -79,17 +112,26 @@ Für weitere Details siehe Kapitel \ref{ch:impl} \todo{change ref to ref, where 
 
 \section{Kamera}
 \label{ch:sa:camera}
-\todo{describe the camera usage}
+Währrend der Studie wurde zur vollständigen Erstellung eines Datensatzes eine Kamera mit Stativ aufgestellt, welche den Kopf des Studienteilnehmers fokussiert. 
+Somit können eventuelle Unklarheiten im Datensatz, wie zum Beispiel ein Husten der Person, genau deklariert werden. 
+Die verwendete Kamera ist eine \glqq Canon EOS 6D Mk II\grqq.
+Die Aufnahme wurde in $1080p$ mit einer Abtastrate von $50fps$ aufgenommen.
 
 \section{Datensynchronisation}
 \label{ch:sa:data_synchronisation}
-\todo{Beschreibe, wie die Daten synchron abgestimmt wurden}
 Um sicherzugehen, dass das PSG-System, sowie die Daten der eSense-Earpods zeitlich exakt übereinstimmt, wurden mit der App kurze Lichtblitze gesendet ($20 \si{\ms}$).
-Durch einen 3D-Drucker wurde eine Vorrichtung angefertigt, welche das Smartphone auf das PSG-System platziert, sodass die Lichtblitze direkt auf den Lichtsensor zeigen.
-\todo{insert pic from 3D-Printing}
+Mit einem 3D-Drucker wurde eine Vorrichtung angefertigt, welche das Smartphone auf das PSG-System platziert, sodass die LED des Smartphones direkt auf den Lichtsensor zeigt (siehe Abbildung \ref{study:3d_print}).
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{study/3d_print_3}
+    \caption{3D-Druck, welcher die LED des Smartphones auf den Lichtsensor zeigen lässt}
+    \label{study:3d_print}
+  \end{figure}
+
 Die Lichtblitze lösen nach jeder Aktionsänderung aus, die der Studienteilnehmer erhält. 
-Den genauen Ablauf der Lichtblitze kann man dem Kapitel \ref{testref} entnehmen.
-Die Lichtblitze der Messung können nun mit den Lichtblitzen der eSense-Daten synchronisiert werden (siehe \ref{testref} \todo{insert ref}).
+Den genauen Ablauf kann man der Abbildung \ref{fig_study_flow} entnehmen.
+Die Lichtblitze der Messung können nun mit den Lichtblitzen der eSense-Daten synchronisiert werden (siehe Kapitel \ref{ch:Implementierung:data_sync}).
 
 \section{Zusatzinformationen der Nutzer}
 \label{ch:sa:additionalUserStudiesInformation}
@@ -97,27 +139,3 @@ Vor dem Start der Datenaufzeichnung wurden Informationen über die Aufzeichnung 
 Dies soll lediglich dazu dienen, spätere Unklarheiten im Datensatz erklären zu können.
 Es werden Informationen zum Körper der Person abgefragt (Alter, Größe, Gewicht, Geschlecht, Schlafrhythmus), den Earpodaufsatz, die Matratzenart, sowie Maße des Ohrs.
 
-\todo{Beschreibe, welche Daten aufgezeichnet wurden, jedoch mit beschreiben, dass sie nur da sind, falls was erkannt und bestätigt wernden sollte, wie z.B dass jmd krasser geatmet hat weil er dick ist, oder so...}
-
-\section{Maschinelle Lernverfahren}
-\label{ch:sa:machine_learning}
-\begin{itemize}
-    \item Welche maschinellen Lernverfahren kommen in Frage?
-    \item WelcheVor-undNachteilekönnendieseVerfahrenbieten? 
-    \item WiemüssenDatenaufbereitetwerden?
-\end{itemize}
-
-Klassifikation der Daten
-\begin{itemize}
-    \item Random Forest
-    \item SVM
-\end{itemize}
-
-Was bieten die beiden verfahren, wie macht das sinn, dass sinnvolle ergebnisse herauskommen...
-
-\subsection{Datenaufbreitung für Klassifikation}
-\label{ch:sa:machine_learning:data_handling}
-
-5 sec zeitschlitze, welche immer um 1 sec verschoben sind
-
-feature extractor tsfresh auf 5 sec zeitintervall angewandt...

@@ -5,7 +5,9 @@ In diesem Kapitel wird erläutert, wie die Daten des Datensatzes gesammelt, zur 
 Der Fokus hierbei liegt auf der Implementierung, für mehr Details, siehe Kapitel \todo{link to ref} %verlinke auf kapitel, wo erklärt wird, was wie gemacht wird
 
 \section{App}
+\label{ch:Implementierung:app}
 \subsection{Plattform}
+\label{ch:Implementierung:app:platform}
 Die Smartphone-App wurde mit der Sprache Swift für Apple-Smartphones entwickelt. 
 Mit der Software XCode lässt sich eine mit Swift geschriebe App kompilieren und auf dem Smartphone installieren.
 
@@ -38,6 +40,7 @@ Im weiteren wird nur die \textit{Messungsansicht} genauer erläutert, da die and
 \end{figure}
 
 \subsection{Messungsablauf}
+\label{ch:Implementierung:app:measurement_procedure}
 Mit der Messungsansicht soll eine komplette Messung durchgeführt werden.
 Der \textit{MeasurementFlow} wird gestartet und die erste \textit{View} (Abb. \ref{implementation:app:screenshots:connect_bluetooth}) wird geöffnet.
 Nach der erfolgreichen Verbindung mit den eSense-Earpods erfolgt eine Weiterleitung zur nächsten \textit{View} (Abb. \ref{implementation:app:screenshots:user_studies_information}) zum Ausfüllen der Nutzerinformationen. 
@@ -49,6 +52,7 @@ Nach dem Ablauf des letzten Timers wird eine View geöffnet, welche die Möglich
 Zudem kann die Datenbank vollständig geleert werden.
 
 \subsection{Messung}
+\label{ch:Implementierung:app:measurement}
 Eine Messung wird im Code in einem \textit{Measurement} Objekt persistiert.
 Durch ein Observer-Pattern wird der \textit{MeasurementFlow} über jegliche Änderung informiert und kann entsprechende Handlungen durchführen.
 Durch die Funktionen \texttt{startMeasurement} und \texttt{stopMeasurement} kann eine Messung gestartet, bzw gestoppt werden.
@@ -64,6 +68,7 @@ Die Instruktionen liegen als Audiodatei vor und werden jeweils vor dem jeweilige
 \todo{extend with diagrams like class-diagram}
 
 \section{Anbindung an Auswertungspipeline}
+\label{ch:Implementierung:way_to_pipeline}
 \begin{wrapfigure}{r}{0.3\textwidth}
   \centering
   \includegraphics[width=0.25\textwidth]{data_analyzation/folder_structure}
@@ -114,10 +119,24 @@ Die Ornderstruktur kann der Abb. \ref{implementation:folder_structure} entnommen
 \end{figure}
 
 \subsection{Synchronisation der Daten}
+\label{ch:Implementierung:data_sync}
 Da es nicht garantiert ist, dass der Timer des PSG-Systems zuverlässig arbeitet, wird jeder Peak des Lichtsensors mit dem Lichtsignal der Smartphone-Daten verglichen.
+\todo{wie wurden die Daten herausgezogen und wie liegen sie zum aktuellen zeitpunkt vor}
+\todo{Dies war zu beachten, weil ich erfahren habe, dass der Timer nicht genau nach der richtigen uhrzeit läuft}
+\todo{die Verschiebung der Peaks waren dann allerdings nur 0,2sec innerhalb von 7 Minuten... Verschiebung um den mittelwert reicht fürs erste, macht bei der Klassifikation keinen unterschied}
 Es wird ein Mittelwert aller Differenzen gebildet und das PSG-Signal wird um diesen verschoben.
-Nun ist garantiert, dass die Lichtsignale von PSG-System und dem Smartphone synchron sind. Die Daten sind nun bereit zur Analyse
+Nun ist garantiert, dass die Lichtsignale von PSG-System und dem Smartphone synchron sind. Die Daten sind nun bereit zur Analyse.
+
+\todo{add pictures describing the data synchronisation}
 
 \section{Verarbeitungspipeline zur Klassifikation}
-Wie werden Daten aufgeteilt,wie wird trainiert?
+\label{ch:Implementierung:classification_pipeline}
+aufteilung in 2 teile
+\begin{itemize}
+  \item feature extraction \todo{hier wird ... gemacht}
+  \begin{itemize}
+    \item hier die einteilung in die 5 sec und 10 sec windows
+  \end{itemize}
+  \item classification \todo{hier wird ... gemacht}
+\end{itemize}
 \todo{Fill section}

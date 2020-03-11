@@ -51,7 +51,7 @@ Aufgrund dieser Annahme wurden Klassifikatoren für Schlafstörungen entwickelt.
 Diese Gliederung orientiert sich an der \textit{ICSD-3} \cite{praxis_der_schlafmedizin}.
 
 
-Diese Bachelorarbeit fokussiert sich darauf, ein zentrales Schlafapnoe zu klassifizieren. \todo{zu welcehm der 7 gehört schlafapnoe}
+Diese Bachelorarbeit fokussiert sich darauf, ein zentrales Schlafapnoe zu klassifizieren, was zu den schlafbezogenen Atmungsstörungen gehört.
 Schlafapnoe wird in obstruktives und zentrales Apnoe unterschieden. 
 20\% aller Erwachsenen haben 5 oder mehr obstruktive Ereignisse pro Schlafstunde \cite{schlafmedizin_1x1}.
 Zentrales Apnoe hingegen tritt seltener auf, als obstruktives Apnoe, jedoch auffällig oft bei besonderen Patientengruppen. 
@@ -72,6 +72,20 @@ Zudem kann lautes und unregelmäßiges Schnarchen ein Indiz für ein Apnoe sein,
 Ein Schlafapnoe kann jedoch in unterschiedlichen Schweregraden auftreten. 
 Es gibt Patienten, welche kaum bis keine Probleme haben und nur aufgrund von nächtlichen Erkenntnissen ihrer Ehepartner zum Arzt geschickt werden. 
 Es gibt jedoch auch Patienten, die am Tag Probleme haben, bei monotonen Situationen wach zu bleiben.
+
+\section{Maschinelle Lernverfahren}
+\todo{grundlagen zu machine learning}
+\todo{allg. kurz beschreiben, was die machen}
+
+\subsection{Random Forest}
+\todo{wie funktioniert das?}
+
+\subsection{XGBoost}
+\todo{wie funktioniert das?}
+
+\subsection{SVM}
+\todo{wie funktioniert das?}
+
 
 \section{Forschung von Klassifikation anhand von IMU-Daten}
 Es gibt bereits Ansätze, welche sich damit befassen, Alternativen zur Ermittlung von Schlafstörungen zu finden. 
@@ -127,70 +141,55 @@ Somit konnte ermittelt werden, ob in dem zeitlichen Intervall ein Apnoe stattgef
 Durch dieses Paper wurde eine Genauigkeit von 84.2\% erreicht, ein zentrales Apnoe zu erkennen und mit 84.1\% konnte ermittelt werden, dass in diesem Zeitrahmen kein zentrales Apnoe vorkam.
 
 
-\subsection{Google Glass Brille zur Detektion direkt am Kopf}
-\todo{optimize title}
-2015 wurde erforscht, durch Informationen des Google Glass Puls und Atemsignal zu ermitteln \cite{hernandez_cardiac_nodate}. 
+\subsection{Detektion direkt am Kopf mittels der Google Glass Brille}
+2015 wurde erforscht, durch Informationen des Google Glass den Puls und das Atemsignal zu ermitteln \cite{hernandez_cardiac_nodate}. 
 Der Vorteil hierbei ist die Position der Brille. 
-Da sie Am Kopf platziert ist, liefert die Brille möglicherweise vielversprechende Werte, im Vergleich zu IMU-Daten, die am Brustkorb aufgezeichnet worden sind.
-Das Google Glass wurde nicht entwickelt, um physiologische Daten zu sammeln, kann jedoch dafür verwendet werden, da alle nötigen Sensoren (Accelerometer, Gyroscope und Kamera) vorhanden sind.
-Die Resultate zeigen einen mittleren absoluten Fehler (\textit{MAE}) von 0.82 Schlägen pro Minute (STD: 1.98) der Herzrate und 0.6 Atmungen pro Minute (STD: 1.19) der Atmung bei der Betrachtung verschiedener Beobachtungsfenster und Kombinationen der Sensoren. 
+Da sie Am Kopf platziert ist, liefert die Brille möglicherweise vielversprechende Werte im Vergleich zu IMU-Daten, die am Brustkorb aufgezeichnet worden sind.
+Die Google Glass wurde allerdings nicht entwickelt, um physiologische Daten zu sammeln, kann jedoch dafür verwendet werden, da alle nötigen Sensoren (Accelerometer, Gyroscope und Kamera) verbaut hat.
+Die Resultate liefern einen mittleren absoluten Fehler (\textit{MAE}) von 0.82 Schlägen pro Minute (STD: 1.98) der Herzrate und 0.6 Atmungen pro Minute (STD: 1.19) bei der Atmung unter Betrachtung verschiedener Beobachtungsfenster und Kombinationen der Sensoren. 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth / 2]{imu_research/googleGlass}
     \caption{Google Glass Sensordaten \cite{hernandez_cardiac_nodate}}
     \label{imu_research_google_glass}
 \end{figure}
-Die Herausforderung lag zudem daran, stromsparende Echtzeitberechnungen mit Algorithmen zu entwickeln, womit physiologische Parameter extrahiert werden. Der Nutzer soll das Gerät schließlich für den Alltag normal weiterbenutzen können. 
+Die Herausforderung lag zudem daran, stromsparende Echtzeitberechnungen mit Algorithmen zu entwickeln, womit physiologische Parameter extrahiert werden. Der Nutzer soll das Gerät im Alltag normal weiternutzen können. 
+
 Es wurden 2 Techniken entwickelt, eine zur Ermittlung des Pulssignals und die andere für das Atemsignal.
 \subsubsection{Pulssignal}
-\todo{Pulssignal}
 Die Schätzung des Pulssignals wurde anhand einer Timeseries von Vektoren in mehrere Schritte aufgeteilt:
 \begin{itemize}
-    \item A moving average window of 3 samples was subtracted from each dimension of the vector,  allowing the removal of signal shifts and trends.
-    \item A band-pass Butterworth filter of order 4 with cut-off frequencies of 10 and 13  Hz was applied to each dimension to isolate BCG changes.
-    \item Finally, a band-pass Butterworth filter of order 2 with cut-off frequencies of 0.75 and 2.5 Hz (corresponding to 45 and 150 beats per minute) was applied, yielding the final pulse wave.
+    \item Von jeder Dimension des Vektors wurde ein gleitendes Durchschnittsfenster von 3 Abtastwerten subtrahiert, wodurch Signalverschiebungen und Trends entfernt werden konnten.
+    \item Ein Bandpass Butterworthfilter der 4. Ordnung mit Cut-Off Frequenzen von $10 \si{\hertz}$ und $13 \si{\hertz}$ wurde auf jede Dimension angewendet, um Veränderungen des BCG zu isolieren
+    \item Zudem wurde ein Bandpass Butterworthfilter der 2. Ordnung mit den Cut-Off Frequenzen von $0.75 \si{\hertz}$ und $2.5 \si{\hertz}$ (entspricht 45 and 150 Schläge die Minute) angewand, was schließlich das resultierende Pulssignal liefert.
 \end{itemize}
 
 \begin{figure}[ht]
     \centering
     \begin{subfigure}{.49\textwidth}
         \includegraphics[width=\textwidth]{imu_research/googleGlass_pulse_fig2}
-      \caption{Example of an estimated pulse wave from gyroscope data (red) and the ground truth blood volume pulse signal (blue). Bottom graphs show the Fourier Spectrum of each signal. (FFT: Fourier Spectrum, GYR: Gyroscope, BVP: Blood Volume Pulse, HR: Heart Rate, bpms: beats per minute)
-      }
+      \caption{Beispiel eines Pulssignals mittels der Gyroskopdaten (rot) und des Ground-Truth Signals (blau). Die beiden unteren Graphen zeigen das Fouriespektrum von jedem Signal (FFT: Fourier Spectrum, GYR: Gyroscope, BVP: Blood Volume Pulse, HR: Heart Rate, bpms: beats per minute)}
       \label{background:googleGlass:pulse_wave}
     \end{subfigure}
     \begin{subfigure}{.49\textwidth}
         \includegraphics[width=\textwidth]{imu_research/googleGlass_respiratory_fig3}
-      \caption{Example of an estimated respiratory wave from accelerometer data (blue) and the ground truth respiration signal (red). Bottom graphs show the Fourier Spectrum of each signal. (FFT: Fourier Spectrum, ACL: accelerometer, RESP: Respiration from chest band, RR: respiration rate, bpms: breaths per minute)
-      }
+      \caption{Beispiel einer Schätzung des Atemsignals anhand der Beschleunigungsdaten (blau) und des Ground-Truthsignals (rot). Die beiden unteren Graphen zeigen das Fourierspektrum von jedem Signal. (FFT: Fourier Spectrum, ACL: accelerometer, RESP: Respiration from chest band, RR: respiration rate, bpms: breaths per minute)}
       \label{background:googleGlass:respiratory_wave}
     \end{subfigure}
     \caption{Herzrate- und Atemfrequenzanalyse}
     \label{background:googleGlass}
   \end{figure}
 
-Die Abbildung \ref{background:googleGlass:pulse_wave} zeigt ein Signal des Herzschlags, gesammelt von den Informationen der Gyroskopdaten. Diese Daten wurden von dem Google Glass aufgezeichnet, währrend der Person auf dem Rück lag. Der obige Graph zeit ein 3-Achsen Gyroskop signal über eine Dauer von 5.5 Sekunden. Der mittlere Graph zeigt die Schätzung des Herzschlags, nachdem die vorgestellten Methoden angewandt wurden in rot, die des Referenzsignals in blau. Ebenfalls ist gut zu erkennen, dass die Schätzung sehr nahe an den Referenzsignalen ist.
+Die Abbildung \ref{background:googleGlass:pulse_wave} zeigt ein Signal des Herzschlags, gesammelt von den Informationen der Gyroskopdaten. Diese Daten wurden von dem Google Glass aufgezeichnet, währrend der Person auf dem Rück lag. Der obige Graph zeit ein 3-Achsen Gyroskop signal über eine Dauer von 5.5 Sekunden. Der mittlere Graph zeigt die Schätzung des Herzschlags, nachdem die vorgestellten Methoden angewandt wurden in rot, die des Referenzsignals in blau. Es ist sehr gut zu erkennen, dass die Schätzung sehr nahe an den Referenzsignalen ist.
 
 \subsubsection{Atemsignal}
-\todo{Atemsignal}
+Das Atemsignal wurde durch verschiedene Schritte berechnet:
+\begin{itemize}
+    \item Ein gleitender Mittelwertfilter wurde auf jede Komponente angewandt. Die Fensterlänge wurde auf die Dauer eines Atemzyklus gesetz, in diesem Fall 45 Atmungen pro Minute. 
+    \item Ein Bandpass Butterworthfilter der 4. Ordnung mit dem Cut-Off Frequenzen von $0.13 \si{\hertz}$ und $0.75 \si{\hertz}$ (entspricht 8-45 Atmungen pro Minute) wurde auf jede Dimension angewandt.
+    \item Da die verschiedenen Dimensionen der Sensoren nicht in Relation zu den Körperpositionen stehen, wurde eine Principal Component Analyse angewandt, um einen derartigen Einfluss zu reduzieren. Nach einer Fast Foiuriertransformation (FFT) auf jede Komponente wurde das Signal mit der Periode mit der maximalen Größenordnung ausgewählt, welche innerhalb des betrachteten Frequenzbereichs liegt.
+\end{itemize}
 
-In order to estimate the respiratory wave from data of a specific sensor (same to what we used for pulse wave), we performed the following steps independently for each sensor modality:
-(i) An averaging filter was applied to each of the
-components. The window length was set to be the
-duration of a respiration cycle at a maximum breathing
-rate (45 breaths per minute in our case).
-(ii) A band-pass Butterworth filter of order 4 with cut-off
-frequencies of 0.13 and 0.75  Hz (corresponding to 8
-and 45 breaths per minute) was applied to each
-dimension.
-(iii) Since different dimensions of the sensor reading
-(e.g.,  X and Y axis of accelerometer) may change in
-different directions depending on the body position,
-we  applied  Principal Component Analysis  to reduce
-this influence.  We then computed the Fast Fourier
-Transform of each principal  component and selected 
-the most periodic signal, where  periodicity of the signal was estimated by computing the maximum magnitude observed within the operational frequency
-range.
 Die Abbildung \ref{background:googleGlass:respiratory_wave} zeigt ein Beispiel einer Atemfrequenzschätzung der Beschleunigungsdaten eines Patienten. Wie zu sehen ist, sind die Daten sehr nahe an dem Referenzwert, welcher mit aufgezeichnet wurde.
 
 
@@ -201,3 +200,9 @@ Es wurden hierbei eine Studie mit 12 Personen aufgezeichnet, welche in 3 Positio
 Die Analyse der Daten erfolgte im Anschluss der Studie und wurde in einer Pipeline verarbeitet, welche zuerst das Rauschen reduziert, anschließend einen Triangle-Filter der Breite $2\si{\s}$ anwendet und danach eine PCA (engl. \textit{principal component analysis}) ausführt, um die Daten unabhängig von deren Achse zu bewerten.
 Nun wurden Windows mit der Größe von $20\si{\s}$ extrahiert, welche die die Atmung und den Puls anhand dieses Windows berechnen.
 Die Resultate ergaben einen mittleren absoluten Fehler (engl. \textit{mean absolute error}) von 2.62 CPM (acc) und 2.55 CPM (gyro), jedoch variieren diese von Proband zu Proband.
+
+\begin{figure}[ht]
+    \includegraphics[width=1\textwidth]{imu_research/towards_resp_rates_waves}
+    \caption{Rohdaten der Accelerometer und Gyroscope daten innerhalb von $12 \si{\s}$, sowie die Atem- und Pulsschätzung, verglichen mit dem Ground-Truh (blau)}
+    \label{background:towards_resp_esense:results}
+\end{figure}

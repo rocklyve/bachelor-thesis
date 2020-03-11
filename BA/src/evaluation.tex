@@ -5,5 +5,60 @@
 \label{ch:Evaluation}
 
 \section{Vergleich verschiedener Klassifikationsverfahren}
+\begin{itemize}
+    \item SVM
+    \item Random Forest
+    \item XGBoost
+\end{itemize}
+
+Was bieten die verfahren, wie macht das sinn, dass sinnvolle ergebnisse herauskommen...
+
+WelcheVor-undNachteilekönnendieseVerfahrenbieten?
+
 \section{Gibt es passende Features?}
-\section{Was kann bei respiratorischen Ereignissen klassifiziert werden, was nicht?}
+\begin{itemize}
+    \item tsfresh verwendet
+    \item es hat sich ein pool an resultaten herausgezeichnet, war oft n 
+    \begin{itemize}
+        \item gyroZ partial autocorrelation
+        \item gytoX fft coefficient
+        \item gyroX agg autocorrelation
+        \item accY autocorrelation
+        \item gyroY change quantiles 
+        \item gyroZ fft coefficient
+    \end{itemize}
+\end{itemize}
+
+\section{Ablauf der Evaluierung}
+wie müssen die daten für tsfresh vorbereitet werden?
+\begin{itemize}
+    \item in welche windows wird das ganze aufgeteilt? 5 sec, 10sec?
+    \item welche zeischlitze werden gelabelt, welche nicht?
+    \begin{itemize}
+        \item jeder wert in den 5-10 sec windows ist gelabelt, ab wann wird window gelabelt? 50\%, 90\%?
+        \item sollen windows weggelassen werden, bei denen das verhältnis zwischen 10 und 90\% ist? damit die Übergänge nicht die ergebnisse verfälschen? WIR SAGEN NEIN, SONST KANNS DANACH NICHT VERWENDET WERDEN
+    \end{itemize}
+\end{itemize}
+ok, jz sind die features der daten persistiert, jz wird klassifiziert
+
+für jede classification
+\begin{itemize}
+    \item Leave one Subject out, dann Mittelwert von jedem, was rausgelassen wurde
+    \item leave one Subject out, jedoch von jeder Position einzeln, dann Mittelwert von jedem loso.
+\end{itemize}
+
+\subsection{Ergebnisse}
+\todo{plots hier rein}
+
+\section{Erkenntnisse}
+\todo{ich habe gelernt}
+\begin{itemize}
+    \item auswertungsdaten: Auf dem rücken liegende ddaten sind am vielversprechendsten
+    \item die atempausen können einigermaßen klassifiziert werden
+    \item rauschen entfernen bringt nix vermutlich wegen tsfresh, da es das schon macht, also es kommen
+    \item 
+\end{itemize}
+
+
+gibt earables, die blutsauerstoff und puls mittracken können
+plus grafik telegram tobi
