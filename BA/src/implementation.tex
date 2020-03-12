@@ -12,8 +12,19 @@ Die Smartphone-App wurde mit der Sprache Swift für Apple-Smartphones entwickelt
 Mit der Software XCode lässt sich eine mit Swift geschriebe App kompilieren und auf dem Smartphone installieren.
 
 Zur Einbindung externer Frameworks wird der Dependency-Manager \textit{Accio} und \textit{Carthage} verwendet.
-Folgende Frameworks sind in der App eingebunden worden:
-\todo{insert table of frameworks with description}
+Im Folgenden sind die relevanten Frameworks aufgelistet, welche in der App eingebunden worden sind:
+
+\begin{center}
+  \begin{tabular}{ | l | l | }
+    \hline
+    Imperio & Strukturierung der App \\ \hline
+    Realm-Cocoa & Datenbank-Framework \\ \hline
+    Zip & Bietet die Möglichkeit, einen Ordner \\ 
+    & als {\glqq zip\grqq}-Datei zu komprimieren\\ \hline
+    Mungohealer & Fügt Logging zu der App hinzu \\
+    \hline
+  \end{tabular}
+\end{center}
 
 Durch das Framework \textit{Imperio} ist es möglich, die View-Komponenten von der Logik zu trennen. 
 Somit ändert sich die Struktur der App, indem jeder Ablauf in der App als \textit{Flow} interpretiert wird. 
@@ -44,10 +55,10 @@ Im weiteren wird nur die \textit{Messungsansicht} genauer erläutert, da die and
 Mit der Messungsansicht soll eine komplette Messung durchgeführt werden.
 Der \textit{MeasurementFlow} wird gestartet und die erste \textit{View} (Abb. \ref{implementation:app:screenshots:connect_bluetooth}) wird geöffnet.
 Nach der erfolgreichen Verbindung mit den eSense-Earpods erfolgt eine Weiterleitung zur nächsten \textit{View} (Abb. \ref{implementation:app:screenshots:user_studies_information}) zum Ausfüllen der Nutzerinformationen. 
-Mit dem Betätigen des Buttons: \glqq Start Measurement\grqq bestätigt man die Eingabe der Daten und die Messung beginnt.
+Mit dem Betätigen des Buttons: {\glqq Start Measurement\grqq} bestätigt man die Eingabe der Daten und die Messung beginnt.
 Automatisch beginnt der erste Timer (Abb. \ref{implementation:app:screenshots:measurement_started}).
 Der Timer zeigt den aktuellen, sowie den nächsten \textit{Task} an, sowie die Restzeit des aktuellen Tasks.
-Der genaue Ablauf der einzelnen Timer ist in Kapitel \ref{toRef} \todo{Add ref} detailliert beschrieben.
+Der genaue Ablauf der einzelnen Timer ist in Abbildung \ref{fig_study_flow} detailliert beschrieben.
 Nach dem Ablauf des letzten Timers wird eine View geöffnet, welche die Möglichkeit zum Teilen der aktuellen Messung bietet (Abb. \ref{implementation:app:screenshots:sampling_stopped}, \ref{implementation:app:screenshots:share}).
 Zudem kann die Datenbank vollständig geleert werden.
 
@@ -60,7 +71,7 @@ Mit der Funktion \texttt{startMeasurement} wird das IMU-Sampling per BLE, sowie 
 Ebenso wird der erste Timer gestartet und ein doppeltes Lichtsignal gesendet. 
 Durch die Funktion \texttt{stopMeasurement} werden die Datenströme gestoppt, ebenfalls ein doppeltes Lichtsignal gesendet und der Timer wird beendet.
 Der nächste Task wird gestartet, wenn der Timer abgelaufen ist. Der Timer startet mit der Länge des nächsten Tasks.
-Sofern der nächste Task \glqq Hold\_breath\grqq ist, also die Person im folgenden Task die Luft anhält, wird dem Teilnehmer kurz vor Ablauf mitgeteilt, wann der nächste Task startet.
+Sofern der nächste Task {\glqq Hold\_breath\grqq} ist, also die Person im folgenden Task die Luft anhält, wird dem Teilnehmer kurz vor Ablauf mitgeteilt, wann der nächste Task startet.
 Mit der Instruktion \glqq Bitte die Luft anhalten in 3, 2, 1\grqq \ weiß der Teilnehmer, wann er die Luft anhalten soll.
 Durch die Anweisung \glqq Stopp\grqq \ wird dem Nutzer das Ende des Tasks mitgeteilt. 
 Die Instruktionen liegen als Audiodatei vor und werden jeweils vor dem jeweiligen Task abgespielt und mittels Bluetooth über die Lautsprecher der eSense-Earpods ausgegeben.
@@ -79,12 +90,15 @@ Die App liefert beim Export die Daten der eSense-Earpods, was die IMU-Daten, sow
 Zum aktuellen Stand liegen somit die Daten der eSense-Earpods und vom PSG-System vor. 
 Zu Beginn müssen die PSG-Daten, welche als eine Messung für alle 3 Positionen pro Studienteilnehmer persistiert wurde, in 3 einzelne Messungen aufgeteilt werden.
 Die Daten des PSG-Systems liegen als \textit{edf}-Datei vor. 
-Diese können mittels python und der Library \texttt{edfrd} (siehe \todo{verlinke zu tools}) ausgelesen werden.
-Mittels der Funktion \texttt{find\_peaks} aus \texttt{scipy.peak}\ können die Peaks des Lichtsensors ermittelt werden.
-Da eine Messung mit 2 Lichtblitzen beginnt und endet, kann nun der Start- und Endzeitpunkt einer Position ermittelt und in die 11 verfügbaren Signale ausgelesen werden.
+Diese können mittels python und der Library \texttt{edfrd} ausgelesen werden.
+Jedoch sind die Einträge des jeweiligen Signals ohne einen Zeitwert abgespeichert. 
+Es muss nun aufgrund der Abtastrate in $\si{\hertz}$ die Zeit manuell berechnet werden. 
+Mittels der Funktion \texttt{find\_peaks} aus \texttt{scipy.peak}\ können die Peaks des Lichtsensors am PSG-System ermittelt werden (siehe Abb. \ref{implementation:synchronisation:light_peaks_detection}).
+Da eine Messung mit 2 Lichtblitzen beginnt und endet, kann nun der Start- und Endzeitpunkt einer Position ermittelt und die einzelnen Positionen können voneinander unterschieden werden. 
+Daraufhin können die 11 verfügbaren Signale einzeln ausgelesen werden.
 Pro Position wird nun jedes der Signale als \textit{csv}-Datei im jeweiligen Ordner abgelegt.
 Die Daten der eSense-Earpods liegen getrennt in \textit{AccData\_\$ID\$.csv} und \textit{GyroData\_\$ID\$.csv} vor. 
-Diese werden ausgelesen und zusammengeführt.
+Diese werden ausgelesen und zu der Datei \textit{eSenseData.csv} zusammengeführt.
 Die Ornderstruktur kann der Abb. \ref{implementation:folder_structure} entnommen werden und ist nun vollständig.
 
 \begin{figure}[ht]
@@ -121,22 +135,40 @@ Die Ornderstruktur kann der Abb. \ref{implementation:folder_structure} entnommen
 \subsection{Synchronisation der Daten}
 \label{ch:Implementierung:data_sync}
 Da es nicht garantiert ist, dass der Timer des PSG-Systems zuverlässig arbeitet, wird jeder Peak des Lichtsensors mit dem Lichtsignal der Smartphone-Daten verglichen.
-\todo{wie wurden die Daten herausgezogen und wie liegen sie zum aktuellen zeitpunkt vor}
-\todo{Dies war zu beachten, weil ich erfahren habe, dass der Timer nicht genau nach der richtigen uhrzeit läuft}
-\todo{die Verschiebung der Peaks waren dann allerdings nur 0,2sec innerhalb von 7 Minuten... Verschiebung um den mittelwert reicht fürs erste, macht bei der Klassifikation keinen unterschied}
-Es wird ein Mittelwert aller Differenzen gebildet und das PSG-Signal wird um diesen verschoben.
-Nun ist garantiert, dass die Lichtsignale von PSG-System und dem Smartphone synchron sind. Die Daten sind nun bereit zur Analyse.
+Der Abstand jedes einzelnen Peaks wird nun ermittelt und die durchschnittliche Distanz der Peaks wird ermittelt.
+In der Abbildung \ref{implementation:synchronisation:before_light_peak} ist der Vergleich eines Lichtblitzes von Smartphone (blau) und PSG-System (orange) im zeitlichen Verlauf (\texttt{time}).
+Da die Verschiebung des Timers des PSG-Systems währrend einer 7-minütigen Messung im Mittel bei $0.3\si{\s}$ lag, wurde der Timer des PSG-Systems um die durchschnittliche Distanz der Peaks verschoben.
+Dies ist ausreichend, da die PSG-Daten in der Bachelorarbeit lediglich zum visuellen Vergleich dienen und in der Klassifikation nicht mit betrachtet werden. 
+Die zeitliche Verschiebung wird nun in jede \textit{csv}-Datei eingearbeitet mit der Zeile \texttt{new\_time}.
+In Abbildung \ref{implementation:synchronisation:after_light_peak} ist klar zu erkennen, dass der neue Zeitwert (\texttt{new\_time}) des PSG-Signals (orange) direkt über dem Zeitwert des Smartphonesignals (blau) liegt, was an den Lichtpeaks zu erkennen ist.
+Nun ist garantiert, dass die Lichtsignale von PSG-System und dem Smartphone annähernd synchron sind. Die Daten sind nun bereit zur Analyse.
 
-\todo{add pictures describing the data synchronisation}
+\begin{figure}[ht]
+  \centering
+  \begin{subfigure}{0.66\textwidth}
+    \includegraphics[width=1\textwidth]{data_analyzation/light_peak_detection_psg_data}
+    \caption{Peaks des Lichtsignals vom PSG-Gerät \todo{bessere grafik und zudem noch dass man alle peaks von der edf sieht und die doppelten signale erkennt, eventuell breitere grafik}}
+    \label{implementation:synchronisation:light_peaks_detection}
+  \end{subfigure}
+  \begin{subfigure}{.49\textwidth}
+    \includegraphics[width=1\textwidth]{data_analyzation/light_peak_detail_before.png}
+    \caption{Zeitlicher Lichtpeakvergleich vor der Synchronisation}
+    \label{implementation:synchronisation:before_light_peak}
+  \end{subfigure}
+  \begin{subfigure}{.49\textwidth}
+    \includegraphics[width=1\textwidth]{data_analyzation/light_peak_detail_after.png}
+    \caption{Zeitlicher Lichtpeakvergleich nach der Synchronisation}
+    \label{implementation:synchronisation:after_light_peak}
+  \end{subfigure}
+  \label{implementation:synchronisation}
+\end{figure}
 
 \section{Verarbeitungspipeline zur Klassifikation}
 \label{ch:Implementierung:classification_pipeline}
-aufteilung in 2 teile
-\begin{itemize}
-  \item feature extraction \todo{hier wird ... gemacht}
-  \begin{itemize}
-    \item hier die einteilung in die 5 sec und 10 sec windows
-  \end{itemize}
-  \item classification \todo{hier wird ... gemacht}
-\end{itemize}
-\todo{Fill section}
+Zur Klassifizierung der Daten müssen nun Features berechnet werden. 
+Pro Position wurden nun alle Werte in Fenster gepackt mit einer Größe von $5\si{\s}$, beziehungsweise $10\si{\s}$ mit einer Verschiebung von $1\si{\s}$. 
+Da die Messergebnisse der eSense Earpods per BLE an das Smartphone gesendet wurden und dort keine Uhrzeit mitgegeben wurde, liegen die einzelnen Messergebnisse nicht im Abstand von exakt $50\si{\hertz}$ vor. 
+Aufgrund dessen wurden Fenster manuell anhand des Zeitwertes zusammengefügt. 
+Anschließend wurden mittels des Moduls \texttt{tsfresh} Features berechnet und es entstand eine Datei \textit{df\$patient\_id\$\_\$position\_id\$\_feature.csv}.
+
+Da nun die Features für eine Fenstergröße von $5\si{\s}$ und $10\si{\s}$ mit der Verschiebung von $1\si{\s}$ pro Fenster vorliegen, kann mit der Klassifikation begonnen werden.

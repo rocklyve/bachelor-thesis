@@ -51,7 +51,7 @@ Aufgrund dieser Annahme wurden Klassifikatoren für Schlafstörungen entwickelt.
 Diese Gliederung orientiert sich an der \textit{ICSD-3} \cite{praxis_der_schlafmedizin}.
 
 
-Diese Bachelorarbeit fokussiert sich darauf, ein zentrales Schlafapnoe zu klassifizieren, was zu den schlafbezogenen Atmungsstörungen gehört.
+Diese Bachelorarbeit fokussiert sich darauf, ein zentrales Schlafapnoe zu klassifizieren, was ein Teil der Klassifikation \glqq schlafbezogenen Atmungsstörungen\grqq ist.
 Schlafapnoe wird in obstruktives und zentrales Apnoe unterschieden. 
 20\% aller Erwachsenen haben 5 oder mehr obstruktive Ereignisse pro Schlafstunde \cite{schlafmedizin_1x1}.
 Zentrales Apnoe hingegen tritt seltener auf, als obstruktives Apnoe, jedoch auffällig oft bei besonderen Patientengruppen. 
@@ -59,19 +59,20 @@ Ein Beispiel liefern Patienten mit Herzinsuffizien und einer eingeschränkten ka
 72\% dieser Patientengruppe leidet unter zentralem Schlafapnoe. Dies stellt die Bedeutung der Klassifikation deutlich klar, da eine genaue Erkennung eines zentralen Apnoes hier sehr wichtig ist.
 
 \subsection{Zentrales Schlafapnoe}
-\todo{hier sind die sätze zusammengewürfelt, verbesserung!}
-Beim zentralen Apnoe steht der Luftfluss trotz offener Atemwege für mind. $10\si{\s}$ still. Dies kann vollständig (zentrales Apnoe), oder partiell (zentrales Hypopnoe) erfolgen. 
+Beim zentralen Apnoe steht der Luftfluss trotz offener Atemwege für mindestens $10\si{\s}$ still. Dies kann vollständig (zentrales Apnoe), oder partiell (zentrales Hypopnoe) erfolgen. 
 Ab einer Anzahl von 5 Apnoeereignissen wird zentrales Apnoe diagnostiziert.
-Die Ursache bei zentralem Apnoe basiert internistischer oder neurologischer Grundlage. 
-Durch eine chronische Herzinsuffizienz, durch eine verlängerte Kreislaufzeit und eine zentralnervöse Verstellung der sogenannten Apnoeschwelle kann zu dem typischen an- und abschwelligen Mustern eines zentralen Apnoes führen.
+Die Ursachen gelten hierbei internistischer oder neurologischer Grundlage.
+Typische an- und abschwellige Muster sind durch eine chronische Herzinsuffizienz, durch eine verlängerte Kreislaufzeit, oder durch eine zentralnervöse Verstellung der sogenannten Apnoeschwelle zurückzuführen.
 Der $CO_2$ Gehalt im Blut wird als Apnoeschwelle bezeichnet.
-Die Symptome von zentralem Apnoe sind am Tag eher an deren Ursache, den internistischen und neurologischen Grunderkrankungen zu erkennen, da diese häufig nicht von den Symptomen der Schlafapnoe zu unterscheiden sind. 
-In der Nacht kann zentrales Apnoe, ebenso wie obstruktives Apnoe an Atemaussetzern, häufig beobachtet vom Partner des Patienten, erkannt werden. 
+Am Tag sind die Symptome von zentralem Apnoe eher an deren Ursache, den internistischen und neurologischen Grunderkrankungen zu erkennen, da diese häufig nicht von den Symptomen der Schlafapnoe zu unterscheiden sind. 
+In der Nacht wird zentrales Apnoe, ebenso wie obstruktives Apnoe an Atemaussetzern, häufig vom Partner des Patienten beobachtet.
 Zudem kann lautes und unregelmäßiges Schnarchen ein Indiz für ein Apnoe sein, ebenso wie ein Aufwachen in Atemnot.
 
 Ein Schlafapnoe kann jedoch in unterschiedlichen Schweregraden auftreten. 
 Es gibt Patienten, welche kaum bis keine Probleme haben und nur aufgrund von nächtlichen Erkenntnissen ihrer Ehepartner zum Arzt geschickt werden. 
 Es gibt jedoch auch Patienten, die am Tag Probleme haben, bei monotonen Situationen wach zu bleiben.
+
+Eine Diagnose würde mögliche Folgeerkrankungen schneller erkennbar machen und die Ursache dieser erklären.
 
 \section{Maschinelle Lernverfahren}
 \todo{grundlagen zu machine learning}
@@ -89,13 +90,12 @@ Es gibt jedoch auch Patienten, die am Tag Probleme haben, bei monotonen Situatio
 
 \section{Forschung von Klassifikation anhand von IMU-Daten}
 Es gibt bereits Ansätze, welche sich damit befassen, Alternativen zur Ermittlung von Schlafstörungen zu finden. 
-Somit könnte ein Besuch im Schlaflabor ersetzt werden durch einen bequemen Test.
-Ein Ansatz ist es, mittels IMU-Daten die Bewegung des Körpers zu messen und anhand dieser Informationen die Atmung oder ähnliches herauszufiltern, um dann Rückschlüsse auf Schlafstörungen schließen zu können.
+Somit könnte ein Besuch im Schlaflabor durch einen bequemen Test ersetzt werden. 
+Ein vielversprechender Ansatz ist es, mittels IMU-Daten die Bewegung des Körpers zu messen und anhand dieser Informationen die Atmung oder ähnliches herauszufiltern, um dann Rückschlüsse auf Schlafstörungen schließen zu können.
 
 \subsection{Accelerometer am Brustkorb}
-
-Bereits 2018 gab es Forschung in diesem Bereich, womit sich \textit{Phan Duy Hung} damit befasst hat, einen Accelerometer an den Brustkorb zu fixieren \cite{hung_central_2018}.
-Es wurde versucht, durch die Platzierung an geanu dieser Stelle das Herzschlagen genauer erkennen zu können. 
+Bereits 2018 gab es Forschung in diesem Bereich. \textit{Phan Duy Hung} hat sich damit befasst, einen Accelerometer an den Brustkorb zu fixieren \cite{hung_central_2018}.
+Es wurde versucht, durch die Platzierung an genau dieser Stelle das Herzschlagen genauer erkennen zu können. 
 Die Rohdaten zeigen hierbei bereits die Herzfrequenz und die Atmung des Probanden (siehe Abb. \ref{imu_research_hung_rawData}).
 
 \begin{figure}[ht]
@@ -105,10 +105,10 @@ Die Rohdaten zeigen hierbei bereits die Herzfrequenz und die Atmung des Probande
     \label{imu_research_hung_rawData}
 \end{figure}
 
-Hierbei wurde ein Bandpassfilter mit adaptiver Anpassung verwendet, um den SNR (\textit{signal-noise-ratio}) zu optimieren.
+Die Daten wurden nach der Aufzeichnung durch einen Bandpassfilter mit adaptiver Apassung optimiert, um die SNR (\textit{signal-noise-ratio}) zu verringern.
 Der Puls wurde ermittelt, indem Peaks (Max: \textit{V}-Peak, Min: \textit{R}-Peak) gefunden und als Herzschlag interpretiert wurden.
-Bei der Atmung musste Signalrauschen, z.B von der Reibung des T-Shirts und Haut, herausgefiltert werden. 
-Es wurden 3 Features anhand der Amplitude über die Zeit berechnet. 
+Des weiteren musste Signalrauschen, z.B von der Reibung des T-Shirts und Haut, aus dem Signal herausgefiltert werden. 
+Zudem wurden 3 Features anhand der Amplitude über die Zeit berechnet. 
 Das erste Feature ist die \textit{Spektralverhältnis (spectral ratio)}. 
 Hier wird ein Leistungsspektrum einminütigems Segments vom HR-Signal geschätzt. 
 Der Frequenzbreich zwischen [0-1] $\si{\hertz}$ wurde untersucht. 
