@@ -75,7 +75,36 @@ Es gibt jedoch auch Patienten, die am Tag Probleme haben, bei monotonen Situatio
 Eine Diagnose würde mögliche Folgeerkrankungen schneller erkennbar machen und die Ursache dieser erklären.
 
 \section{Maschinelle Lernverfahren}
-\todo{grundlagen zu machine learning}
+Maschinelle Lernverfahren sind Algorithmen, welche die Performance des Algorithmus mittels Trainingsdaten verbessern \ref{add ref} \todo{reference Maschine Learning course of KIT}. 
+Es wird zwischen verschiedenen Lernverfahren unterschieden:
+\begin{itemize}
+    \item Supervised Learning
+    \item Unsupervised Learning
+    \item Reinforcement Learning
+\end{itemize}
+Beim \textit{Supervised Learning} sind die Trainingsdaten im Vergleich zum \textit{Unsupervised Learning} markiert. 
+So wird beim \textit{Supervised Learning} anhand von markierten Trainingsdaten eine Entscheidung getroffen. 
+Anhand der folgenden Tabelle wird bei \textit{Supervised} und \textit{Unsupervised Learning} zwischen verschiedenen Modellen unterschieden:
+\begin{center}
+    \begin{tabular}{ | l | l | }
+      \hline
+      \textbf{Supervised Learning} & \textbf{Unsupervised Learning} \\ \hline
+      \hline
+      Regression & Clustering \\ \hline
+      Klassifikation & Dimensionsreduktion \\
+      \hline
+    \end{tabular}
+\end{center}
+
+Jeder Algorithmus, welcher in einem Maschinellen Lernverfahren eingesetzt ist, besteht aus 3 Teilen: Zum einen der \textit{Representation}, der \textit{Evaluation} und der \textit{Optimization}. 
+In der \textit{Representation} unterscheidet man nach dem zugrunde liegenden Modell, welches beispielsweise ein Entscheidungsbaum, ein neuronales Netz oder eine Support-Vektor-Maschine sein kann.
+Die \textit{Evaluation} behandelt die Frage, in welche Richtung die Entscheidung getroffen werden soll. 
+Ein Beispiel hierfür wäre die Genauigkeit, den \textit{Precision & Recall}, die Entropie oder den Likelihood-Schätzer.
+Beim dritte Teil, der \textit{Optimization}, wird eine Optimierung des Algorithmus angestrebt. 
+Dies kann unter anderem mit Methoden 2. Ordnung, Zufälliger Suche, einem absteigenden Gradienten oder der Methode der kleinsten Quadrate versucht werden.
+
+Das in dieser Bachelorarbeit verwendete Lernverfahren ist \textit{Supervised Learning} mit dem zugehörigen Modell, die \textit{Klassifikation}.
+
 \todo{allg. kurz beschreiben, was die machen}
 
 \subsection{Random Forest}
