@@ -2,16 +2,18 @@
 \label{ch:Implementierung}
 
 In diesem Kapitel wird erläutert, wie die Daten des Datensatzes gesammelt, zur weiteren Verarbeitung vorbereitet und schließlich analysiert werden.
-Der Fokus hierbei liegt auf der Implementierung, für mehr Details, siehe Kapitel \todo{link to ref} %verlinke auf kapitel, wo erklärt wird, was wie gemacht wird
+Zur vollständigen Erarbeitung eines Datensatzes muss zuvor eine App erstellt werden, welche die zu sammelnden Daten der eSense Earpods empfängt und persistiert. 
+Zudem soll die App den Ablauf einer Messung automatisch verwalten und danach einen einfachen Export der persitierten Daten ermöglichen.
+Anschließend müssen die persistierten Daten aufbereitet werden, sodass sie klassifiziert werden können.
 
 \section{App}
 \label{ch:Implementierung:app}
 \subsection{Plattform}
 \label{ch:Implementierung:app:platform}
-Die Smartphone-App wurde mit der Sprache Swift für Apple-Smartphones entwickelt. 
-Mit der Software XCode lässt sich eine mit Swift geschriebe App kompilieren und auf dem Smartphone installieren.
+Die Smartphone-App wurde für Apple-Geräte konzipiert und mit der Sprache Swift entwickelt. 
+Mit der Software XCode lässt sich eine mit Swift geschriebene App kompilieren und auf dem Smartphone installieren.
 
-Zur Einbindung externer Frameworks wird der Dependency-Manager \textit{Accio} und \textit{Carthage} verwendet.
+Zur Einbindung externer Frameworks werden die Dependency-Manager \textit{Accio} und \textit{Carthage} verwendet.
 Im Folgenden sind die relevanten Frameworks aufgelistet, welche in der App eingebunden worden sind:
 
 \begin{center}
@@ -61,6 +63,7 @@ Der Timer zeigt den aktuellen, sowie den nächsten \textit{Task} an, sowie die R
 Der genaue Ablauf der einzelnen Timer ist in Abbildung \ref{fig_study_flow} detailliert beschrieben.
 Nach dem Ablauf des letzten Timers wird eine View geöffnet, welche die Möglichkeit zum Teilen der aktuellen Messung bietet (Abb. \ref{implementation:app:screenshots:sampling_stopped}, \ref{implementation:app:screenshots:share}).
 Zudem kann die Datenbank vollständig geleert werden.
+Währrend dieses Ablaufs wird ein Objekt erstellt, welches die Messung verwaltet.
 
 \subsection{Messung}
 \label{ch:Implementierung:app:measurement}

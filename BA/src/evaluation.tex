@@ -3,6 +3,25 @@
 
 \chapter{Evaluation}
 \label{ch:Evaluation}
+Die Evaluation der Ergebnisse beginnt damit, die Daten der eSense Earpods in Fenster (\textit{windows}) einzuteilen.
+Auf diese Fenster werden anschließend \textit{Features} berechnet, welche ausschlaggebend für die Klassifizierung sein sollen.
+
+\section{Gibt es passende Features?}
+Die Suche nach passenden Features wurde mit dem Python Package \texttt{tsfresh} angegangen.
+\texttt{tsfresh} berechnet automatisch Charakteristiken anhand von einer \textit{Timeseries}, die sogenannten Features \todo{ref to website https://tsfresh.readthedocs.io}.
+Zudem evaluiert das Package die Relevanz der Charakteristiken, um somit die Regression oder die Klassifikation zu erleichtern.
+
+
+passende features sind z.B
+\begin{itemize}
+    \item gyroZ partial autocorrelation
+    \item gytoX fft coefficient
+    \item gyroX agg autocorrelation
+    \item accY autocorrelation
+    \item gyroY change quantiles 
+    \item gyroZ fft coefficient
+\end{itemize}
+
 
 \section{Vergleich der Klassifikationsverfahren}
 \begin{itemize}
@@ -15,19 +34,6 @@ Was bieten die verfahren, wie macht das sinn, dass sinnvolle ergebnisse herausko
 
 WelcheVor-undNachteilekönnendieseVerfahrenbieten?
 
-\section{Gibt es passende Features?}
-\begin{itemize}
-    \item tsfresh verwendet
-    \item es hat sich ein pool an resultaten herausgezeichnet, war oft n 
-    \begin{itemize}
-        \item gyroZ partial autocorrelation
-        \item gytoX fft coefficient
-        \item gyroX agg autocorrelation
-        \item accY autocorrelation
-        \item gyroY change quantiles 
-        \item gyroZ fft coefficient
-    \end{itemize}
-\end{itemize}
 
 \section{Ablauf der Evaluierung}
 Im Kapitel \ref{ch:Implementierung:classification_pipeline} wurde beschrieben, wie die Features berechnet und persistiert wurden. 

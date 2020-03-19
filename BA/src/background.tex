@@ -15,9 +15,9 @@ Zudem konnten den Schlafphasen physiologische Eigenschaften nachgewiesen werden.
 Heutzutage sind ca. 80 Schlafstörungen in dieversen Bereichen bekannt, welche neben psychologischen Testverfahren überwiegend elektrophysiologisch untersucht und behandelt werden.
 Patienten werden mit ambulanten Hilfsmitteln oder stationär in einem Schlaflabor untersucht und anschließend von einem technisch ausgebildeten Personal analysiert.
 
-Im Falle eines Schlaflabors, welches genauere Messergebnisse im Vergleich zu einem ambulanten Hilfsmittel (z.B eine Langzeitbewegungsmessung) liefert, wird eine Polysomnographie durchgeführt.
-Diese misst Gehirnströme, Augenbewegungen und Muskelspannungen und erkennt erkennt einzelne Schlafphasen.
-Mithilfe eines PSG-Geräts werden über verschiedene Sensoren Werte ausgelesen, welche dann in Form eines Hypnogramms mittels der Kriterien des AASM (engl. \textit{American Association for Sleep Medicine}) ausgewertet werden können (siehe \ref{hypnogram_example}). 
+Hierbei wird eine Polysomnographie durchgeführt, womit genauere Messergebnisse im Vergleich zu einem ambulanten Hilfsmittel (z.B eine Langzeitbewegungsmessung), erreicht werden können.
+Währrend einer Polysomnographie werden Gehirnströme, Augenbewegungen und Muskelspannungen erkannt, wodurch die einzelnen Schlafphasen unterschieden werden können.
+Die verschiedene Sensorwerte werden dann in Form eines Hypnogramms mittels der Kriterien des AASM (engl. \textit{American Association for Sleep Medicine}) ausgewertet (siehe \ref{hypnogram_example}). 
 Hierbei werden die Schlafstadien in \textit{Wachphase (w)}, \textit{Einschlafen (N1)}, \textit{leichten Schlaf (N2)}, \textit{Tiefschlaf (N3)} und \textit{Rapid-Eye-Movement-Schlaf (REM)} unterteilt.
 
 \begin{figure}[ht]
@@ -33,7 +33,7 @@ Im Schlaflabor werden zudem auch Untersuchungen der Müdigkeit, der Tagesschläf
 
 Atmungsstörungen können oft die Ursache von Schlaganfällen, Herzinfarkten oder den eben genannten Symptomen sein, welche zu erheblichen psychischen Störungen führen können.
 % ende cite
-Aus diesem Grund ist es wichtig, so genau wie möglich Schlafstörungen bestimmen zu können, um Folgeerkrankungen verhindern zu können. 
+Aus diesem Grund ist es wichtig, so genau wie möglich Schlafstörungen bestimmen zu können, um Folgeerkrankungen zu verhindern. 
 
 \section{Klassifizierung von Schlafstörungen}
 Zur Charakterisierung von Schlafstörungen werden viele Biosignale währrend des Schlafs registriert, welche entscheidene Merkmale liefern \cite{praxis_der_schlafmedizin}.
@@ -51,7 +51,7 @@ Aufgrund dieser Annahme wurden Klassifikatoren für Schlafstörungen entwickelt.
 Diese Gliederung orientiert sich an der \textit{ICSD-3} \cite{praxis_der_schlafmedizin}.
 
 
-Diese Bachelorarbeit fokussiert sich darauf, ein zentrales Schlafapnoe zu klassifizieren, was ein Teil der Klassifikation \glqq schlafbezogenen Atmungsstörungen\grqq ist.
+Diese Bachelorarbeit fokussiert sich darauf, ein zentrales Schlafapnoe zu klassifizieren, was Bestandteil der {\glqq schlafbezogenen Atmungsstörungen\grqq} ist.
 Schlafapnoe wird in obstruktives und zentrales Apnoe unterschieden. 
 20\% aller Erwachsenen haben 5 oder mehr obstruktive Ereignisse pro Schlafstunde \cite{schlafmedizin_1x1}.
 Zentrales Apnoe hingegen tritt seltener auf, als obstruktives Apnoe, jedoch auffällig oft bei besonderen Patientengruppen. 
@@ -75,7 +75,8 @@ Es gibt jedoch auch Patienten, die am Tag Probleme haben, bei monotonen Situatio
 Eine Diagnose würde mögliche Folgeerkrankungen schneller erkennbar machen und die Ursache dieser erklären.
 
 \section{Maschinelle Lernverfahren}
-\todo{Mache eine Einführung und n bisschen schöneren Übergang, damits mehr sinn ergibt und n besseren Redefluss gibt}
+Zur Klassifikation eines zentralen Apnoes werden im Rahmen dieser Bachelorarbeit verschiedene Klassifikationsverfahren verwendet, wobei Trainingsdaten gesammelt werden, welche dann zentrale Apnoeereignisse anhand dieser Trainingsdaten klassifizieren sollen.
+
 Maschinelle Lernverfahren sind Algorithmen, welche die Performance des Algorithmus mittels Trainingsdaten verbessern \ref{add ref} \todo{reference Maschine Learning course of KIT}. 
 Es wird zwischen folgenden Lernverfahren unterschieden:
 \begin{itemize}
@@ -229,6 +230,8 @@ Es wurden hierbei eine Studie mit 12 Personen aufgezeichnet, welche in 3 Positio
 Die Analyse der Daten erfolgte im Anschluss der Studie und wurde in einer Pipeline verarbeitet, welche zuerst das Rauschen reduziert, anschließend einen Triangle-Filter der Breite $2\si{\s}$ anwendet und danach eine PCA (engl. \textit{principal component analysis}) ausführt, um die Daten unabhängig von deren Achse zu bewerten.
 Nun wurden Windows mit der Größe von $20\si{\s}$ extrahiert, welche die die Atmung und den Puls anhand dieses Windows berechnen.
 Die Resultate ergaben einen mittleren absoluten Fehler (engl. \textit{mean absolute error}) von 2.62 CPM (acc) und 2.55 CPM (gyro), jedoch variieren diese von Proband zu Proband.
+
+\todo{extend with more content from this paper}
 
 \begin{figure}[ht]
     \includegraphics[width=1\textwidth]{imu_research/towards_resp_rates_waves}
