@@ -81,7 +81,6 @@ Es werden kontinuierlich verschiedene Körperfunktionen überwacht, wodurch nach
 
 
 Das PSG-System zeichnet währrend der Studie ebenfalls Daten auf und soll die Resultate, welche durch die eSense-Earpods gesammelt und analysiert werden, verifizieren. Somit dienen die Daten, welche durch das PSG-System gesammelt werden, als \glqq Ground-Truth\grqq.
-\todo{1x1 literatur seite 100 lesen und hinzufügen}
 
 Mittels der {\glqq DOMINO Schlafdiagnostik\grqq} Software kann eine Montage erstellt werden. 
 Eine Montage ist eine Konfiguration, bei der man festlegen kann, welche Sensoren gemessen und persistiert werden sollen. Zudem kann man die Abtastrate in $\si{\hertz}$ festlegen.
@@ -89,26 +88,26 @@ Im folgenden werden alle Sensoren aufgelistet, welche für die Studie aufgezeich
 
 \begin{itemize}
     \item \textbf{Bauchsignal (\texttt{abdomen}) ($32 \si{\hertz}$)}: Gibt die Veränderung des Volumens am Bauch an.
-    \item \textbf{Lichtsignal (\texttt{light}) ($128 \si{\hertz}$)}: wird verwendet, um die Signale vom PSG-System und den eSense-Earpods zu synchronisieren
+    \item \textbf{Lichtsignal (\texttt{light}) ($128 \si{\hertz}$)}: Misst Umgebungslicht, was verwendet wird, um die Signale vom PSG-System und den eSense-Earpods zu synchronisieren.
     \item \textbf{Drucksignal (\texttt{flow}) ($256 \si{\hertz}$)}: Hier wird der Druck gemessen, der durch die Nase kommt. Der Sensor ist direkt an der Nase befestigt.
-    \item \textbf{Bewegungssignal (\texttt{movement}) ($32 \si{\hertz}$)}: \todo{misst bewegung anhand von Beschleunigungsdaten}
-    \item \textbf{Sauerstoffsättigung (\texttt{pleth}) ($128 \si{\hertz}$)}: \todo{describe}
-    \item \textbf{Pulssignal (\texttt{pulse}) ($32 \si{\hertz}$)}: Am Finger des Patienten wird dieser Sensor angebracht und misst den Puls.
-    \item \textbf{Schnarchmikrofonsignal (\texttt{schnarch}) ($256 \si{\hertz}$)}: Dieser Sensor wird am Kehlkopf befestigt und soll das Schnarchen messen.
-    \item \textbf{Sauerstoffgehalt (\texttt{spo2}) ($32 \si{\hertz}$)}: \todo{describe}
+    \item \textbf{Bewegungssignal (\texttt{movement}) ($32 \si{\hertz}$)}: Misst bewegung anhand von Beschleunigungsdaten.
+    \item \textbf{Sauerstoffsättigung (\texttt{pleth}) ($128 \si{\hertz}$)}: Gibt die Sauerstoffsättigung im Blut an.
+    \item \textbf{Pulssignal (\texttt{pulse}) ($32 \si{\hertz}$)}: Gibt den Puls, gemessen am Finger des Patienten, an.
+    \item \textbf{Schnarchmikrofonsignal (\texttt{schnarch}) ($256 \si{\hertz}$)}: Dieser Sensor wird am Kehlkopf befestigt und misst das Schnarchen.
+    \item \textbf{Sauerstoffgehalt (\texttt{spo2}) ($32 \si{\hertz}$)}: Manschettenfreie kontinuierliche Blutdruckmessung
     \item \textbf{Brustkorbsignal (\texttt{thorax}) ($32 \si{\hertz}$)}: Gibt die Veränderung des Volumens am Brustkorb an.
     \item \textbf{Brustkorb \& Bauchsignal (\texttt{thoraxabdomen}) ($32 \si{\hertz}$)}: Das kombinierte Signal von Brust- und Bauchsignal
-    \item \textbf{EDF Informationen (\texttt{edfAnnotations}) ($60 \si{\hertz}$)}: \todo{describe}
+    \item \textbf{EDF Informationen (\texttt{edfAnnotations}) ($60 \si{\hertz}$)}: Enthält Anmerkungen als \textit{char}, z.B die Startzeit der Messung
 \end{itemize}
 
 \subsection{Datenexport}
 \label{ch:sa:psg:export}
 
 Im PSG-System befindet sich eine CF-Karte (\textit{Compact-Flash}). Diese kann mihilfe der vom PSG-System bereitgestellten {\glqq DOMINO Schlafdiagnostik\grqq} Software ausgelesen werden.
-Die Software stellt eine Ansicht dar, womit man die Signale untereinander in einer Timeline betrachten kann. Die aufgezeichneten Signale können als \textit{edf}-Datei exportiert werden.
+Die Software stellt eine Ansicht dar, womit man die Signale untereinander in einer zeitlich synchronisiert betrachten kann. Die aufgezeichneten Signale können als \textit{edf}-Datei exportiert werden.
 Mittels Python kann man \textit{edf}-Dateien auslesen und weiterverarbeiten.
 Pro Studie wurden alle 3 Positionsabläufe in einem einzigen Messvorgang aufgezeichnet. Somit müssen die 3 Einzelmessugen aus der \textit{edf}-Datei herausgezogen werden.
-Für weitere Details siehe Kapitel \ref{ch:impl} \todo{change ref to ref, where edf-analyzation is explained}
+Für weitere Details siehe Kapitel \ref{ch:Implementierung:way_to_pipeline}.
 
 \section{Kamera}
 \label{ch:sa:camera}

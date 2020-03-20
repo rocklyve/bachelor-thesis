@@ -169,9 +169,11 @@ Nun ist garantiert, dass die Lichtsignale von PSG-System und dem Smartphone ann�
 \section{Verarbeitungspipeline zur Klassifikation}
 \label{ch:Implementierung:classification_pipeline}
 Zur Klassifizierung der Daten müssen nun Features berechnet werden. 
-Pro Position wurden nun alle Werte in Fenster gepackt mit einer Größe von $5\si{\s}$, beziehungsweise $10\si{\s}$ mit einer Verschiebung von $1\si{\s}$. 
-Da die Messergebnisse der eSense Earpods per BLE an das Smartphone gesendet wurden und dort keine Uhrzeit mitgegeben wurde, liegen die einzelnen Messergebnisse nicht im Abstand von exakt $50\si{\hertz}$ vor. 
-Aufgrund dessen wurden Fenster manuell anhand des Zeitwertes zusammengefügt. 
-Anschließend wurden mittels des Moduls \texttt{tsfresh} Features berechnet und es entstand eine Datei \textit{df\$patient\_id\$\_\$position\_id\$\_feature.csv}.
+Diese werden jedoch nicht auf das ganze Zeitintervall einer Messung berechnet, sondern aufgeteilt.
+Eine Messung wird nun in Fenster der Größe von 5, bzw 10 Sekunden aufgeteilt, wobei jedes Fenster um eine Sekunde verschoben wird. 
+Somit überlappen sich zwei aneinander liegende Fenster immer um 4, bzw 9 Sekunden. 
+Die Trennung der Fenster wurde anhand des Zeitwertes jedes Messergebnisses entschieden, da die Messergebnisse der eSense Earpods beim Senden per BLE an das Smartphone keine Uhrzeit beinhalteten.
+Dadurch liegt kein genauer Abstand der einzelnen Messdaten von $50\si{\hertz}$ vor. 
+Anschließend wurden mittels des Moduls \texttt{tsfresh} Features für jedes Fenster einzeln berechnet und es entstand eine Datei \textit{df\$patient\_id\$\_\$position\_id\$\_feature.csv}, welche alle Features der einzelnen Fenster beinhaltet.
 
 Da nun die Features für eine Fenstergröße von $5\si{\s}$ und $10\si{\s}$ mit der Verschiebung von $1\si{\s}$ pro Fenster vorliegen, kann mit der Klassifikation begonnen werden.
