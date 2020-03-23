@@ -31,40 +31,41 @@ Dies ist eine essenzielle Entscheidung, da beim Training des Modells nun anhand 
 \todo{genauer beschreiben, warum hier 50\% gewählt wurde... ich wollte bei 90\% z.B die Übergänge nicht als 0 markieren, weil dann teile der 0 markierten features eigentlich ein Atemaussetzer gewesen wäre... dann trainiert es kacke...}
 Nun können die Resultate mit den Klassifikatoren verglichen werden.
 
-\subsection{Methoden}
-\subsubsection{Kreuzvalidierungsverfahren}
-Die Klassifikation wurde mit verschiedenen Verfahren durchgeführt. 
-Die erste Methode ist das Kreuzvalidierungsverfahren. 
+\subsection{Kreuzvalidierungsverfahren}
+\subsubsection{Leave One Subject Out (LOSO)}
+Die Klassifikation wurde mit verschiedenen Methoden des Kreuzvalidierungsverfahren durchgeführt. 
+Die erste Methode ist das \textit{Leave One Subject Out} (\textit{LOSO}) Kreuzvalidierungsverfahren. 
 Hierbei wird ein Modell anhand der Daten der Studienteilnehmer trainiert, jedoch wird ein Datensatz eines Studienteilnehmers ausgelassen. 
 Dieser eine Datensatz wird schließlich verwendet, um eine Vorhersage anhand der Trainingsdaten zu treffen, ohne durch interne Trainingsdaten optimiert sein zu können.
-Im Folgenden wurde das Kreuzvalidierungsverfahren durchgeführt mit den beiden Klassifikationsalgorithmen \textit{Random Forest} und \textit{XGBoost}. 
+Im Folgenden wurde das LOSO Kreuzvalidierungsverfahren mit den beiden Klassifikationsalgorithmen \textit{Random Forest} und \textit{XGBoost} durchgeführt. 
 Es wurde jede Person einmal ausgelassen und auf den Trainingsdatensatz angewandt, welcher diese Person nicht enthält. 
 Somit entstehen 7 Resultate, von denen nun der Mittelwert gebildet wird.
-Die Resultate sind in den Abbildungen \ref{evaluation:random_forest_loso_5:person6}, \ref{evaluation:random_forest_loso_10:person6}, \ref{evaluation:xgboost_loso_5:person6}, \ref{evaluation:xgboost_loso_10:person6} dargestellt.
+Die Resultate sind in den Abbildungen \ref{evaluation:random_forest_loso:person6} und \ref{evaluation:xgboost_loso:person6} beispielhaft an Person 6 dargestellt.
 Die vollständige Auflistung aller Resultate sind im Anhang zu finden. \\
-Hier ist anzumerken, dass Person 6 als Beispiel genommen wurde. 
-Es wurde eine Vorhersage auf jede Person einzeln getroffen, welche dann im \textit{Precision} und \textit{Recall} der unterliegenden Tabelle mit dem Mittelwert zusammengetragen wurden. 
+Der Mittelwert aller Ergebnisse des LOSO Kreuzvalidierungsverfahrens sind im \textit{Precision} und \textit{Recall} der unterliegenden Tabelle der Beispiele bei Person 6 mit dem Mittelwert zusammengetragen worden. 
+\todo{schreibe darüber, was die ergebnisse von LOSO aussagen}
 
 Des weiteren, um mögliche Positionsabhängigkeiten zu erkennen, wurden das selbe erneut evaluiert, jedoch nur mit den einzelnen Positionsdaten der jeweiligen Person. 
-In Abbildung \ref{asdf} \todo{add ref} sind die Resultate zu sehen.
+In der Tabelle \ref{evaluation:loso_classification_results} sind die Resultate zu sehen.
+\todo{schreibe darüber, was die ergebnisse der einzelnen personen aussagen}
+
 
 %%%%%%%%%%%%%%%%%%%        RANDOM FOREST 5 sec %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[ht]
+\begin{figure}[H]
+  \textbf{Random Forest ($w=5\si{\s}$, $d=1\si{\s}$)}
     \centering
     \begin{subfigure}{1\textwidth}
         \includegraphics[width=1\textwidth]{evaluation/loso_5sec/random_forest_loso/Random Forest (Leave one Subject out: Person 6 back).png}
-        \caption{Klassifikationsresultate der Person 6. Die Messung wurde auf dem Rücken liegend durchgeführt.}
+        %\caption{Resultate der Person 6 auf dem Rücken liegend.}
       \end{subfigure}
       \begin{subfigure}{1\textwidth}
         \includegraphics[width=1\textwidth]{evaluation/loso_5sec/random_forest_loso/Random Forest (Leave one Subject out: Person 6 side).png}
-        \caption{Klassifikationsresultate der Person 6. Die Messung wurde auf der Seite liegend durchgeführt.}
+        %\caption{Resultate der Person 6 auf der Seite liegend.}
       \end{subfigure}
       \begin{subfigure}{1\textwidth}
         \includegraphics[width=1\textwidth]{evaluation/loso_5sec/random_forest_loso/Random Forest (Leave one Subject out: Person 6 stomach).png}
-        \caption{Klassifikationsresultate der Person 6. Die Messung wurde auf dem Bauch liegend durchgeführt.}
+        %\caption{Resultate der Person 6 auf dem Bauch liegend.}
     \end{subfigure}
-    \label{evaluation:random_forest_loso_5:person6}
-
     \begin{subfigure}{1\textwidth}
         \begin{center}
             \begin{tabular}{ | l | c | r | }
@@ -75,62 +76,60 @@ In Abbildung \ref{asdf} \todo{add ref} sind die Resultate zu sehen.
               \hline
             \end{tabular}
         \end{center}
-        \caption{Random Forest mit dem Kreuzvalidierungsverfahren}
+        \caption{Random Forest mit dem Kreuzvalidierungsverfahren. Die Tabelle zeigt den Mittelwert aller Vorhersagen der einzelnen Personen.}
         \label{implementation:app:screenshots:user_studies_information}
     \end{subfigure}
-    \caption{Ergebnisse eines Kreuzvalidierungsverfahren der Person 6 mit dem Klassifikationsalgorithmus Random Forest und einer Fenstergröße von 5 Sekunden mit einer Verschiebung der Fenster von 1 Sekunde. Hier wurden alle Positionen mit in das Modell zum trainieren gegeben und es wurde auf alle Positionen der Person 6 vorhergesagt. Die blauen Bereiche sind die, in denen die Luft angehalten wurde, die orangene Kurve ist die Vorhersage.}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%        RANDOM FOREST 10 sec %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[ht]
-    \centering
+    \newline
+    \vspace*{1 cm}
+    \newline
+    \textbf{Random Forest ($w=10\si{\s}$, $d=1\si{\s}$)}
     \begin{subfigure}{1\textwidth}
-        \includegraphics[width=1\textwidth]{evaluation/loso_10sec/random_forest_loso/Random Forest (Leave one Subject out: Person 6 back).png}
-        \caption{Klassifikationsresultate der Person 6. Die Messung wurde auf dem Rücken liegend durchgeführt.}
-      \end{subfigure}
-      \begin{subfigure}{1\textwidth}
-        \includegraphics[width=1\textwidth]{evaluation/loso_10sec/random_forest_loso/Random Forest (Leave one Subject out: Person 6 side).png}
-        \caption{Klassifikationsresultate der Person 6. Die Messung wurde auf der Seite liegend durchgeführt.}
-      \end{subfigure}
-      \begin{subfigure}{1\textwidth}
-        \includegraphics[width=1\textwidth]{evaluation/loso_10sec/random_forest_loso/Random Forest (Leave one Subject out: Person 6 stomach).png}
-        \caption{Klassifikationsresultate der Person 6. Die Messung wurde auf dem Bauch liegend durchgeführt.}
+      \includegraphics[width=1\textwidth]{evaluation/loso_10sec/random_forest_loso/Random Forest (Leave one Subject out: Person 6 back).png}
+      %\caption{Resultate der Person 6 auf dem Rücken liegend.}
     \end{subfigure}
-    \label{evaluation:random_forest_loso_10:person6}
-
     \begin{subfigure}{1\textwidth}
-        \begin{center}
-            \begin{tabular}{ | l | c | r | }
-              \hline
-               & precision & recall \\ \hline
-              0 & 0.91499 & 0.76483 \\ \hline
-              1 & 0.76483 & 0.67411 \\
-              \hline
-            \end{tabular}
-        \end{center}
-        \caption{Random Forest mit dem Kreuzvalidierungsverfahren}
-        \label{implementation:app:screenshots:user_studies_information}
+      \includegraphics[width=1\textwidth]{evaluation/loso_10sec/random_forest_loso/Random Forest (Leave one Subject out: Person 6 side).png}
+      %\caption{Resultate der Person 6 auf der Seite liegend.}
     \end{subfigure}
-    \caption{Ergebnisse eines Kreuzvalidierungsverfahren der Person 6 mit dem Klassifikationsalgorithmus Random Forest und einer Fenstergröße von 10 Sekunden mit einer Verschiebung der Fenster von 1 Sekunde. Hier wurden alle Positionen mit in das Modell zum trainieren gegeben und es wurde auf alle Positionen der Person 6 vorhergesagt. Die blauen Bereiche sind die, in denen die Luft angehalten wurde, die orangene Kurve ist die Vorhersage.}
+    \begin{subfigure}{1\textwidth}
+      \includegraphics[width=1\textwidth]{evaluation/loso_10sec/random_forest_loso/Random Forest (Leave one Subject out: Person 6 stomach).png}
+      %\caption{Resultate der Person 6 auf dem Bauch liegend.}
+  \end{subfigure}
+
+  \begin{subfigure}{1\textwidth}
+      \begin{center}
+          \begin{tabular}{ | l | c | r | }
+            \hline
+             & precision & recall \\ \hline
+            0 & 0.91499 & 0.76483 \\ \hline
+            1 & 0.76483 & 0.67411 \\
+            \hline
+          \end{tabular}
+      \end{center}
+      \caption{Random Forest mit dem Kreuzvalidierungsverfahren (LOSO). Die Tabelle zeigt den Mittelwert aller Vorhersagen der einzelnen Personen.}
+      \label{implementation:app:screenshots:user_studies_information}
+  \end{subfigure}
+    \caption{Das Kreuzvalidierungsverfahren (LOSO) mit dem Klassifikationsalgorithmus Random Forest. Das Modell wurde auf allen Personen, exklusive einer Person trainiert und auf alle Positionen dieser einen Person wurde eine Vorhersage getroffen. Am Beispiel hier sind die Resultate von Person 6 zu sehen. Die blauen Bereiche sind die, in denen die Luft angehalten wurde, die orangene Kurve ist die Vorhersage. ($w=$ Fenstergröße, $d=$ Verschiebung der Fenster)}
+\label{evaluation:random_forest_loso:person6}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%        XG BOOST 5 sec %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{figure}[ht]
+\begin{figure}[H]
+  \textbf{XG Boost ($w=5\si{\s}$, $d=1\si{\s}$)}
     \centering
     \begin{subfigure}{1\textwidth}
         \includegraphics[width=1\textwidth]{evaluation/loso_5sec/xg_boost_loso/XG Boost (Leave one Subject out: Person 6 back).png}
-        \caption{Klassifikationsresultate der Person 6. Die Messung wurde auf dem Rücken liegend durchgeführt.}
+        %\caption{Resultate der Person 6 auf dem Rücken liegend.}
       \end{subfigure}
       \begin{subfigure}{1\textwidth}
         \includegraphics[width=1\textwidth]{evaluation/loso_5sec/xg_boost_loso/XG Boost (Leave one Subject out: Person 6 side).png}
-        \caption{Klassifikationsresultate der Person 6. Die Messung wurde auf der Seite liegend durchgeführt.}
+        %\caption{Resultate der Person 6 auf der Seite liegend.}
       \end{subfigure}
       \begin{subfigure}{1\textwidth}
         \includegraphics[width=1\textwidth]{evaluation/loso_5sec/xg_boost_loso/XG Boost (Leave one Subject out: Person 6 stomach).png}
-        \caption{Klassifikationsresultate der Person 6. Die Messung wurde auf dem Bauch liegend durchgeführt.}
+        %\caption{Resultate der Person 6 auf dem Bauch liegend.}
     \end{subfigure}
-    \label{evaluation:xgboost_loso_5:person6}
 
     \begin{subfigure}{1\textwidth}
         \begin{center}
@@ -142,49 +141,45 @@ In Abbildung \ref{asdf} \todo{add ref} sind die Resultate zu sehen.
               \hline
             \end{tabular}
         \end{center}
-        \caption{XGBoost mit dem Kreuzvalidierungsverfahren}
+        \caption{XGBoost mit dem Kreuzvalidierungsverfahren (LOSO). Die Tabelle zeigt den Mittelwert aller Vorhersagen der einzelnen Personen.}
         \label{implementation:app:screenshots:user_studies_information}
     \end{subfigure}
-    \caption{Ergebnisse eines Kreuzvalidierungsverfahren der Person 6 mit dem Klassifikationsalgorithmus XGBoost und einer Fenstergröße von 5 Sekunden mit einer Verschiebung der Fenster von 1 Sekunde. Hier wurden alle Positionen mit in das Modell zum trainieren gegeben und es wurde auf alle Positionen der Person 6 vorhergesagt. Die blauen Bereiche sind die, in denen die Luft angehalten wurde, die orangene Kurve ist die Vorhersage.}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%        XG BOOST 10 sec %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[ht]
-    \centering
+    \newline
+    \vspace*{1 cm}
+    \newline
+    \textbf{XG Boost ($w=10\si{\s}$, $d=1\si{\s}$)}
     \begin{subfigure}{1\textwidth}
-        \includegraphics[width=1\textwidth]{evaluation/loso_10sec/xg_boost_loso/XG Boost (Leave one Subject out: Person 6 back).png}
-        \caption{Klassifikationsresultate der Person 6. Die Messung wurde auf dem Rücken liegend durchgeführt.}
-      \end{subfigure}
-      \begin{subfigure}{1\textwidth}
-        \includegraphics[width=1\textwidth]{evaluation/loso_10sec/xg_boost_loso/XG Boost (Leave one Subject out: Person 6 side).png}
-        \caption{Klassifikationsresultate der Person 6. Die Messung wurde auf der Seite liegend durchgeführt.}
-      \end{subfigure}
-      \begin{subfigure}{1\textwidth}
-        \includegraphics[width=1\textwidth]{evaluation/loso_10sec/xg_boost_loso/XG Boost (Leave one Subject out: Person 6 stomach).png}
-        \caption{Klassifikationsresultate der Person 6. Die Messung wurde auf dem Bauch liegend durchgeführt.}
+      \includegraphics[width=1\textwidth]{evaluation/loso_10sec/xg_boost_loso/XG Boost (Leave one Subject out: Person 6 back).png}
+      %\caption{Klassifikationsresultate der Person 6. Die Messung wurde auf dem Rücken liegend durchgeführt.}
     \end{subfigure}
-    \label{evaluation:xgboost_loso_10:person6}
-
     \begin{subfigure}{1\textwidth}
-        \begin{center}
-            \begin{tabular}{ | l | c | r | }
-              \hline
-               & precision & recall \\ \hline
-              0 & 0.93186 & 0.74072 \\ \hline
-              1 & 0.74072 & 0.74767 \\
-              \hline
-            \end{tabular}
-        \end{center}
-        \caption{XGBoost mit dem Kreuzvalidierungsverfahren}
-        \label{implementation:app:screenshots:user_studies_information}
+      \includegraphics[width=1\textwidth]{evaluation/loso_10sec/xg_boost_loso/XG Boost (Leave one Subject out: Person 6 side).png}
+      %\caption{Klassifikationsresultate der Person 6. Die Messung wurde auf der Seite liegend durchgeführt.}
     \end{subfigure}
-    \caption{Ergebnisse eines Kreuzvalidierungsverfahren der Person 6 mit dem Klassifikationsalgorithmus XGBoost und einer Fenstergröße von 10 Sekunden mit einer Verschiebung der Fenster von 1 Sekunde. Hier wurden alle Positionen mit in das Modell zum trainieren gegeben und es wurde auf alle Positionen der Person 6 vorhergesagt. Die blauen Bereiche sind die, in denen die Luft angehalten wurde, die orangene Kurve ist die Vorhersage.}
+    \begin{subfigure}{1\textwidth}
+      \includegraphics[width=1\textwidth]{evaluation/loso_10sec/xg_boost_loso/XG Boost (Leave one Subject out: Person 6 stomach).png}
+      %\caption{Klassifikationsresultate der Person 6. Die Messung wurde auf dem Bauch liegend durchgeführt.}
+  \end{subfigure}
+
+  \begin{subfigure}{1\textwidth}
+      \begin{center}
+          \begin{tabular}{ | l | c | r | }
+            \hline
+             & precision & recall \\ \hline
+            0 & 0.93186 & 0.74072 \\ \hline
+            1 & 0.74072 & 0.74767 \\
+            \hline
+          \end{tabular}
+      \end{center}
+      \caption{XGBoost mit dem Kreuzvalidierungsverfahren (LOSO). Die Tabelle zeigt den Mittelwert aller Vorhersagen der einzelnen Personen.}
+      \label{implementation:app:screenshots:user_studies_information}
+  \end{subfigure}
+    \caption{Das Kreuzvalidierungsverfahren (LOSO) mit dem Klassifikationsalgorithmus XG Boost. Das Modell wurde auf allen Personen, exklusive einer Person trainiert und auf alle Positionen dieser einen Person wurde eine Vorhersage getroffen. Am Beispiel hier sind die Resultate von Person 6 zu sehen. Die blauen Bereiche sind die, in denen die Luft angehalten wurde, die orangene Kurve ist die Vorhersage. ($w=$ Fenstergröße, $d=$ Verschiebung der Fenster)}
+\label{evaluation:xgboost_loso:person6}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%        Position based results  5 sec %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\todo{add description for each table}
-
-
+\begin{table}
 \begin{tabular}{cc}    
     \begin{minipage}{.33\linewidth}
         \begin{center}
@@ -195,8 +190,9 @@ In Abbildung \ref{asdf} \todo{add ref} sind die Resultate zu sehen.
               1 & 0.71875 & 0.57238 \\
               \hline
             \end{tabular}
+            \smallskip
+            \\ Random Forest (only side, \textit{window: 5s})
         \end{center}
-        %\caption{random forest loso side}
         %\label{evaluation:5s:random_forest_loso_side}
     \end{minipage}
 
@@ -209,8 +205,9 @@ In Abbildung \ref{asdf} \todo{add ref} sind die Resultate zu sehen.
               1 & 0.82538 & 0.44796 \\
               \hline
             \end{tabular}
+            \smallskip
+            \\ Random Forest (only back, \textit{window: 5s})
         \end{center}
-        %\caption{random forest loso back}
         %\label{evaluation:5s:random_forest_loso_back}
     \end{minipage}
 
@@ -223,13 +220,16 @@ In Abbildung \ref{asdf} \todo{add ref} sind die Resultate zu sehen.
               1 & 0.723369 & 0.65753 \\
               \hline
             \end{tabular}
+            \smallskip
+            \\ Random Forest (only stomach, \textit{window: 5s})
         \end{center}
-        %\caption{random forest loso stomach}
         %\label{evaluation:5s:random_forest_loso_stomach}
     \end{minipage}
 \end{tabular}
-
-\begin{tabular}{cc} 
+\newline
+\vspace*{5mm}
+\newline
+\begin{tabular}{cc}
     \begin{minipage}{0.33\textwidth}
         \begin{center}
             \begin{tabular}{ | l | c | r | }
@@ -239,8 +239,9 @@ In Abbildung \ref{asdf} \todo{add ref} sind die Resultate zu sehen.
               1 & 0.66979 & 0.6116 \\
               \hline
             \end{tabular}
+            \smallskip
+            \\ XG Boost (only side, \textit{window: 5s})
         \end{center}
-        %\caption{xg boost loso side}
         %\label{evaluation:5s:xg_boost_loso_side}
     \end{minipage}
 
@@ -253,8 +254,9 @@ In Abbildung \ref{asdf} \todo{add ref} sind die Resultate zu sehen.
               1 & 0.75145 & 0.54108 \\
               \hline
             \end{tabular}
+            \smallskip
+            \\ XG Boost (only back, \textit{window: 5s})
         \end{center}
-        %\caption{xg boost loso back}
         %\label{evaluation:5s:xg_boost_loso_back}
     \end{minipage}
 
@@ -267,39 +269,114 @@ In Abbildung \ref{asdf} \todo{add ref} sind die Resultate zu sehen.
               1 & 0.70734 & 0.71763 \\
               \hline
             \end{tabular}
+            \smallskip 
+            \\ XG Boost (only stomach, \textit{window: 5s})
         \end{center}
-        %\caption{xg boost loso stomach}
         %\label{evaluation:5s:xg_boost_loso_stomach}
     \end{minipage}
 \end{tabular}
-
-
+\newline
+\vspace*{5mm}
+\newline
 %%%%%%%%%%%%%%%%%%%        Position based results  10 sec %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{figure}[ht]
-%     random_forest_loso_side
-% 0 precision: 0.8910321701260353 recall: 0.7944339547679462
-% 1 precision: 0.7944339547679462 recall: 0.5342972945135886
-% 
-% random_forest_loso_back
-% 0 precision: 0.8856848120232153 recall: 0.7942768843164358
-% 1 precision: 0.7942768843164358 recall: 0.5226600199639415
-% 
-% random_forest_loso_stomach
-% 0 precision: 0.9441160862106648 recall: 0.714477770976837
-% 1 precision: 0.714477770976837 recall: 0.7303793266951162
-% 
-% xg_boost_loso_side
-% 0 precision: 0.9049749539351956 recall: 0.7844056251056845
-% 1 precision: 0.7844056251056845 recall: 0.6074581770976869
-% 
-% xg_boost_loso_back
-% 0 precision: 0.9030026977390445 recall: 0.7505666120433064
-% 1 precision: 0.7505666120433064 recall: 0.5797357581671306
-% 
-% xg_boost_loso_stomach
-% 0 precision: 0.937830526588158 recall: 0.7127870082777301
-% 1 precision: 0.7127870082777301 recall: 0.720753883969457
-% \end{figure}
+  \begin{tabular}{cc}    
+      \begin{minipage}{.33\linewidth}
+          \begin{center}
+              \begin{tabular}{ | l | c | r | }
+                \hline
+                 & precision & recall \\ \hline
+                0 & 0.89103 & 0.79443 \\ \hline
+                1 & 0.79443 & 0.53429 \\
+                \hline
+              \end{tabular}
+              \smallskip
+              \\ Random Forest (only side, \textit{window: 10s})
+          \end{center}
+          %\label{evaluation:5s:random_forest_loso_side}
+      \end{minipage}
+  
+      \begin{minipage}{.33\linewidth}
+          \begin{center}
+              \begin{tabular}{ | l | c | r | }
+                \hline
+                 & precision & recall \\ \hline
+                0 & 0.88568 & 0.79427 \\ \hline
+                1 & 0.79427 & 0.52266 \\
+                \hline
+              \end{tabular}
+              \smallskip
+              \\ Random Forest (only back, \textit{window: 10s})
+          \end{center}
+          %\label{evaluation:5s:random_forest_loso_back}
+      \end{minipage}
+ 
+      \begin{minipage}{0.33\textwidth}
+          \begin{center}
+              \begin{tabular}{ | l | c | r | }
+                \hline
+                 & precision & recall \\ \hline
+                0 & 0.94411 & 0.71447 \\ \hline
+                1 & 0.71447 & 0.73037 \\
+                \hline
+              \end{tabular}
+              \smallskip
+              \\ Random Forest (only stomach, \textit{window: 10s})
+          \end{center}
+          %\label{evaluation:5s:random_forest_loso_stomach}
+      \end{minipage}
+  \end{tabular}
+  \newline
+  \vspace*{5mm}
+  \newline
+  \begin{tabular}{cc}
+      \begin{minipage}{0.33\textwidth}
+          \begin{center}
+              \begin{tabular}{ | l | c | r | }
+                \hline
+                 & precision & recall \\ \hline
+                0 & 0.90497 & 0.78440 \\ \hline
+                1 & 0.78440 & 0.60745 \\
+                \hline
+              \end{tabular}
+              \smallskip
+              \\ XG Boost (only side, \textit{window: 10s})
+          \end{center}
+          %\label{evaluation:5s:xg_boost_loso_side}
+      \end{minipage}
+
+      \begin{minipage}{0.33\textwidth}
+          \begin{center}
+              \begin{tabular}{ | l | c | r | }
+                \hline
+                 & precision & recall \\ \hline
+                0 & 0.90300 & 0.75056 \\ \hline
+                1 & 0.75056 & 0.57973 \\
+                \hline
+              \end{tabular}
+              \smallskip
+              \\ XG Boost (only back, \textit{window: 10s})
+          \end{center}
+          %\label{evaluation:5s:xg_boost_loso_back}
+      \end{minipage}
+  
+      \begin{minipage}{0.33\textwidth}
+          \begin{center}
+              \begin{tabular}{ | l | c | r | }
+                \hline
+                 & precision & recall \\ \hline
+                0 & 0.93783 & 0.71278 \\ \hline
+                1 & 0.71278 & 0.72075 \\
+                \hline
+              \end{tabular}
+              \smallskip 
+              \\ XG Boost (only stomach, \textit{window: 10s})
+          \end{center}
+          %\label{evaluation:5s:xg_boost_loso_stomach}
+      \end{minipage}
+  \end{tabular}
+  \caption{Klassifikationsergebnisse mit dem Kreuzvalidierungsverfahren bei einer Fenstergröße von 5, bzw. 10 Sekunden, welche um 1 Sekunde verschoben wurden. Es wurde immer eine Person aus dem Trainieren des Modells ausgelassen und auf diese Person wurde anschließend eine Vorhersage getroffen. Jede Person wurde einmel in dem Modell außen vorgelassen und auf dieses Modell vorhergesagt. Das zu sehende Resultat ist der Mittelwert aller Resultate des Kreuzvalidierungsverfahrens der einzelnen Positionen der Position.}
+  \label{evaluation:loso_classification_results}
+  \end{table}
 
 
 Jede Klassifikation ergab ein Resultat, welches durch einzelne Features entschieden wurde. 
@@ -314,8 +391,46 @@ Um einen kleinen Überblick zu bekommen, welche Features entscheidend für die E
 \end{itemize}
 Diese Features wurden mittels \texttt{tsfresh} berechnet und waren bei der Klassifikation des Kreuzvalidierungsverfahrens entscheidened.
 
-\subsubsection{Leave one subject in}
-s
+\subsubsection{Within Subject}
+Als zweites Kreuzvalidierungsverfahren wird \textit{Within Subject} angewandt.
+Hier wird versucht, alle Personen mit der Methode \texttt{test\_train\_split} die ganzen Daten in Trainingsdaten und Testdaten aufzuteilen.
+Hier wird eine Aufteilung von 70\% für die Trainingsdaten und 30\% für die Testdaten gewählt. 
+Daraus ergibt sich ein \textit{score}, welcher \todo{was gibt mit der score}
+Die Resultate sind in Abbildung \ref{evaluation:within_subject_results} zu sehen.
+\todo{daraus erkennt man folgendes:}
+
+\begin{table}
+  \begin{tabular}{cc}
+    \begin{minipage}{1\textwidth}
+      \begin{center}
+          \begin{tabular}{ | l | c | c | c | c | c | }
+            \hline
+            \textbf{Verfahren} & \textbf{Positionen} & \textbf{Score} & \textbf{Score} & \textbf{Score} & \textbf{Score} \\ 
+            & & \textbf{$w=5\si{\s}$} & \textbf{$w=5\si{\s}$} & \textbf{$w=10\si{\s}$} & \textbf{$w=10\si{\s}$} \\
+            & & \textbf{$d=1\si{\s}$} & \textbf{$d=5\si{\s}$} & \textbf{$d=1\si{\s}$} & \textbf{$d=10\si{\s}$} \\ \hline
+            Random Forest & Alle &  0.87081 & 0.73988 & 0.89300 & 0.71428 \\ 
+             & Rücken & 0.85517 & 0.66666 & 0.93333 & 0.57142 \\
+             & Seite  & 0.85763 & 0.72413 & 0.89523 & 0.75 \\
+             & Bauch  & 0.89619 & 0.84745 & 0.92332 & 0.65714 \\ \hline
+            XG Boost  & Alle & 0.88004 & 0.69942 & 0.91737 & 0.76190 \\ 
+             & Rücken & 0.88965 & 0.66666 & 0.95238 & 0.62857 \\
+             & Seite  & 0.90277 & 0.77586 & 0.92380 & 0.47222 \\
+             & Bauch  & 0.90311 & 0.74576 & 0.94888 & 0.62857 \\ \hline
+            SVM & Alle& 0.54209 & 0.47976 & 0.65360 & 0.41904 \\ 
+             & Rücken & 0.59655 & 0.66666 & 0.71746 & 0.45714 \\
+             & Seite  & 0.56597 & 0.37931 & 0.62539 & 0.5 \\
+             & Bauch  & 0.61245 & 0.40677 & 0.67412 & 0.4 \\
+            \hline
+          \end{tabular}
+      \end{center}
+    \end{minipage}
+  \end{tabular}
+  \caption{Ergebnisse des Kreuzvalidierungsverfahrens innerhalb eines Subjects mit einer Aufteilung von 70\% Trainings- und 30\% Testdaten. Alle Personen der Nutzerstudie wurden verwendet. $w$ steht für die Fenstergröße, $d$ für die Verschiebung der aneinanderfolgenden Fenster.}
+  \label{evaluation:within_subject_results}
+\end{table}
+
+die ergebnisse sind in abb zu finden... 
+evaluation der ergebnisse
 
 Was bieten die verfahren, wie macht das sinn, dass sinnvolle ergebnisse herauskommen...
 
@@ -329,7 +444,6 @@ WelcheVor-undNachteilekönnendieseVerfahrenbieten?
     \item rauschen entfernen bringt nix vermutlich wegen tsfresh, da es das schon macht, also es kommen
     \item 
 \end{itemize}
-
 
 gibt earables, die blutsauerstoff und puls mittracken können
 plus grafik telegram tobi
