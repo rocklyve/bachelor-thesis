@@ -11,8 +11,10 @@ Die Suche nach passenden Features wird mit dem Python Package \texttt{tsfresh} a
 \texttt{tsfresh} berechnet automatisch Charakteristiken, sowie deren Relevanz anhand eines Zeitintervalls (\textit{Feature}) \todo{ref to website https://tsfresh.readthedocs.io}.
 Diese Charakteristiken werden fortan als Features bezeichnet. \todo{wo steckt die relevanz in den tsfresh daten... }
 
+Wie in Kapitel \ref{ch:Implementierung:classification_pipeline} bereits erklärt, wird eine Messung in viele sich überlappende Fenster aufgeteilt. 
+Eine Messung wird in eine Fenstergröße von $5\si{\s}$, bzw. $10\si{\s}$ und einer Verschiebung des nächsten Fensters von $1\si{\s}$ in viele Teile aufgeteilt. 
+Nun wird für jedes Fenster eine Featureberechnung ausgeführt, womit durch \texttt{tsfresh} ($\sim$ 6000) Features für jedes Fenster entstehen.
 Als Eingabe bekommt \texttt{tsfresh} die Daten der eSense Earpods, also die \textit{x, y} und \textit{z}- Achse der Gyroskop und Beschleunigungsdaten, versehen mit einem Zeitstempel. 
-Anhand dieser Informationen berechnet \texttt{tsfresh} nun ($\sim$ 6000) Features für jedes Fenster.
 
 \section{Ablauf der Evaluierung}
 Im Kapitel \ref{ch:Implementierung:classification_pipeline} wurde beschrieben, wie die Features berechnet und persistiert wurden. 
@@ -25,24 +27,77 @@ Zur Klassifikation müssen die Daten bereits markiert sein, um eine Entscheidung
 Beim Abspeichern der eSense Daten ist dies bereits geschehen. 
 Da die Messung genau vorgibt, wann eine Person die luft anhalten soll, beziehungsweise nicht, wird diese Information mit einem \textit{Boolean} als zusätzliches Attribut vermerkt.
 Da bei der Klassifikation Features anhand der eSense Daten berechnet werden, darf dieses Attribut offensichtlich nicht Teil der Featureberechnung sein.
-Da nun bei einem 5 Sekunden Intervall circa 250 Einträge, bei einem 10 Sekunden Intervall circa 500 Einträge in eine Featureberechnung zusammenfließen, muss die Markierung dieses Features berechnet werden.
+Da nun bei einem 5 Sekunden Intervall circa 250 Einträge, bei einem 10 Sekunden Intervall circa 500 Einträge in eine Featureberechnung zusammenfließen, muss die Markierung dieses Features gewählt werden.
 Ab 50\% der markierten Einträge wird das ganze Intervall als markiert gesetzt.
 Dies ist eine essenzielle Entscheidung, da beim Training des Modells nun anhand dieser Markierung entschieden wird, ob ein Intervall ein Atemaussetzer repräsentiert, oder nicht.
 \todo{genauer beschreiben, warum hier 50\% gewählt wurde... ich wollte bei 90\% z.B die Übergänge nicht als 0 markieren, weil dann teile der 0 markierten features eigentlich ein Atemaussetzer gewesen wäre... dann trainiert es kacke...}
 Nun können die Resultate mit den Klassifikatoren verglichen werden.
 
 \subsection{Kreuzvalidierungsverfahren}
+\subsubsection{Within Subject (\textit{k-fold cross validation})}
+Das erste Kreuzvalidierungsverfahren ist die \textit{K-fold cross validation}.
+Bei diesem Verfahren werden alle Daten in $k$ Partitionen aufgeteilt.
+Eine Partition wird als Testdatensatz und $k-1$ Partitionen werden als Trainingsdatensatz gewählt \ref{asdf} \todo{add ref from ML folien}.
+Somit werden alle Personen als ein Datensatz zusammengefasst und mit der Methode \texttt{test\_train\_split} in Trainingsdaten und Testdaten aufgeteilt.
+Hier wird eine Aufteilung von 70\% für die Trainingsdaten und 30\% für die Testdaten gewählt. 
+Daraus ergibt sich ein \textit{score}, welcher \todo{was gibt mit der score}
+Die Resultate sind in Abbildung \ref{evaluation:within_subject_results} zu sehen.
+
+\begin{table}[H]
+  \begin{tabular}{cc}
+    \begin{minipage}{1\textwidth}
+      \begin{center}
+          \begin{tabular}{ | l | c | c | c | c | c | }
+            \hline
+            \textbf{Verfahren} & \textbf{Positionen} & \textbf{Score} & \textbf{Score} & \textbf{Score} & \textbf{Score} \\ 
+            & & \textbf{$w=5\si{\s}$} & \textbf{$w=5\si{\s}$} & \textbf{$w=10\si{\s}$} & \textbf{$w=10\si{\s}$} \\
+            & & \textbf{$d=1\si{\s}$} & \textbf{$d=5\si{\s}$} & \textbf{$d=1\si{\s}$} & \textbf{$d=10\si{\s}$} \\ \hline
+            Random Forest & Alle &  0.87081 & 0.73988 & 0.89300 & 0.71428 \\ 
+             & Rücken & 0.85517 & 0.66666 & 0.93333 & 0.57142 \\
+             & Seite  & 0.85763 & 0.72413 & 0.89523 & 0.75 \\
+             & Bauch  & 0.89619 & 0.84745 & 0.92332 & 0.65714 \\ \hline
+            XG Boost  & Alle & 0.88004 & 0.69942 & 0.91737 & 0.76190 \\ 
+             & Rücken & 0.88965 & 0.66666 & 0.95238 & 0.62857 \\
+             & Seite  & 0.90277 & 0.77586 & 0.92380 & 0.47222 \\
+             & Bauch  & 0.90311 & 0.74576 & 0.94888 & 0.62857 \\ \hline
+            SVM & Alle& 0.54209 & 0.47976 & 0.65360 & 0.41904 \\ 
+             & Rücken & 0.59655 & 0.66666 & 0.71746 & 0.45714 \\
+             & Seite  & 0.56597 & 0.37931 & 0.62539 & 0.5 \\
+             & Bauch  & 0.61245 & 0.40677 & 0.67412 & 0.4 \\
+            \hline
+          \end{tabular}
+      \end{center}
+    \end{minipage}
+  \end{tabular}
+  \caption{Ergebnisse des Kreuzvalidierungsverfahrens innerhalb eines Subjects mit einer Aufteilung von 70\% Trainings- und 30\% Testdaten. Alle Personen der Nutzerstudie wurden verwendet. $w$ steht für die Fenstergröße, $d$ für die Verschiebung der aneinanderfolgenden Fenster.}
+  \label{evaluation:within_subject_results}
+\end{table}
+
+Die Tabelle zeigt die Ergebnisse verschiedener Klassifikationsalgorithmen mit verschiedenen Datensätzen.
+Pro Klassifikationsalgorithmus wurden alle Positionen, sowie jede Position einzeln betrachtet, d.h jede Position jeder Person.
+Jede Kombination aus Klassifikationsalgorithmus und gewähltem Datensatz wurde nun mit den Fenstergrößen von $5\si{\s}$ und $10\si{\s}$ mit einer Verschiebung von $1\si{\s}$ und einer Verschiebung der Fenstergröße evaluiert.
+Somit wurden die Fenstergrößen mit und ohne überlappende Fenster getestet.
+Die Resultate zeigen, dass der \textit{score} mit überlappenden Fenstern deutlich höher ist.
+Dies könnte daran liegen, dass deutlich mehr Fenster pro Datensatz existieren, falls eine Überlappung der aneinanderfolgenden Fenster stattfindet.
+Jedoch ist es auch möglich, dass Teile der überlappenden Fenster bereits erkannt und markiert wurden.
+Dadurch ist der überlappende Teil eventuell in den Trainingsdaten vorhanden und eine Klassifizierung ist einfach für den Klassifikationsalgorithmus.
+
 \subsubsection{Leave One Subject Out (LOSO)}
-Die Klassifikation wurde mit verschiedenen Methoden des Kreuzvalidierungsverfahren durchgeführt. 
-Die erste Methode ist das \textit{Leave One Subject Out} (\textit{LOSO}) Kreuzvalidierungsverfahren. 
+Neben dem k-fachen Kreuzvalidierungsverfahren wird das das \textit{Leave One Subject Out} (\textit{LOSO}) Kreuzvalidierungsverfahren herbeigezogen. 
 Hierbei wird ein Modell anhand der Daten der Studienteilnehmer trainiert, jedoch wird ein Datensatz eines Studienteilnehmers ausgelassen. 
 Dieser eine Datensatz wird schließlich verwendet, um eine Vorhersage anhand der Trainingsdaten zu treffen, ohne durch interne Trainingsdaten optimiert sein zu können.
 Im Folgenden wurde das LOSO Kreuzvalidierungsverfahren mit den beiden Klassifikationsalgorithmen \textit{Random Forest} und \textit{XGBoost} durchgeführt. 
 Es wurde jede Person einmal ausgelassen und auf den Trainingsdatensatz angewandt, welcher diese Person nicht enthält. 
 Somit entstehen 7 Resultate, von denen nun der Mittelwert gebildet wird.
 Die Resultate sind in den Abbildungen \ref{evaluation:random_forest_loso:person6} und \ref{evaluation:xgboost_loso:person6} beispielhaft an Person 6 dargestellt.
-Die vollständige Auflistung aller Resultate sind im Anhang zu finden. \\
+Im Anhang sind weitere Abbildungen anderer Personen zu finden.
+Die Abbildungen listen die Häufigkeit der Vorhersagen für jede einzelne Sekunde. 
+Da eine Sekunde aufgrund der überlappender Fenster in mehreren Fenstern vorkommt, summieren sich die Vorhersagen pro Sekunde maximal auf die Fenstergröße.
+Zu Erkennen ist, dass die Fenstergröße von $10\si{\s}$ deutlich bessere Ergebnisse liefert, als eine Fenstergröße von $5\si{\s}$. 
+XGBoost neigt bei einer Fenstergröße von $5\si{\s}$ zum Overfitting, ebenso wie Random Forest. 
+Da bei der Nutzerstudie die 3 Phasen des Luftanhaltens $10\si{\s}$, $20\si{\s}$, bzw $30\si{\s}$ betrag, könnte dies \todo{ein möglicher Grund sein, kp warum aber :D}
 Der Mittelwert aller Ergebnisse des LOSO Kreuzvalidierungsverfahrens sind im \textit{Precision} und \textit{Recall} der unterliegenden Tabelle der Beispiele bei Person 6 mit dem Mittelwert zusammengetragen worden. 
+Zu sehen ist, dass XGBoost bessere Ergebnisse liefert als Random Forest.
 \todo{schreibe darüber, was die ergebnisse von LOSO aussagen}
 
 Des weiteren, um mögliche Positionsabhängigkeiten zu erkennen, wurden das selbe erneut evaluiert, jedoch nur mit den einzelnen Positionsdaten der jeweiligen Person. 
@@ -391,43 +446,7 @@ Um einen kleinen Überblick zu bekommen, welche Features entscheidend für die E
 \end{itemize}
 Diese Features wurden mittels \texttt{tsfresh} berechnet und waren bei der Klassifikation des Kreuzvalidierungsverfahrens entscheidened.
 
-\subsubsection{Within Subject}
-Als zweites Kreuzvalidierungsverfahren wird \textit{Within Subject} angewandt.
-Hier wird versucht, alle Personen mit der Methode \texttt{test\_train\_split} die ganzen Daten in Trainingsdaten und Testdaten aufzuteilen.
-Hier wird eine Aufteilung von 70\% für die Trainingsdaten und 30\% für die Testdaten gewählt. 
-Daraus ergibt sich ein \textit{score}, welcher \todo{was gibt mit der score}
-Die Resultate sind in Abbildung \ref{evaluation:within_subject_results} zu sehen.
-\todo{daraus erkennt man folgendes:}
 
-\begin{table}
-  \begin{tabular}{cc}
-    \begin{minipage}{1\textwidth}
-      \begin{center}
-          \begin{tabular}{ | l | c | c | c | c | c | }
-            \hline
-            \textbf{Verfahren} & \textbf{Positionen} & \textbf{Score} & \textbf{Score} & \textbf{Score} & \textbf{Score} \\ 
-            & & \textbf{$w=5\si{\s}$} & \textbf{$w=5\si{\s}$} & \textbf{$w=10\si{\s}$} & \textbf{$w=10\si{\s}$} \\
-            & & \textbf{$d=1\si{\s}$} & \textbf{$d=5\si{\s}$} & \textbf{$d=1\si{\s}$} & \textbf{$d=10\si{\s}$} \\ \hline
-            Random Forest & Alle &  0.87081 & 0.73988 & 0.89300 & 0.71428 \\ 
-             & Rücken & 0.85517 & 0.66666 & 0.93333 & 0.57142 \\
-             & Seite  & 0.85763 & 0.72413 & 0.89523 & 0.75 \\
-             & Bauch  & 0.89619 & 0.84745 & 0.92332 & 0.65714 \\ \hline
-            XG Boost  & Alle & 0.88004 & 0.69942 & 0.91737 & 0.76190 \\ 
-             & Rücken & 0.88965 & 0.66666 & 0.95238 & 0.62857 \\
-             & Seite  & 0.90277 & 0.77586 & 0.92380 & 0.47222 \\
-             & Bauch  & 0.90311 & 0.74576 & 0.94888 & 0.62857 \\ \hline
-            SVM & Alle& 0.54209 & 0.47976 & 0.65360 & 0.41904 \\ 
-             & Rücken & 0.59655 & 0.66666 & 0.71746 & 0.45714 \\
-             & Seite  & 0.56597 & 0.37931 & 0.62539 & 0.5 \\
-             & Bauch  & 0.61245 & 0.40677 & 0.67412 & 0.4 \\
-            \hline
-          \end{tabular}
-      \end{center}
-    \end{minipage}
-  \end{tabular}
-  \caption{Ergebnisse des Kreuzvalidierungsverfahrens innerhalb eines Subjects mit einer Aufteilung von 70\% Trainings- und 30\% Testdaten. Alle Personen der Nutzerstudie wurden verwendet. $w$ steht für die Fenstergröße, $d$ für die Verschiebung der aneinanderfolgenden Fenster.}
-  \label{evaluation:within_subject_results}
-\end{table}
 
 die ergebnisse sind in abb zu finden... 
 evaluation der ergebnisse
