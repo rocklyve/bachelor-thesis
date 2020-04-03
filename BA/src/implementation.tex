@@ -48,7 +48,7 @@ Im weiteren wird nur die \textit{Messungsansicht} genauer erläutert, da die and
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.7\textwidth]{implementation/app/Database_SleepEar}
-  \caption{ER-Diagramm der App-Datenbank\todo{higher resolution}}
+  \caption{ER-Diagramm der App-Datenbank}
   \label{implementation:app:erModel}
 \end{figure}
 
@@ -78,8 +78,6 @@ Sofern der nächste Task {\glqq Hold\_breath\grqq} ist, also die Person im folge
 Mit der Instruktion \glqq Bitte die Luft anhalten in 3, 2, 1\grqq \ weiß der Teilnehmer, wann er die Luft anhalten soll.
 Durch die Anweisung \glqq Stopp\grqq \ wird dem Nutzer das Ende des Tasks mitgeteilt. 
 Die Instruktionen liegen als Audiodatei vor und werden jeweils vor dem jeweiligen Task abgespielt und mittels Bluetooth über die Lautsprecher der eSense-Earpods ausgegeben.
-
-\todo{extend with diagrams like class-diagram}
 
 \section{Anbindung an Auswertungspipeline}
 \label{ch:Implementierung:way_to_pipeline}
@@ -150,12 +148,11 @@ Nun ist garantiert, dass die Lichtsignale von PSG-System und dem Smartphone ann�
   \centering
   \begin{subfigure}{0.66\textwidth}
     \includegraphics[width=1\textwidth]{data_analyzation/light_peak_detection_psg_data}
-    \caption{Peaks des Lichtsignals vom PSG-Gerät. Somit können die PSG-Daten und die Daten, gesammelt von den eSense Earpods zeitlich synchronisiert werden. Der Ablauf der Lichtpeaks ist identisch zum Ablauf der Nutzerstudie (siehe Abb. \ref{fig_study_flow}) \todo{bessere grafik und zudem noch dass man alle peaks von der edf sieht und die doppelten signale erkennt, eventuell breitere grafik}}
-    \label{implementation:synchronisation:light_peaks_detection}
+    \caption{Peaks des Lichtsignals vom PSG-Gerät. Somit können die PSG-Daten und die Daten, gesammelt von den eSense Earpods zeitlich synchronisiert werden. Der Ablauf der Lichtpeaks ist identisch zum Ablauf der Nutzerstudie (siehe Abb. \ref{fig_study_flow}). Die x-Achse zeigt den Lichtwert des Sensors, die y-Achse den Zeitwert.}
   \end{subfigure}
   \begin{subfigure}{.49\textwidth}
     \includegraphics[width=1\textwidth]{data_analyzation/light_peak_detail_before}
-    \caption{Zeitlicher Lichtpeakvergleich vor der Synchronisation. Das Lichtsignal des PSG-Geräts (orange) ist weniger als 1s vom Signal der eSense Earpods (blau) entfernt. \todo{modify time value}}
+    \caption{Zeitlicher Lichtpeakvergleich vor der Synchronisation. Das Lichtsignal des PSG-Geräts (orange) ist weniger als 1s vom Signal der eSense Earpods (blau) entfernt.}
     \label{implementation:synchronisation:before_light_peak}
   \end{subfigure}
   \begin{subfigure}{.49\textwidth}

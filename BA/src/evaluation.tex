@@ -8,8 +8,8 @@ Auf diese Fenster werden anschließend \textit{Features} berechnet, welche die G
 
 \section{Gibt es passende Features?}
 Die Suche nach passenden Features wird mit dem Python Package \texttt{tsfresh} angegangen.
-\texttt{tsfresh} berechnet automatisch Charakteristiken, sowie deren Relevanz anhand eines Zeitintervalls (\textit{Feature}) \todo{ref to website https://tsfresh.readthedocs.io}.
-Diese Charakteristiken werden fortan als Features bezeichnet. \todo{wo steckt die relevanz in den tsfresh daten... }
+\texttt{tsfresh} berechnet automatisch Charakteristiken, sowie deren Relevanz anhand eines Zeitintervalls (\textit{Feature}) \cite{TsfreshTsfresh12}.
+Diese Charakteristiken werden fortan als Features bezeichnet.
 
 Wie in Kapitel \ref{ch:Implementierung:classification_pipeline} bereits erklärt, wird eine Messung in viele sich überlappende Fenster aufgeteilt. 
 Eine Messung wird in eine Fenstergröße von $5\si{\s}$, bzw. $10\si{\s}$ und einer Verschiebung des nächsten Fensters von $1\si{\s}$ in viele Teile aufgeteilt. 
@@ -37,7 +37,7 @@ Nun können die Resultate mit den Klassifikatoren verglichen werden.
 \subsubsection{Within Subject (\textit{k-fold cross validation})}
 Das erste Kreuzvalidierungsverfahren ist die \textit{K-fold cross validation}.
 Bei diesem Verfahren werden alle Daten in $k$ Partitionen aufgeteilt.
-Eine Partition wird als Testdatensatz und $k-1$ Partitionen werden als Trainingsdatensatz gewählt \ref{asdf} \todo{add ref from ML folien}.
+Eine Partition wird als Testdatensatz und $k-1$ Partitionen werden als Trainingsdatensatz gewählt \cite{neumannMaschineLearningKIT2020}.
 Somit werden alle Personen als ein Datensatz zusammengefasst und mit der Methode \texttt{test\_train\_split} in Trainingsdaten und Testdaten aufgeteilt.
 Hier wird eine Aufteilung von 70\% für die Trainingsdaten und 30\% für die Testdaten gewählt. 
 Daraus ergibt sich ein \textit{score}, welcher \todo{was gibt mit der score}
@@ -52,23 +52,24 @@ Die Resultate sind in Abbildung \ref{evaluation:within_subject_results} zu sehen
             \textbf{Verfahren} & \textbf{Positionen} & \textbf{Score} & \textbf{Score} & \textbf{Score} & \textbf{Score} \\ 
             & & \textbf{$w=5\si{\s}$} & \textbf{$w=5\si{\s}$} & \textbf{$w=10\si{\s}$} & \textbf{$w=10\si{\s}$} \\
             & & \textbf{$d=1\si{\s}$} & \textbf{$d=5\si{\s}$} & \textbf{$d=1\si{\s}$} & \textbf{$d=10\si{\s}$} \\ \hline
-            Random Forest & Alle &  0.87081 & 0.73988 & 0.89300 & 0.71428 \\ 
-             & Rücken & 0.85517 & 0.66666 & 0.93333 & 0.57142 \\
-             & Seite  & 0.85763 & 0.72413 & 0.89523 & 0.75 \\
-             & Bauch  & 0.89619 & 0.84745 & 0.92332 & 0.65714 \\ \hline
-            XG Boost  & Alle & 0.88004 & 0.69942 & 0.91737 & 0.76190 \\ 
-             & Rücken & 0.88965 & 0.66666 & 0.95238 & 0.62857 \\
-             & Seite  & 0.90277 & 0.77586 & 0.92380 & 0.47222 \\
-             & Bauch  & 0.90311 & 0.74576 & 0.94888 & 0.62857 \\ \hline
-            SVM & Alle& 0.54209 & 0.47976 & 0.65360 & 0.41904 \\ 
-             & Rücken & 0.59655 & 0.66666 & 0.71746 & 0.45714 \\
-             & Seite  & 0.56597 & 0.37931 & 0.62539 & 0.5 \\
-             & Bauch  & 0.61245 & 0.40677 & 0.67412 & 0.4 \\
+            Random Forest & Alle &  0.87 & 0.74 & 0.89 & 0.71 \\ 
+             & Rücken & 0.85 & 0.67 & 0.93 & 0.57 \\
+             & Seite  & 0.86 & 0.72 & 0.89 & 0.75 \\
+             & Bauch  & 0.90 & 0.85 & 0.92 & 0.66 \\ \hline
+            XG Boost  & Alle & 0.88 & 0.70 & 0.92 & 0.76 \\ 
+             & Rücken & 0.89 & 0.67 & 0.95 & 0.62 \\
+             & Seite  & 0.90 & 0.78 & 0.92 & 0.48 \\
+             & Bauch  & 0.90 & 0.75 & 0.95 & 0.63 \\ \hline
+            SVM & Alle& 0.54 & 0.48 & 0.65 & 0.42 \\ 
+             & Rücken & 0.60 & 0.67 & 0.72 & 0.46 \\
+             & Seite  & 0.57 & 0.38 & 0.63 & 0.5 \\
+             & Bauch  & 0.61 & 0.41 & 0.67 & 0.4 \\
             \hline
           \end{tabular}
       \end{center}
     \end{minipage}
   \end{tabular}
+
   \caption{Ergebnisse des Kreuzvalidierungsverfahrens innerhalb eines Subjects mit einer Aufteilung von 70\% Trainings- und 30\% Testdaten. Alle Personen der Nutzerstudie wurden verwendet. $w$ steht für die Fenstergröße, $d$ für die Verschiebung der aneinanderfolgenden Fenster.}
   \label{evaluation:within_subject_results}
 \end{table}
@@ -98,11 +99,42 @@ XGBoost neigt bei einer Fenstergröße von $5\si{\s}$ zum Overfitting, ebenso wi
 Da bei der Nutzerstudie die 3 Phasen des Luftanhaltens $10\si{\s}$, $20\si{\s}$, bzw $30\si{\s}$ betrag, könnte dies \todo{ein möglicher Grund sein, kp warum aber :D}
 Der Mittelwert aller Ergebnisse des LOSO Kreuzvalidierungsverfahrens sind im \textit{Precision} und \textit{Recall} der unterliegenden Tabelle der Beispiele bei Person 6 mit dem Mittelwert zusammengetragen worden. 
 Zu sehen ist, dass XGBoost bessere Ergebnisse liefert als Random Forest.
-\todo{schreibe darüber, was die ergebnisse von LOSO aussagen}
-
+\todo{schreibe darüber, was die ergebnisse von LOSO aussagen} \newline
 Des weiteren, um mögliche Positionsabhängigkeiten zu erkennen, wurden das selbe erneut evaluiert, jedoch nur mit den einzelnen Positionsdaten der jeweiligen Person. 
 In der Tabelle \ref{evaluation:loso_classification_results} sind die Resultate zu sehen.
 \todo{schreibe darüber, was die ergebnisse der einzelnen personen aussagen}
+
+\subsection{Relevante Features}
+Jede Klassifikation ergab ein Resultat, welches durch einzelne Features entschieden wurde. 
+Das Python-Framework \texttt{scikit-learn} beinhaltet \texttt{feature\_importances\_} zeigt die Relevanz der einzelnen Features in einem Plot.
+Um einen kleinen Überblick zu bekommen, welche Features entscheidend für die Evaluation waren, sind nun einige aufgelistet.
+\begin{itemize}
+    \item \texttt{gyroZ partial autocorrelation}
+    \item \texttt{gytoX fft coefficient}
+    \item \texttt{gyroX agg autocorrelation}
+    \item \texttt{accY autocorrelation}
+    \item \texttt{gyroY change quantiles }
+    \item \texttt{gyroZ fft coefficient}
+\end{itemize}
+Diese Features wurden mittels \texttt{tsfresh} berechnet und waren bei der Klassifikation des Kreuzvalidierungsverfahrens entscheidened \cite{TsfreshTsfresh12}.
+Die partielle Autokorrelationfunktion (\texttt{partial autocorrelation}) beschreibt die Abhänigkeit zwischen den Werten der Zeitreihen. 
+Zudem wird ein zeitlicher linearer Zusammenhang der verschiedenen Werte gemessen.
+Somit haben sich die Werte in diesem Fenster zwischen den Werten vermutlich weniger verändert und ähneln somit eher den positiv markierten Trainingsdaten.
+
+Die \textit{Schnelle Fourier-Transformation} berechnet effizient die diskrete Fourier-Transformation.
+Damit können zeidiskrete Signale in Frequenzanteile zerlegt werden. 
+Es wird aus einer Darstellung, bestehend aus Zeit- und Abtastwert in eine Darstellung, bestehend aus Frequenzanteil, Amplitude und Phase überführt.
+Die Funktion \texttt{fft\_coefficient} in \texttt{tsfresh} berechnet die Fourier Koeffizienten einer eindimensionalen diskreten Fouriertransformation für eine reale Eingabe mit dem Algorithmus der Fast-Fourier-Transformation:
+\[A_k = \sum_{m=0}^{n-1} a_m \exp ^ {-2\pi i \frac{mk}{n}}, \hspace{1cm} k = 0,\dots,n-1\]
+Die bei der Apnoephase geringe Amplitude ist hier erkennbar und detektierbar, womit eine Klassifikation ermöglicht wird.
+Die Aggregation \texttt{agg\_autocorrelation} berechnet den Wert der Autokorrelationsfunktion $f_{agg}$ (beispielsweise die Varianz oder den Mittelwert) über die Autokorrelation $R(l)$ für die verschiedenen Fenster. 
+\[R(l) = \frac{1}{(n-l)\sigma ^2} \sum_{t=1}^{n-l} (X_t - \mu) (X_{t+l} - \mu)\]
+$X_i$ sind hierbei  die Werte der Timeseries, $n$ deren Länge. 
+$\sigma$ und $\mu$ sind Schätzwerte für die Varianz und den Mittelwert.
+
+Ein weiteres Feature, welches ausschlaggebend für die Klassifikation ist, ist der Wechsel der Quantilwerte (\texttt{change\_quantiles}).
+Pro Fenster wird ein $ql$ niedriges Quantil und ein $qh$ hohes Quantil berechnet, anschließend wird der durchschnittliche, absolute Wert der aufeinanderfolgenden Änderungen der Reihe x innerhalb dieser Quantile berechnet.
+Dadurch werden starke Veränderungen deutlich und stellen klar, dass in diesem Fenster kein Apnoe stattfindet. 
 
 
 %%%%%%%%%%%%%%%%%%%        RANDOM FOREST 5 sec %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -123,11 +155,11 @@ In der Tabelle \ref{evaluation:loso_classification_results} sind die Resultate z
     \end{subfigure}
     \begin{subfigure}{1\textwidth}
         \begin{center}
-            \begin{tabular}{ | l | c | r | }
+            \begin{tabular}{ | l | c | c | r | }
               \hline
-               & precision & recall \\ \hline
-              0 & 0.92054 & 0.74887 \\ \hline
-              1 & 0.74887 & 0.66565 \\
+               & precision & recall & f1-score\\ \hline
+              0 & 0.92 & 0.75 & \\ \hline
+              1 & 0.75 & 0.67 & \\
               \hline
             \end{tabular}
         \end{center}
@@ -153,11 +185,11 @@ In der Tabelle \ref{evaluation:loso_classification_results} sind die Resultate z
 
   \begin{subfigure}{1\textwidth}
       \begin{center}
-          \begin{tabular}{ | l | c | r | }
+          \begin{tabular}{ | l | c | c | r | }
             \hline
-             & precision & recall \\ \hline
-            0 & 0.91499 & 0.76483 \\ \hline
-            1 & 0.76483 & 0.67411 \\
+             & precision & recall & \\ \hline
+            0 & 0.91 & 0.76 & \\ \hline
+            1 & 0.76 & 0.67 & \\
             \hline
           \end{tabular}
       \end{center}
@@ -188,11 +220,11 @@ In der Tabelle \ref{evaluation:loso_classification_results} sind die Resultate z
 
     \begin{subfigure}{1\textwidth}
         \begin{center}
-            \begin{tabular}{ | l | c | r | }
+            \begin{tabular}{ | l | c | c | r | }
               \hline
-               & precision & recall \\ \hline
-              0 & 0.93269 & 0.69694 \\ \hline
-              1 & 0.69694 & 0.72791 \\
+               & precision & recall & f1-score \\ \hline
+              0 & 0.93 & 0.70 & 0.0 \\ \hline
+              1 & 0.70 & 0.73 & 0.0 \\
               \hline
             \end{tabular}
         \end{center}
@@ -218,11 +250,11 @@ In der Tabelle \ref{evaluation:loso_classification_results} sind die Resultate z
 
   \begin{subfigure}{1\textwidth}
       \begin{center}
-          \begin{tabular}{ | l | c | r | }
+          \begin{tabular}{ | l | c | c | r | }
             \hline
-             & precision & recall \\ \hline
-            0 & 0.93186 & 0.74072 \\ \hline
-            1 & 0.74072 & 0.74767 \\
+             & precision & recall & f1-score \\ \hline
+            0 & 0.93 & 0.74 & 0.0 \\ \hline
+            1 & 0.74 & 0.75 & 0.0 \\
             \hline
           \end{tabular}
       \end{center}
@@ -238,11 +270,11 @@ In der Tabelle \ref{evaluation:loso_classification_results} sind die Resultate z
 \begin{tabular}{cc}    
     \begin{minipage}{.33\linewidth}
         \begin{center}
-            \begin{tabular}{ | l | c | r | }
+            \begin{tabular}{ | l | c | c | r | }
               \hline
-               & precision & recall \\ \hline
-              0 & 0.89921 & 0.71875 \\ \hline
-              1 & 0.71875 & 0.57238 \\
+               & precision & recall & f1-score \\ \hline
+              0 & 0.90 & 0.72 & 0.0 \\ \hline
+              1 & 0.72 & 0.57 & 0.0 \\
               \hline
             \end{tabular}
             \smallskip
@@ -253,11 +285,11 @@ In der Tabelle \ref{evaluation:loso_classification_results} sind die Resultate z
 
     \begin{minipage}{.33\linewidth}
         \begin{center}
-            \begin{tabular}{ | l | c | r | }
+            \begin{tabular}{ | l | c | c | r | }
               \hline
-               & precision & recall \\ \hline
-              0 & 0.89094 & 0.82538 \\ \hline
-              1 & 0.82538 & 0.44796 \\
+               & precision & recall & f1-score \\ \hline
+              0 & 0.89 & 0.83 & 0.0 \\ \hline
+              1 & 0.83 & 0.45 & 0.0 \\
               \hline
             \end{tabular}
             \smallskip
@@ -268,11 +300,11 @@ In der Tabelle \ref{evaluation:loso_classification_results} sind die Resultate z
 
     \begin{minipage}{0.33\textwidth}
         \begin{center}
-            \begin{tabular}{ | l | c | r | }
+            \begin{tabular}{ | l | c | c | r | }
               \hline
-               & precision & recall \\ \hline
-              0 & 0.92421 & 0.72336 \\ \hline
-              1 & 0.723369 & 0.65753 \\
+               & precision & recall & f1-score \\ \hline
+              0 & 0.92 & 0.72 & 0.0 \\ \hline
+              1 & 0.72 & 0.66 & 0.0 \\
               \hline
             \end{tabular}
             \smallskip
@@ -287,11 +319,11 @@ In der Tabelle \ref{evaluation:loso_classification_results} sind die Resultate z
 \begin{tabular}{cc}
     \begin{minipage}{0.33\textwidth}
         \begin{center}
-            \begin{tabular}{ | l | c | r | }
+            \begin{tabular}{ | l | c | c | r | }
               \hline
-               & precision & recall \\ \hline
-              0 & 0.91483 & 0.6697 \\ \hline
-              1 & 0.66979 & 0.6116 \\
+               & precision & recall & f1-score \\ \hline
+              0 & 0.91 & 0.67 & 0.0 \\ \hline
+              1 & 0.67 & 0.61 & 0.0 \\
               \hline
             \end{tabular}
             \smallskip
@@ -302,11 +334,11 @@ In der Tabelle \ref{evaluation:loso_classification_results} sind die Resultate z
 
     \begin{minipage}{0.33\textwidth}
         \begin{center}
-            \begin{tabular}{ | l | c | r | }
+            \begin{tabular}{ | l | c | c | r | }
               \hline
-               & precision & recall \\ \hline
-              0 & 0.89937 & 0.75145 \\ \hline
-              1 & 0.75145 & 0.54108 \\
+               & precision & recall & f1-score \\ \hline
+              0 & 0.90 & 0.75 & 0.0 \\ \hline
+              1 & 0.75 & 0.54 & 0.0 \\
               \hline
             \end{tabular}
             \smallskip
@@ -317,11 +349,11 @@ In der Tabelle \ref{evaluation:loso_classification_results} sind die Resultate z
 
     \begin{minipage}{0.33\textwidth}
         \begin{center}
-            \begin{tabular}{ | l | c | r | }
+            \begin{tabular}{ | l | c | c | r | }
               \hline
-               & precision & recall \\ \hline
-              0 & 0.94418 & 0.70734 \\ \hline
-              1 & 0.70734 & 0.71763 \\
+               & precision & recall & f1-score \\ \hline
+              0 & 0.94 & 0.71 & 0.0 \\ \hline
+              1 & 0.71 & 0.72 & 0.0 \\
               \hline
             \end{tabular}
             \smallskip 
@@ -337,11 +369,11 @@ In der Tabelle \ref{evaluation:loso_classification_results} sind die Resultate z
   \begin{tabular}{cc}    
       \begin{minipage}{.33\linewidth}
           \begin{center}
-              \begin{tabular}{ | l | c | r | }
+              \begin{tabular}{ | l | c | c | r | }
                 \hline
-                 & precision & recall \\ \hline
-                0 & 0.89103 & 0.79443 \\ \hline
-                1 & 0.79443 & 0.53429 \\
+                 & precision & recall & f1-score \\ \hline
+                0 & 0.89 & 0.79 & 0.0 \\ \hline
+                1 & 0.79 & 0.53 & 0.0 \\
                 \hline
               \end{tabular}
               \smallskip
@@ -352,11 +384,11 @@ In der Tabelle \ref{evaluation:loso_classification_results} sind die Resultate z
   
       \begin{minipage}{.33\linewidth}
           \begin{center}
-              \begin{tabular}{ | l | c | r | }
+              \begin{tabular}{ | l | c | c | r | }
                 \hline
-                 & precision & recall \\ \hline
-                0 & 0.88568 & 0.79427 \\ \hline
-                1 & 0.79427 & 0.52266 \\
+                 & precision & recall & f1-score \\ \hline
+                0 & 0.89 & 0.79 & 0.0 \\ \hline
+                1 & 0.79 & 0.52 & 0.0 \\
                 \hline
               \end{tabular}
               \smallskip
@@ -367,11 +399,11 @@ In der Tabelle \ref{evaluation:loso_classification_results} sind die Resultate z
  
       \begin{minipage}{0.33\textwidth}
           \begin{center}
-              \begin{tabular}{ | l | c | r | }
+              \begin{tabular}{ | l | c | c | r | }
                 \hline
-                 & precision & recall \\ \hline
-                0 & 0.94411 & 0.71447 \\ \hline
-                1 & 0.71447 & 0.73037 \\
+                 & precision & recall & f1-score \\ \hline
+                0 & 0.94 & 0.71 & 0.0 \\ \hline
+                1 & 0.71 & 0.73 & 0.0 \\
                 \hline
               \end{tabular}
               \smallskip
@@ -386,11 +418,11 @@ In der Tabelle \ref{evaluation:loso_classification_results} sind die Resultate z
   \begin{tabular}{cc}
       \begin{minipage}{0.33\textwidth}
           \begin{center}
-              \begin{tabular}{ | l | c | r | }
+              \begin{tabular}{ | l | c | c | r | }
                 \hline
-                 & precision & recall \\ \hline
-                0 & 0.90497 & 0.78440 \\ \hline
-                1 & 0.78440 & 0.60745 \\
+                 & precision & recall f1-score \\ \hline
+                0 & 0.90 & 0.78 & 0.0 \\ \hline
+                1 & 0.78 & 0.61 & 0.0 \\
                 \hline
               \end{tabular}
               \smallskip
@@ -401,11 +433,11 @@ In der Tabelle \ref{evaluation:loso_classification_results} sind die Resultate z
 
       \begin{minipage}{0.33\textwidth}
           \begin{center}
-              \begin{tabular}{ | l | c | r | }
+              \begin{tabular}{ | l | c | c | r | }
                 \hline
-                 & precision & recall \\ \hline
-                0 & 0.90300 & 0.75056 \\ \hline
-                1 & 0.75056 & 0.57973 \\
+                 & precision & recall f1-score \\ \hline
+                0 & 0.90 & 0.75 & 0.0 \\ \hline
+                1 & 0.75 & 0.58 & 0.0 \\
                 \hline
               \end{tabular}
               \smallskip
@@ -416,11 +448,11 @@ In der Tabelle \ref{evaluation:loso_classification_results} sind die Resultate z
   
       \begin{minipage}{0.33\textwidth}
           \begin{center}
-              \begin{tabular}{ | l | c | r | }
+              \begin{tabular}{ | l | c | c | r |}
                 \hline
-                 & precision & recall \\ \hline
-                0 & 0.93783 & 0.71278 \\ \hline
-                1 & 0.71278 & 0.72075 \\
+                 & precision & recall & f1-score \\ \hline
+                0 & 0.94 & 0.71 & 0.0 \\ \hline
+                1 & 0.71 & 0.72 & 0.0 \\
                 \hline
               \end{tabular}
               \smallskip 
@@ -433,36 +465,14 @@ In der Tabelle \ref{evaluation:loso_classification_results} sind die Resultate z
   \label{evaluation:loso_classification_results}
   \end{table}
 
+  % \todo{ich habe gelernt}
+% \begin{itemize}
+%     \item auswertungsdaten: Auf dem rücken liegende ddaten sind am vielversprechendsten
+%     \item die atempausen können einigermaßen klassifiziert werden
+%     \item rauschen entfernen bringt nix vermutlich wegen tsfresh, da es das schon macht, also es kommen
+%     \item 10 sekunden window size ist besser als 5 sekunden window size
+%     \item xgboost bringt bessere resultate, als random forest und svm, braucht aber auch länger
+% \end{itemize}
 
-Jede Klassifikation ergab ein Resultat, welches durch einzelne Features entschieden wurde. 
-Um einen kleinen Überblick zu bekommen, welche Features entscheidend für die Evaluation waren, sind nun einige aufgelistet.
-\begin{itemize}
-    \item gyroZ partial autocorrelation
-    \item gytoX fft coefficient
-    \item gyroX agg autocorrelation
-    \item accY autocorrelation
-    \item gyroY change quantiles 
-    \item gyroZ fft coefficient
-\end{itemize}
-Diese Features wurden mittels \texttt{tsfresh} berechnet und waren bei der Klassifikation des Kreuzvalidierungsverfahrens entscheidened.
-
-
-
-die ergebnisse sind in abb zu finden... 
-evaluation der ergebnisse
-
-Was bieten die verfahren, wie macht das sinn, dass sinnvolle ergebnisse herauskommen...
-
-WelcheVor-undNachteilekönnendieseVerfahrenbieten?
-
-\section{Erkenntnisse}
-\todo{ich habe gelernt}
-\begin{itemize}
-    \item auswertungsdaten: Auf dem rücken liegende ddaten sind am vielversprechendsten
-    \item die atempausen können einigermaßen klassifiziert werden
-    \item rauschen entfernen bringt nix vermutlich wegen tsfresh, da es das schon macht, also es kommen
-    \item 
-\end{itemize}
-
-gibt earables, die blutsauerstoff und puls mittracken können
-plus grafik telegram tobi
+% gibt earables, die blutsauerstoff und puls mittracken können
+% plus grafik telegram tobi
