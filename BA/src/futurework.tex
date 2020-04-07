@@ -15,33 +15,41 @@ Der erste Bereich sind die Signale, welche zusätzlich in die Analyse mit aufgen
 Im zweiten Bereich wird die Datenanalyse und Klassifikation genauer betrachtet.
 
 Zum ersten Bereich zählt das Mikrofonsignal, welches bei der Nutzerstudie zwar aufgezeichnet und persistiert wurde, jedoch in der Auswertung nicht mit eingeflossen ist. 
-Das Mikrofonsignal kann weitere Informationen zur Detektion eines Schlafapnoes liefern. 
+Das Mikrofonsignal kann weitere Informationen zur Detektion einer Schlafapnoe liefern. 
 Mittels des Tonsignals direkt am Ohr können unter anderem die Atmung und auch den Puls herausgefiltert werden \cite{nomaWearableDataAcquisition2005}.
-Diese Informationen können in die Auswertung mit einfließen und somit die Erkenntnisse aus den IMU-Daten mit den Erkenntnissen des Mikrofonsignals zusammengeführt werden.
+Diese Informationen können in die Auswertung mit einfließen und somit können die Erkenntnisse aus den IMU-Daten mit den Erkenntnissen des Mikrofonsignals zusammengeführt werden.
 
 Im zweiten Bereich des Ausblicks wird erläutert, wie die Auswertung der zur Verfügung stehenden Daten verbessert werden kann.
-Ein großer Nachteil der aktuellen Klassifikation eine Schlafapnoe-Ereignisses ist, dass die Fenster nicht in Abhängigkeit zueinander stehen. 
+Ein großer Nachteil der aktuellen Klassifikation eines Schlafapnoe-Ereignisses ist, dass die Fenster nicht in Abhängigkeit zueinander stehen. 
 Bei der aktuellen Klassifikation wird jedes Fenster separat und unabhängig von den anderen Fenstern klassifiziert.
-Ein LSTM (\textit{Long short-term Memory}) würde hier die vorherigen, bzw. nachfolgenden Fenster ebenfalls in Betracht ziehen und deren Entscheidung mit in die aktuelle Enscheidung mit einfließen lassen. 
+Ein LSTM (\textit{Long short-term Memory}) würde hier die vorherigen, bzw. nachfolgenden Fenster ebenfalls in Betracht ziehen und deren Entscheidung mit in die aktuelle Entscheidung einfließen lassen. 
 Somit wird die Fehlerquote verringert, da potenzielle Outlier vermieden werden.
 
-Zudem gibt es die Möglichkeit, die weitere Features der IMU-Daten zu berechnen.
+Zudem gibt es die Möglichkeit, die weiteren Features der IMU-Daten zu berechnen.
 In dieser Bachelorarbeit wurden alle Features aus \texttt{tsfresh} mit in Betracht gezogen. 
 Es könnten weitere Features in die Auswertung mit einfließen.
 Es ist möglich, anhand der IMU-Daten das Puls- und $SPO_2$-Signal zu extrahieren. 
 Diese beiden Signale können dann als Feature pro Fenster weitere Erkenntnisse liefern.
-In Abbildung 
+In der Abbildung \ref{futureWork:pulseSpo2} ist eine Beispielmessung eines Probanden zu sehen. 
+In Blau sind die Phasen zu sehen, in denen der Proband die Luft angehalten hat.
+Hier ist der Wert auf 1 gesetzt, wenn die Person die Luft angehalten hat, ansonsten ist der Wert auf 0. 
+In Grün ist das SPO-2 Signal zu sehen, in Orange das Pulssignal. 
+Das SPO-2 Signal zeigt einen Abstieg nach dem Luftanhalten, ebenso steigt der Puls nach dem Lufanhalten.
+Wenn dieses Signal mit in die Features mit aufgenommen wird, könnte ebenfalls die Genauigkeit der Klassifikation steigen. 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=1\textwidth]{futureWork/pulseSpo2Signal}
+    \caption{Darstellung des Puls und SPO-2 Signals einer Messung an einem Probanden. Beide Signale wurden aus den IMU-Daten der eSense-Earpods herausgefiltert. Das SPO-2 Signal zeit Einbrüche an genau den 3 Stellen, an denen der Proband die Luft angehalten hat. Der Puls ist ebenfalls minimal gestiegen in diesen Bereichen.}
     \label{futureWork:pulseSpo2}
-    \caption{\todo{Add description}}
 \end{figure}
 
 Eine weitere Möglichkeit bietet sich, indem die Zusatzinformationen der Nutzer mit in die Klassifikation eingebunden werden.
 Hier können Personen des gleichen Geschlechts, Gewichts oder des gleichen Schlafrythmusses in einem Modell trainiert werden.
 Dies könnte mögliche Einflussfaktoren elmininieren und das Ergebnis ebenfalls verbessern.
 
-\todo{Paper von Tobi hinzufügen} \cite{perslevUTimeFullyConvolutional2019}
-
-\todo{können bei der Klassifikation outlier entcernt werden? kann overfitting mindern}
+Ein weiterer Ansatz zur Weiterarbeit an diesem Thema wird in \cite{perslevUTimeFullyConvolutional2019} behandelt.
+Dort wird der Ansatz, Convolutional Layer und Recurrent Layer zu kombinieren und daraus sinnvolle Features zu extrahieren. 
+Zudem werden zeitliche Beziehungen ermittelt, was jedoch schwer zu ermitteln ist. 
+Das Paper veröffentlicht \textit{U-Time}, einen zeichlichen, vollständiges Deep Learning Ansatz zur Analyse von physiologischen Zeitreihensegmenten. 
+\textit{U-Time} wurde explizit zur Analyse von Schlafdaten entwickelt.
+Jeder Zeitpunkt des Eingangssignals wird implizit klassifiziert, anschließend wird durch Aggregation dieser Klassifikation über feste Intervalle eine endgültigen Vorhersage gebildet.

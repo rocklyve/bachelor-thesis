@@ -33,7 +33,7 @@ Somit ändert sich die Struktur der App, indem jeder Ablauf in der App als \text
 Pro Flow wird ein \textit{FlowController} angelegt, welcher die Logik des Ablaufs kontrolliert. 
 Ein Flow kann nun beliebig viele \textit{ViewController} starten.
 Jede \textit{View}, welche von einem Flow aufgerufen wird, hält ein \textit{Delegate} Objekt.
-Ein \textit{Delegate} ist ein Protocol, womit dem \textit{Flow} eine Aktion auf der \textit{View} mitgeteilt werden kann.
+Ein \textit{Delegate} ist ein Protokoll, womit dem \textit{Flow} eine Aktion auf der \textit{View} mitgeteilt werden kann.
 Somit wird bei jeder Aktion auf der View eine Funktion des FlowControllers aufgerufen, welcher die View gestartet hat.
 
 
@@ -43,7 +43,7 @@ In der App wird die Datenbank verwendet, um eine Messung abzuspeichern (siehe Ab
 
 Die App ist in 3 Sektionen aufgeteilt, einer \textit{Chartansicht}, einer \textit{Messungsansicht}, sowie einer \textit{Einstellungsansicht}. 
 (Abb. \ref{implementation:app:screenshots} Tabbar)
-Im weiteren wird nur die \textit{Messungsansicht} genauer erläutert, da die anderen Ansichten im Rahmen der Bachelorarbeit nicht relevant sind.
+Im Weiteren wird nur die \textit{Messungsansicht} genauer erläutert, da die anderen Ansichten im Rahmen der Bachelorarbeit nicht relevant sind.
 
 \begin{figure}[ht]
   \centering
@@ -63,15 +63,15 @@ Der Timer zeigt den aktuellen, sowie den nächsten \textit{Task} an, sowie die R
 Der genaue Ablauf der einzelnen Timer ist in Abbildung \ref{fig_study_flow} detailliert beschrieben.
 Nach dem Ablauf des letzten Timers wird eine View geöffnet, welche die Möglichkeit zum Teilen der aktuellen Messung bietet (Abb. \ref{implementation:app:screenshots:sampling_stopped}, \ref{implementation:app:screenshots:share}).
 Zudem kann die Datenbank vollständig geleert werden.
-Währrend dieses Ablaufs wird ein Objekt erstellt, welches die Messung verwaltet.
+Während dieses Ablaufs wird ein Objekt erstellt, welches die Messung verwaltet.
 
 \subsection{Messung}
 \label{ch:Implementierung:app:measurement}
 Eine Messung wird im Code in einem \textit{Measurement} Objekt persistiert.
 Durch ein Observer-Pattern wird der \textit{MeasurementFlow} über jegliche Änderung informiert und kann entsprechende Handlungen durchführen.
-Durch die Funktionen \texttt{startMeasurement} und \texttt{stopMeasurement} kann eine Messung gestartet, bzw gestoppt werden.
+Durch die Funktionen \texttt{startMeasurement} und \texttt{stopMeasurement} kann eine Messung gestartet, beziehungsweise gestoppt werden.
 Mit der Funktion \texttt{startMeasurement} wird das IMU-Sampling per BLE, sowie die Audioaufnahme gestartet. 
-Ebenso wird der erste Timer gestartet und ein doppeltes Lichtsignal gesendet. 
+Ebenso wird der erste Timer gestartet und ein doppeltes Lichtsignal wird gesendet. 
 Durch die Funktion \texttt{stopMeasurement} werden die Datenströme gestoppt, ebenfalls ein doppeltes Lichtsignal gesendet und der Timer wird beendet.
 Der nächste Task wird gestartet, wenn der Timer abgelaufen ist. Der Timer startet mit der Länge des nächsten Tasks.
 Sofern der nächste Task {\glqq Hold\_breath\grqq} ist, also die Person im folgenden Task die Luft anhält, wird dem Teilnehmer kurz vor Ablauf mitgeteilt, wann der nächste Task startet.
@@ -79,7 +79,7 @@ Mit der Instruktion \glqq Bitte die Luft anhalten in 3, 2, 1\grqq \ weiß der Te
 Durch die Anweisung \glqq Stopp\grqq \ wird dem Nutzer das Ende des Tasks mitgeteilt. 
 Die Instruktionen liegen als Audiodatei vor und werden jeweils vor dem jeweiligen Task abgespielt und mittels Bluetooth über die Lautsprecher der eSense-Earpods ausgegeben.
 
-\section{Anbindung an Auswertungspipeline}
+\section{Anbindung an die Auswertungspipeline}
 \label{ch:Implementierung:way_to_pipeline}
 \begin{wrapfigure}{r}{0.3\textwidth}
   \centering
@@ -88,19 +88,20 @@ Die Instruktionen liegen als Audiodatei vor und werden jeweils vor dem jeweilige
   \label{implementation:folder_structure}
 \end{wrapfigure}
 Die App liefert beim Export die Daten der eSense-Earpods, was die IMU-Daten, sowie die Nutzerinformationen und die Mikrofonaufnahme beinhaltet.
-Zum aktuellen Stand liegen somit die Daten der eSense-Earpods und vom PSG-System vor. 
+Zum aktuellen Stand liegen somit die Daten der eSense-Earpods und die des PSG-Systems vor. 
 Zu Beginn müssen die PSG-Daten, welche als eine Messung für alle 3 Positionen pro Studienteilnehmer persistiert wurde, in 3 einzelne Messungen aufgeteilt werden.
 Die Daten des PSG-Systems liegen als \textit{edf}-Datei vor. 
-Diese können mittels python und der Library \texttt{edfrd} ausgelesen werden.
+Diese können mittels Python und der Library \texttt{edfrd} ausgelesen werden.
 Jedoch sind die Einträge des jeweiligen Signals ohne einen Zeitwert abgespeichert. 
 Es muss nun aufgrund der Abtastrate in $\si{\hertz}$ die Zeit manuell berechnet werden. 
 Mittels der Funktion \texttt{find\_peaks} aus \texttt{scipy.peak}\ können die Peaks des Lichtsensors am PSG-System ermittelt werden (siehe Abb. \ref{implementation:synchronisation:light_peaks_detection}).
-Da eine Messung mit 2 Lichtblitzen beginnt und endet, kann nun der Start- und Endzeitpunkt einer Position ermittelt und die einzelnen Positionen können voneinander unterschieden werden. 
+Da eine Messung mit 2 Lichtblitzen beginnt und endet, kann nun der Start- und Endzeitpunkt einer Position ermittelt werden. 
+Die einzelnen Positionen können sodurch voneinander unterschieden werden. 
 Daraufhin können die 11 verfügbaren Signale einzeln ausgelesen werden.
 Pro Position wird nun jedes der Signale als \textit{csv}-Datei im jeweiligen Ordner abgelegt.
 Die Daten der eSense-Earpods liegen getrennt in \textit{AccData\_\$ID\$.csv} und \textit{GyroData\_\$ID\$.csv} vor. 
 Diese werden ausgelesen und zu der Datei \textit{eSenseData.csv} zusammengeführt.
-Die Ornderstruktur kann der Abb. \ref{implementation:folder_structure} entnommen werden und ist nun vollständig.
+Die Ordnerstruktur kann der Abbildung \ref{implementation:folder_structure} entnommen werden und ist nun vollständig.
 
 \begin{figure}[ht]
   \centering
@@ -129,18 +130,18 @@ Die Ornderstruktur kann der Abb. \ref{implementation:folder_structure} entnommen
     \caption{Messung teilen}
     \label{implementation:app:screenshots:share}
   \end{subfigure}
-  \caption{Verlauf einer Messung mit der App}
+  \caption{Verlauf einer Messung mit der App: Zu Beginn wird eine Verbindung mit den eSense-Earpods hergestellt, anschließend werden die Nutzerinformationen des Probanden abgefragt. Mit dem Klick auf \textit{Start Measurement} wird eine Messung gestartet. Der erste Timer läuft ab und über die Lautsprecher werden alle Information an den Probanden weitergegeben. Nach Ablauf des Timers beginnt der nächste Timer. Sobald der letzte Timer abgelaufen ist, kann die Messung geteilt werden. Zudem kann die Datenbank gelöscht werden und die nächste Messung kann beginnen. Der Ablauf einer Messung ist in Abbildung \ref{fig_study_flow} nachzusehen.}
   \label{implementation:app:screenshots}
 \end{figure}
 
 \subsection{Synchronisation der Daten}
 \label{ch:Implementierung:data_sync}
 Da es nicht garantiert ist, dass der Timer des PSG-Systems zuverlässig arbeitet, wird jeder Peak des Lichtsensors mit dem Lichtsignal der Smartphone-Daten verglichen.
-Der Abstand jedes einzelnen Peaks wird nun ermittelt und die durchschnittliche Distanz der Peaks wird ermittelt.
-In der Abbildung \ref{implementation:synchronisation:before_light_peak} ist der Vergleich eines Lichtblitzes von Smartphone (blau) und PSG-System (orange) im zeitlichen Verlauf (\texttt{time}).
-Da die Verschiebung des Timers des PSG-Systems währrend einer 7-minütigen Messung im Mittel bei $0.3\si{\s}$ lag, wurde der Timer des PSG-Systems um die durchschnittliche Distanz der Peaks verschoben.
-Dies ist ausreichend, da die PSG-Daten in der Bachelorarbeit lediglich zum visuellen Vergleich dienen und in der Klassifikation nicht mit betrachtet werden. 
-Die zeitliche Verschiebung wird nun in jede \textit{csv}-Datei eingearbeitet mit der Zeile \texttt{new\_time}.
+Der Abstand jedes einzelnen Peaks wird nun ermittelt, ebenso wie die durchschnittliche Distanz der Peaks.
+In der Abbildung \ref{implementation:synchronisation:before_light_peak} ist der Vergleich eines Lichtblitzes von Smartphone (blau) und dem PSG-System (orange) im zeitlichen Verlauf dargestellt (\texttt{time}).
+Da die Verschiebung des Timers des PSG-Systems während einer 7-minütigen Messung im Mittel bei $0.3\si{\s}$ lag, wurde der Timer des PSG-Systems um die durchschnittliche Distanz der Peaks verschoben.
+Dies ist ausreichend, da die PSG-Daten in der Bachelorarbeit lediglich dem visuellen Vergleich dienen und in der Klassifikation nicht mit betrachtet werden. 
+Die zeitliche Verschiebung wird nun in jede \textit{csv}-Datei mit der Spalte \texttt{new\_time} eingearbeitet.
 In Abbildung \ref{implementation:synchronisation:after_light_peak} ist klar zu erkennen, dass der neue Zeitwert (\texttt{new\_time}) des PSG-Signals (orange) direkt über dem Zeitwert des Smartphonesignals (blau) liegt, was an den Lichtpeaks zu erkennen ist.
 Nun ist garantiert, dass die Lichtsignale von PSG-System und dem Smartphone annähernd synchron sind. Die Daten sind nun bereit zur Analyse.
 
@@ -148,16 +149,16 @@ Nun ist garantiert, dass die Lichtsignale von PSG-System und dem Smartphone ann�
   \centering
   \begin{subfigure}{0.66\textwidth}
     \includegraphics[width=1\textwidth]{data_analyzation/light_peak_detection_psg_data}
-    \caption{Peaks des Lichtsignals vom PSG-Gerät. Somit können die PSG-Daten und die Daten, gesammelt von den eSense Earpods zeitlich synchronisiert werden. Der Ablauf der Lichtpeaks ist identisch zum Ablauf der Nutzerstudie (siehe Abb. \ref{fig_study_flow}). Die x-Achse zeigt den Lichtwert des Sensors, die y-Achse den Zeitwert.}
+    \caption{Peaks des Lichtsignals vom PSG-Gerät. Somit können die PSG-Daten und die Daten, gesammelt von den eSense Earpods zeitlich synchronisiert werden. Der Ablauf der Lichtpeaks ist identisch zum Ablauf der Nutzerstudie (siehe Abb. \ref{fig_study_flow}). Die y-Achse zeigt den Lichtausschlag des Sensors, die x-Achse den Zeitwert.}
   \end{subfigure}
   \begin{subfigure}{.49\textwidth}
-    \includegraphics[width=1\textwidth]{data_analyzation/light_peak_detail_before}
-    \caption{Zeitlicher Lichtpeakvergleich vor der Synchronisation. Das Lichtsignal des PSG-Geräts (orange) ist weniger als 1s vom Signal der eSense Earpods (blau) entfernt.}
+    \includegraphics[width=1\textwidth]{data_analyzation/light_peak_detail_before.png}
+    \caption{Zeitlicher Lichtpeakvergleich vor der Synchronisation. Das Lichtsignal des PSG-Geräts (orange) ist weniger als 1s vom Signal der eSense Earpods (blau) entfernt. Der Zeitwert ist in $\si{\ms}$ angegeben. Die Lichtsignale wurden skaliert, um diese vergleichen zu können. }
     \label{implementation:synchronisation:before_light_peak}
   \end{subfigure}
   \begin{subfigure}{.49\textwidth}
-    \includegraphics[width=1\textwidth]{data_analyzation/light_peak_detail_after}
-    \caption{Zeitlicher Lichtpeakvergleich nach der Synchronisation. Das Lichtsignal des PSG-Systems (orange) ist nun zeitlich sehr nahe über den Lichtpeaks der eSense Earpods (blau)}
+    \includegraphics[width=1\textwidth]{data_analyzation/light_peak_detail_after.png}
+    \caption{Zeitlicher Lichtpeakvergleich nach der Synchronisation. Das Lichtsignal des PSG-Systems (orange) ist nun zeitlich sehr nahe über den Lichtpeaks der eSense Earpods (blau). Der neue Zeitwert ist in der Spalte \texttt{new\_time} jeder Datei zu entnehmen. Der Zeitwert ist in $\si{\ms}$ angegeben.}
     \label{implementation:synchronisation:after_light_peak}
   \end{subfigure}
   \label{implementation:synchronisation}
@@ -167,8 +168,8 @@ Nun ist garantiert, dass die Lichtsignale von PSG-System und dem Smartphone ann�
 \label{ch:Implementierung:classification_pipeline}
 Zur Klassifizierung der Daten müssen nun Features berechnet werden. 
 Diese werden jedoch nicht auf das ganze Zeitintervall einer Messung berechnet, sondern aufgeteilt.
-Eine Messung wird nun in Fenster der Größe von 5, bzw 10 Sekunden aufgeteilt, wobei jedes Fenster um eine Sekunde verschoben wird. 
-Somit überlappen sich zwei aneinander liegende Fenster immer um 4, bzw 9 Sekunden. 
+Eine Messung wird nun in Fenster der Größe von 5 bzw. 10 Sekunden aufgeteilt, wobei jedes Fenster um eine Sekunde verschoben wird. 
+Somit überlappen sich zwei aneinander liegende Fenster immer um 4 bzw. 9 Sekunden. 
 Die Trennung der Fenster wurde anhand des Zeitwertes jedes Messergebnisses entschieden, da die Messergebnisse der eSense Earpods beim Senden per BLE an das Smartphone keine Uhrzeit beinhalteten.
 Dadurch liegt kein genauer Abstand der einzelnen Messdaten von $50\si{\hertz}$ vor. 
 Anschließend wurden mittels des Moduls \texttt{tsfresh} Features für jedes Fenster einzeln berechnet und es entstand eine Datei \textit{df\$patient\_id\$\_\$position\_id\$\_feature.csv}, welche alle Features der einzelnen Fenster beinhaltet.
