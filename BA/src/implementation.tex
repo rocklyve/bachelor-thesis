@@ -8,38 +8,14 @@ Anschließend müssen die persistierten Daten aufbereitet werden, sodass sie kla
 
 \section{App}
 \label{ch:Implementierung:app}
-\subsection{Plattform}
-\label{ch:Implementierung:app:platform}
-Die Smartphone-App wurde für Apple-Geräte konzipiert und mit der Sprache Swift entwickelt. 
-Mit der Software XCode lässt sich eine mit Swift geschriebene App kompilieren und auf dem Smartphone installieren.
-
-Zur Einbindung externer Frameworks werden die Dependency-Manager \textit{Accio} und \textit{Carthage} verwendet.
-Im Folgenden sind die relevanten Frameworks aufgelistet, welche in der App eingebunden worden sind:
-
-\begin{center}
-  \begin{tabular}{ | l | l | }
-    \hline
-    Imperio & Strukturierung der App \\ \hline
-    Realm-Cocoa & Datenbank-Framework \\ \hline
-    Zip & Bietet die Möglichkeit, einen Ordner \\ 
-    & als {\glqq zip\grqq}-Datei zu komprimieren\\ \hline
-    Mungohealer & Fügt Logging zu der App hinzu \\
-    \hline
-  \end{tabular}
-\end{center}
-
-Durch das Framework \textit{Imperio} ist es möglich, die View-Komponenten von der Logik zu trennen. 
-Somit ändert sich die Struktur der App, indem jeder Ablauf in der App als \textit{Flow} interpretiert wird. 
-Pro Flow wird ein \textit{FlowController} angelegt, welcher die Logik des Ablaufs kontrolliert. 
-Ein Flow kann nun beliebig viele \textit{ViewController} starten.
-Jede \textit{View}, welche von einem Flow aufgerufen wird, hält ein \textit{Delegate} Objekt.
-Ein \textit{Delegate} ist ein Protokoll, womit dem \textit{Flow} eine Aktion auf der \textit{View} mitgeteilt werden kann.
-Somit wird bei jeder Aktion auf der View eine Funktion des FlowControllers aufgerufen, welcher die View gestartet hat.
-
-
-Das Framework \textit{Realm} ist eine Datenbank für mobile Systeme, die vollständig auf dem mobilen Endgerät läuft.
-Die Daten können direkt als \textit{Objekt} ausgelesen und verarbeitet werden.
-In der App wird die Datenbank verwendet, um eine Messung abzuspeichern (siehe Abbildung \ref{implementation:app:erModel}))
+Zur Erstellung des Datensatzes wurde eine App entwickelt.
+Diese startet eine Messung, nachdem eine Verbindung zu den eSense-Earpods hergestellt wurde.
+Jeder Messwert wird in der Datenbank abgespeichert.
+In Abbildung \ref{implementation:app:erModel} ist das ER-Diagramm der Datenbank beschrieben.
+Das Gerät wird bei der ersten Koppelung mit dem Namen und dessen Identifikator in der Tabelle {\glqq Device\grqq}abgespeichert.
+Der Identifikator ist hierbei eine Repräsentation der MAC-Adresse, welche unter Swift nicht erreichbar ist.
+Für jeden Messwert wird ein Eintrag in der Tabelle {\glqq EsenseData\grqq} abgelegt, sowie eine Referenz zu den \textit{x}, \textit{y} und \textit{z}-Achsenwerten der Gyroskop- und Beschleunigungsdaten, welche in der entsprechenden Tabelle abgelegt werden.
+Zudem wird für jede Messung ein Zeitstempel (\texttt{timestamp}), eine Messungs-ID (\texttt{measurementID}), der aktuell auszuführende Task (\texttt{task}) und die Information, ob die LED des Smarphones an ist, oder nicht (\texttt{lightOn}) abgespeichert.
 
 Die App ist in 3 Sektionen aufgeteilt, einer \textit{Chartansicht}, einer \textit{Messungsansicht}, sowie einer \textit{Einstellungsansicht}. 
 (Abb. \ref{implementation:app:screenshots} Tabbar)
@@ -52,6 +28,7 @@ Im Weiteren wird nur die \textit{Messungsansicht} genauer erläutert, da die and
   \label{implementation:app:erModel}
 \end{figure}
 
+\newpage
 \subsection{Messungsablauf}
 \label{ch:Implementierung:app:measurement_procedure}
 Mit der Messungsansicht soll eine komplette Messung durchgeführt werden.
@@ -79,6 +56,7 @@ Mit der Instruktion \glqq Bitte die Luft anhalten in 3, 2, 1\grqq \ weiß der Te
 Durch die Anweisung \glqq Stopp\grqq \ wird dem Nutzer das Ende des Tasks mitgeteilt. 
 Die Instruktionen liegen als Audiodatei vor und werden jeweils vor dem jeweiligen Task abgespielt und mittels Bluetooth über die Lautsprecher der eSense-Earpods ausgegeben.
 
+\newpage
 \section{Anbindung an die Auswertungspipeline}
 \label{ch:Implementierung:way_to_pipeline}
 \begin{wrapfigure}{r}{0.3\textwidth}
@@ -164,6 +142,7 @@ Nun ist garantiert, dass die Lichtsignale von PSG-System und dem Smartphone ann�
   \label{implementation:synchronisation}
 \end{figure}
 
+\newpage
 \section{Verarbeitungspipeline zur Klassifikation}
 \label{ch:Implementierung:classification_pipeline}
 Zur Klassifizierung der Daten müssen nun Features berechnet werden. 

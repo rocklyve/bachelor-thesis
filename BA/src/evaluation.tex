@@ -3,8 +3,50 @@
 
 \chapter{Evaluation}
 \label{ch:Evaluation}
+
+Zu Beginn der Evaluation wurde eine Nutzerstudie durchgeführt, womit ein Datensatz generiert wurde. 
+Anhand dieses Datensatzes wird anschließend ein Klassifikationsmodell erstellt, womit eine Vorhersage darüber getroffen wird, an welcher Stelle ein Apnoeereignis stattgefunden hat.
+
+\section{Studienablauf}
+In Kapitel \ref{ch:Design:sec:studienplanung} wurde eine einzelne Messung einer Studie detailliert beschrieben.
+Es wurden nun 7 Probanden nach dem Prinzip des \textit{Sample of Convenience} ausgewählt.
+
+Dieser Ablauf (siehe Abb. \ref{fig_study_flow}) wurde nun pro Studienteilnehmer jeweils bei den 3 Positionen durchgeführt, womit alle Schlaflagen abgedeckt wären.
+Zu Beginn der Studie fand eine kurze Einweisung statt, indem der Proband erfuhr, was er zu tragen hat und wie er Anweisungen erhält, um dem Ablauf folgen zu können. 
+Die Kamera wurde auf dem Stativ platziert und so ausgelegt, dass sie das Ohr des Probanden filmt. 
+Das PSG-System wurde am Studienteilnehmer angebracht, sowie alle nötigen Sensoren, die im Kapitel \ref{ch:sa:psg} beschrieben wurden.
+Nachdem die passenden Auswahl des eSense-Earpodaufsatzes gefunden wurde, war der Aufbau der Studie beendet.
+
+Nun wird die Messung des PSG-Systems gestartet, sowie die Smartphone-App geöffnet. 
+Nach Eingabe der Nutzerinformationen kann der erste Durchgang, welcher abhängig vom Ablauf der 3 Positionen war, begonnen werden.
+Durch den Start der Messung am Smartphone beginnt die Messung. 
+Da zusätzlich das Mikrofon am eSense-Earpod mit aufgezeichnet wird, wird nach dem Start der Messung ein $4\si{\s}$ Zeitfenster gewählt, indem der Teilnehmer in die Hände klatschen muss, um das Mikrofonsignal später synchronisieren zu können.
+Nun beginnt die Aufzeichnung. Der Leiter der Studie hat bereits den Raum verlassen und alle Anweisungen werden durch die Earpods per Audiosignal ausgesprochen. 
+Sofern die Messung beendet ist, tritt der Leiter der Studie wieder in den Raum und die Messung kann exportiert werden. 
+Der Export beinhaltet jegliche Smartphone-Daten. Die PSG-Daten werden als eine komplette Messung am Ende der Studie exportiert.
+Zudem wird die Kamera angehalten und eine neue Aufnahme kann gestartet werden.
+Anschließend beginnt die nächste Position. Der Proband kann nun die neue Position einnehmen, anschließend wird per App die neue Messung gestartet.
+Zum Abschluss aller 3 Positionen wird die Messung am PSG-System gestoppt und mittels eines vom PSG-System bereitgestellten Programms lässt sich die Messung als \glqq \textit{edf}-Datei\grqq exportieren.
+Mehr zum Export der Daten und zur Synchronisation, siehe Kapitel \ref{ch:Implementierung:way_to_pipeline}
+Pro Position dauert eine Messung ca. 7 Minuten, was bei 3 Personen eine Gesamtdauer von 21 Minuten bedeutet.
+Einschließlich der Instruktionszeit, dem Export nach der Messung und den Positionswechseln der Probanden beträgt die durchschnittliche Gesamtdauer einer Aufzeichnung ca 45-60 Minuten. 
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}{0.53\textwidth}
+        \includegraphics[width=1\textwidth]{study/study_proband_2_clean.png}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+        \includegraphics[width=1\textwidth]{study/study_proband_clean2.png}
+    \end{subfigure}
+    \caption{Darstellung von Beispielprobanden der Nutzerstudie. Das PSG-System wurde mitsamt den Sensoren am Körper angebracht. Zudem wurde das Handy am PSG-System befestigt und die Person ist nun bereit für die erste Messung.}
+    \label{implementation:study:measurement_example}
+\end{figure}
+
 Die Evaluation der Ergebnisse beginnt damit, die Daten der eSense Earpods in Fenster (\textit{windows}) einzuteilen.
 Auf diese Fenster werden anschließend \textit{Features} berechnet, welche die Grundlage für die Klassifizierung sind.
+
+\newpage 
 
 \section{Gibt es passende Features?}
 Die Suche nach passenden Features wird mit dem Python Package \texttt{tsfresh} angegangen.
@@ -36,7 +78,7 @@ Wenn der Proband nicht die Luft anhält, erkennt man deutliche Bewegungen der Gy
 Im Kapitel \ref{ch:Implementierung:classification_pipeline} wurde beschrieben, wie die Features berechnet und persistiert wurden. 
 Nun sind pro Studienteilnehmer für alle 3 Positionen Features berechnet worden. 
 Es sind jeweils die Features für ein Fenster von 5 Sekunden und 10 Sekunden berechnet worden.
-Zur Erinnerung: Jede Messung wurde in Fenster der Länge von 5, bzw. 10 Sekunden aufgeteilt, wobei jedes Fenster um eine Sekunde verschoben ist.
+Zur Erinnerung: Jede Messung wurde in Fenster der Länge von 5, bzw. 10 Sekunden aufgeteilt, wobei jedes Fenster um eine Sekunde, bzw. 5 und 10 Sekunden verschoben ist.
 
 \subsection{Data Labeling}
 Bei Supervised Learning mit Klassifikation müssen die Daten bereits markiert sein, um eine Entscheidung treffen zu können. 
@@ -318,7 +360,6 @@ Dadurch werden starke Veränderungen deutlich und stellen klar, dass in diesem F
                     &     &       & 1 & 0.72 & 0.70 & 0.53 \\ \hline
           \end{tabular}
           \smallskip
-          \\ Random Forest (only side, \textit{window: 5s})
       \end{center}
       %\label{evaluation:5s:random_forest_loso_side}
   \end{minipage} 

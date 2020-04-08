@@ -2,10 +2,13 @@
 %% $Id: zusammenf.tex 4 2005-10-10 20:51:21Z bless $
 %%
 
-\chapter{Ausblick}
+\chapter{Diskussion \& Ausblick}
 \label{ch:FutureWork}
 %% ==============================
 %
+
+\todo{add discussion, halbe seite...}
+\todo{es gibt probleme bei den übergängen, zeitdiskrete... }
 
 Wie in der Evaluation zu sehen, ist noch nicht die perfekte Lösung gefunden worden, ein Schlafapnoe mittels der eSense Earpods zu ermitteln.
 Es gibt Bereiche, in denen gute Resultate erzielt wurden, jedoch auch Bereiche, in denen Verbesserungspotenzial steckt. 
@@ -33,13 +36,13 @@ Diese beiden Signale können dann als Feature pro Fenster weitere Erkenntnisse l
 In der Abbildung \ref{futureWork:pulseSpo2} ist eine Beispielmessung eines Probanden zu sehen. 
 In Blau sind die Phasen zu sehen, in denen der Proband die Luft angehalten hat.
 Hier ist der Wert auf 1 gesetzt, wenn die Person die Luft angehalten hat, ansonsten ist der Wert auf 0. 
-In Grün ist das SPO-2 Signal zu sehen, in Orange das Pulssignal. 
-Das SPO-2 Signal zeigt einen Abstieg nach dem Luftanhalten, ebenso steigt der Puls nach dem Lufanhalten.
+In Grün ist das $SpO_2$ Signal zu sehen, in Orange das Pulssignal. 
+Das $SpO_2$ Signal zeigt einen Abstieg nach dem Luftanhalten, ebenso steigt der Puls nach dem Lufanhalten.
 Wenn dieses Signal mit in die Features mit aufgenommen wird, könnte ebenfalls die Genauigkeit der Klassifikation steigen. 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=1\textwidth]{futureWork/pulseSpo2Signal}
-    \caption{Darstellung des Puls und SPO-2 Signals einer Messung an einem Probanden. Beide Signale wurden aus den IMU-Daten der eSense-Earpods herausgefiltert. Das SPO-2 Signal zeit Einbrüche an genau den 3 Stellen, an denen der Proband die Luft angehalten hat. Der Puls ist ebenfalls minimal gestiegen in diesen Bereichen.}
+    \caption{Darstellung des Puls und $SpO_2$ Signals einer Messung an einem Probanden. Beide Signale wurden aus den IMU-Daten der eSense-Earpods herausgefiltert. Das $SpO_2$ Signal zeit Einbrüche an genau den 3 Stellen, an denen der Proband die Luft angehalten hat. Der Puls ist ebenfalls minimal gestiegen in diesen Bereichen.}
     \label{futureWork:pulseSpo2}
 \end{figure}
 

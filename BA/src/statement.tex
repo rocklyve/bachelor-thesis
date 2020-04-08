@@ -7,3 +7,52 @@ Ich versichere wahrheitsgemäß, die Arbeit selbstständig angefertigt, alle ben
 Karlsruhe, den 10.04.2020
 
 \cleardoublepage
+
+\vspace*{1em}
+\begin{center}
+	\textbf{Zusammenfassung}
+\end{center}
+\par
+Weltweit leiden 15\% der Menschen unter Atemaussetzern während des Schlafs, von denen 85\% undiagnostiziert sind. 
+Es gibt diverse Arten von Atemaussetzern, zum Beispiel die zentrale Apnoe, die Hauptbestandteil dieser Bachelorarbeit ist.
+Bei zentralem Apnoe setzt die Atmung bei geöffneten Atemwegen für mindestens 10 Sekunden aus. Der Grund für den Atemaussetzer ist, dass das Gehirn in dieser Zeit dem Körper keine Signale zum Atmen weitergibt.
+Heutige Methoden, die es zur Klassifikation solcher respiratorischer Ereignisse gibt, sind aufwendig und kostspielig. 
+Spezialisierte Schlaflabore sind hier der Standard zur Ermittlung von Apnoeereignissen, jedoch ist dies mit einigen Nachteilen verbunden.
+Die durchschnittliche Wartezeit beträgt circa drei Monate und die Patienten verbringen meist nicht länger als zwei Tage im Schlaflabor.
+Dies führt dazu, dass der Datenbestand unzufriedenstellend ist und eine genaue Diagnose nur beschränkt möglich ist.
+
+Diese Bachelorarbeit fokussiert sich darauf, mittels Earables (intelligente Kopfhörer) ein solches zentrales Apnoe zu klassifizieren.
+Die eSense Earpods dienen hier als Grundlage, da diese eine inertiale Messeinheit (IMU) beinhalten, womit die nötigen Signale aufgezeichnet werden können. 
+Der Sensor ist im Gegensatz zu anderen Ansätzen nicht am Oberkörper, sondern im Ohr platziert und ohne weitere Verkabelung einsetzbar.
+Somit ist eine Möglichkeit geboten, ein Apnoeereignis im eigenen Bett zuhause zu klassifizieren.
+Als Ground-Truth dient ein Polysomnographie-Gerät, womit die Vorhersagen mit die IMU-Daten verifiziert werden können.
+Zu Beginn der Arbeit wurde eine App erstellt, welche Messergebnisse mit den eSense Earpods während einer Nutzerstudie aufzeichnet.
+Während der Nutzerstudie werden die Studienteilnehmer gebeten, an bestimmten Zeitpunkten die Luft für 10, 20 und 30 Sekunden anzuhalten.
+Dies simuliert ein zentrales Apnoeereignis und stellt die Grundlage dar, unter welchen der Klassifikator seine Entscheidung trifft.
+
+Die Evaluation führt mit verschiedenen maschinellen Lernverfahren zur Klassifikation das Kreuzvalidierungsverfahren durch.
+Mit dem Kreuzvalidierungsverfahren {\glqq Within Subject\grqq} wurde ein \textit{score} von bis zu 95\% erreicht, mit dem Kreuzvalidierungsverfahren {\glqq Leave One Subject Out\grqq} ergab sich eine hohe Varianz in den Ergebnissen von Studienteilnehmer zu Studienteilnehmer.
+Hier wurde ein \textit{f1-score} von bis zu 86\% erreicht, vorherzusagen, dass in diesem Fenster kein Apnoeereignis stattfand. 
+Ein Fenster als Apnoeereignis zu deklarieren ergab einen \textit{f1-score} von bis zu 55\%. \newline
+Im Mittel ergab das Kreuzvalidierungsverfahren {\glqq Within Subject\grqq} einen \textit{score} von \todo{94}\%, das Kreuzvalidierungsverfahren {\glqq Leave One Subject Out\grqq} einen \textit{f1-score} von 79\% bei der Klassifikation eines Fensters ohne Apnoeereignis und 47\% eines Fensters mit Apnoeereignis
+Aufgrund der hohen Anzahl an Features pro Fenster (circa 6000) neigt das Modell zu Overfitting, was die Varianz der Resultate erklärt.
+
+Da bei der aktuellen Featureberechnung lediglich die Gyroskop- und Beschleunigungsdaten in Betracht gezogen wurden, wird bei einer erweiterten Featureberechnung, beispielsweise      durch Betrachtung von Puls- und $SpO_2$-Signalen eine Optimierung der Resultate erwartet.
+Zudem würde ein maschinelles Lernverfahren, welches vorherige und nachfolgende Fenster mit in die Entscheidung mit einfließen lässt eine Verbesserung der Signale liefern.
+
+%\todo{diskutiere, was kann man draus lernen, was bedeutet das für die realität... bei einzelnen probanden klappts, bei den anderen nciht so... }
+%\todo{es wurde bisher nur acc und gyro verwendet, mit mehr infos und nem lstm wird erwartet, dass ein besseres ergebnis erzielt werden kann. }
+
+%Somit bietet das entwickelte Verfahren eine Grundlage, um ein Apnoeereignis diagnostizieren zu können, während der Proband im eigenen Bett schläft.
+% Den Probanden bietet sich nun die Möglichkeit, ohne einen Termin im Schlaflabor, welcher sich meist nicht länger als zwei Tage den Schlaf analysiert, ein mögliches Apnoeereignis zu klassifizieren.
+
+\cleardoublepage
+\vspace*{1em}
+\begin{center}
+	\textbf{Abstract}
+	\todo{take summary and translate to engl}
+\end{center}
+% \par
+% \todo{Zusammenfassung (Englisch)}
+
+\cleardoublepage
