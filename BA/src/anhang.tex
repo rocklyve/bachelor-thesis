@@ -1,6 +1,16 @@
 \chapter{Anhang}
 \label{ch:anhang}
-\todo{erkläre kurz, warum ich die plots genommen habe}
+Im Anhang sind weitere Resultate des Kreuzvalidierungsverfahrens {\glqq Leave One Subject Out\grqq} aufgelistet.
+Es wurde zuerst die Resultate der Person 5, 7 und 8 aufgelistet, wobei hier alle Positionen im Modell mittrainiert wurden und eine Vorhersage auf jede Position getroffen wurde.
+In orange sind die Vorhersagen der Fenster für jede Sekunde aufaddiert, in blau sind die Markierungen der Fenster aufaddiert.
+
+Es ist erkennbar, dass bei Person 5 kaum Bereiche als positiv markiert vorhergesagt wurden, in denen kein Apnoeereignis simuliert wurde.
+jedoch wurden nicht alle Fenster der Apnoeereignisse als solche klassifiziert.
+
+Bei Person 7 ist klar zu erkennen, dass eine Fenstergröße von 10 Sekunden deutlich bessere Resultate liefert im Vergleich zu einer Fenstergröße von 5 Sekunden.
+Hier ist die Variation der Vorhersage von Proband zu Proband gut zu sehen.
+Person 8 zeigt jedoch auch, dass die Ergebnisse bei einer Fenstergröße von 10s auch nicht immer gut sind.
+
 %% ==============================
 %
 
@@ -36,7 +46,7 @@
       \end{subfigure}
   
       %\caption{Das Kreuzvalidierungsverfahren (LOSO) mit dem Klassifikationsalgorithmus XG Boost. Das Modell wurde auf allen Personen, exklusive einer Person trainiert und auf alle Positionen dieser einen Person wurde eine Vorhersage getroffen. Am Beispiel hier sind die Resultate von Person 6 zu sehen. Die blauen Bereiche sind die, in denen die Luft angehalten wurde, die orangene Kurve ist die Vorhersage. ($w=$ Fenstergröße, $d=$ Verschiebung der Fenster)}
-      \label{evaluation:xgboost_loso:person6}
+      \label{evaluation:random_forest_loso:person5}
 \end{figure}
 \begin{figure}
     \textbf{Person 5: XG Boost ($w=5\si{\s}$, $d=1\si{\s}$)}
@@ -69,7 +79,7 @@
       \end{subfigure}
   
       %\caption{Das Kreuzvalidierungsverfahren (LOSO) mit dem Klassifikationsalgorithmus XG Boost. Das Modell wurde auf allen Personen, exklusive einer Person trainiert und auf alle Positionen dieser einen Person wurde eine Vorhersage getroffen. Am Beispiel hier sind die Resultate von Person 6 zu sehen. Die blauen Bereiche sind die, in denen die Luft angehalten wurde, die orangene Kurve ist die Vorhersage. ($w=$ Fenstergröße, $d=$ Verschiebung der Fenster)}
-      \label{evaluation:xgboost_loso:person6}
+      \label{evaluation:xgboost_loso:person5}
 \end{figure}
 
 %%%%%      PERSON 5 LOSO %%%%%%%%%%%%%%%%%%%%%%%
@@ -104,7 +114,7 @@
       \end{subfigure}
   
       %\caption{Das Kreuzvalidierungsverfahren (LOSO) mit dem Klassifikationsalgorithmus XG Boost. Das Modell wurde auf allen Personen, exklusive einer Person trainiert und auf alle Positionen dieser einen Person wurde eine Vorhersage getroffen. Am Beispiel hier sind die Resultate von Person 6 zu sehen. Die blauen Bereiche sind die, in denen die Luft angehalten wurde, die orangene Kurve ist die Vorhersage. ($w=$ Fenstergröße, $d=$ Verschiebung der Fenster)}
-      \label{evaluation:xgboost_loso:person6}
+      \label{evaluation:random_forest_loso:person7}
 \end{figure}
 \begin{figure}
     \textbf{Person 7: XG Boost ($w=5\si{\s}$, $d=1\si{\s}$)}
@@ -137,7 +147,7 @@
       \end{subfigure}
   
       %\caption{Das Kreuzvalidierungsverfahren (LOSO) mit dem Klassifikationsalgorithmus XG Boost. Das Modell wurde auf allen Personen, exklusive einer Person trainiert und auf alle Positionen dieser einen Person wurde eine Vorhersage getroffen. Am Beispiel hier sind die Resultate von Person 6 zu sehen. Die blauen Bereiche sind die, in denen die Luft angehalten wurde, die orangene Kurve ist die Vorhersage. ($w=$ Fenstergröße, $d=$ Verschiebung der Fenster)}
-      \label{evaluation:xgboost_loso:person6}
+      \label{evaluation:xgboost_loso:person7}
 \end{figure}
 
 %%%%%      PERSON 8 LOSO %%%%%%%%%%%%%%%%%%%%%%%
@@ -172,7 +182,7 @@
       \end{subfigure}
   
       %\caption{Das Kreuzvalidierungsverfahren (LOSO) mit dem Klassifikationsalgorithmus XG Boost. Das Modell wurde auf allen Personen, exklusive einer Person trainiert und auf alle Positionen dieser einen Person wurde eine Vorhersage getroffen. Am Beispiel hier sind die Resultate von Person 6 zu sehen. Die blauen Bereiche sind die, in denen die Luft angehalten wurde, die orangene Kurve ist die Vorhersage. ($w=$ Fenstergröße, $d=$ Verschiebung der Fenster)}
-      \label{evaluation:xgboost_loso:person6}
+      \label{evaluation:random_forest_loso:person8}
 \end{figure}
 \begin{figure}
     \textbf{Person 8: XG Boost ($w=5\si{\s}$, $d=1\si{\s}$)}
@@ -205,7 +215,7 @@
       \end{subfigure}
   
       %\caption{Das Kreuzvalidierungsverfahren (LOSO) mit dem Klassifikationsalgorithmus XG Boost. Das Modell wurde auf allen Personen, exklusive einer Person trainiert und auf alle Positionen dieser einen Person wurde eine Vorhersage getroffen. Am Beispiel hier sind die Resultate von Person 6 zu sehen. Die blauen Bereiche sind die, in denen die Luft angehalten wurde, die orangene Kurve ist die Vorhersage. ($w=$ Fenstergröße, $d=$ Verschiebung der Fenster)}
-      \label{evaluation:xgboost_loso:person6}
+      \label{evaluation:xgboost_loso:person8}
 \end{figure}
 
 %%%%%      PERSON 5 LOSO %%%%%%%%%%%%%%%%%%%%%%%
@@ -240,7 +250,7 @@
       \end{subfigure}
   
       %\caption{Das Kreuzvalidierungsverfahren (LOSO) mit dem Klassifikationsalgorithmus XG Boost. Das Modell wurde auf allen Personen, exklusive einer Person trainiert und auf alle Positionen dieser einen Person wurde eine Vorhersage getroffen. Am Beispiel hier sind die Resultate von Person 6 zu sehen. Die blauen Bereiche sind die, in denen die Luft angehalten wurde, die orangene Kurve ist die Vorhersage. ($w=$ Fenstergröße, $d=$ Verschiebung der Fenster)}
-      \label{evaluation:xgboost_loso:person6}
+      \label{evaluation:random_forest:person5}
 \end{figure}
 \begin{figure}
     \textbf{Person 5 (nur einzelne Positionen): Random Forest ($w=10\si{\s}$, $d=1\si{\s}$)}
@@ -273,5 +283,5 @@
       \end{subfigure}
   
       %\caption{Das Kreuzvalidierungsverfahren (LOSO) mit dem Klassifikationsalgorithmus XG Boost. Das Modell wurde auf allen Personen, exklusive einer Person trainiert und auf alle Positionen dieser einen Person wurde eine Vorhersage getroffen. Am Beispiel hier sind die Resultate von Person 6 zu sehen. Die blauen Bereiche sind die, in denen die Luft angehalten wurde, die orangene Kurve ist die Vorhersage. ($w=$ Fenstergröße, $d=$ Verschiebung der Fenster)}
-      \label{evaluation:xgboost_loso:person6}
+      \label{evaluation:xgboost:person5}
 \end{figure}

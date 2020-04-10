@@ -15,6 +15,7 @@
 \usepackage{csquotes} 
 \usepackage{tabularx}
 \usepackage{booktabs}
+\usepackage{svg}
 \usepackage{multirow}
 %\usepackage{tocbibind}
 \usepackage{siunitx}
@@ -29,6 +30,7 @@
 \usepackage{pgfplotstable}
 \usepackage{url}
 \usepackage{boxhandler}
+\usepackage{pdfpages}
 \usepackage{tabu}
 \usepackage{amssymb}
 %\usepackage{subfig}
@@ -131,12 +133,12 @@
 		basicstyle=\scriptsize,
     %postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}
 }
-
 % Index-Datei öffnen
 \ifnotdraft{\makeindex}
 %%%%%%%%%%%%%% includeonly %%%%%%%%%%%%%%%%%%%
 % Es werden nur die Teile eingebunden, die hier 
 % aufgefuehrt sind!
+
 \includeonly{%
 src/titlepage,%
 %src/statement,% Ist in KA Pflicht für Diplomarbeiten
@@ -150,6 +152,7 @@ src/futurework,% Future Work
 src/summary,  % Zusammenfassung der Ergebnisse 
 src/anhang
 }
+
 \bibliography{Bibliography}
 \usepgfplotslibrary{groupplots}
 \usetikzlibrary{pgfplots.groupplots}
@@ -161,8 +164,11 @@ src/anhang
 \frontmatter
 \pagenumbering{roman}
 \ifnotdraft{
- \include{src/titlepage}
- \blankpage % Leerseite auf Titelrückseite
+\includepdf{src/titlepage_new.pdf}
+\blankpage
+\includepdf{src/erklaerung.pdf}
+\blankpage
+ %\blankpage % Leerseite auf Titelrückseite
  %
  % Die folgende Erklärung ist für Diplomarbeiten Pflicht
  % (siehe Prüfungsordnung), für Studienarbeiten nicht notwendig

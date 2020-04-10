@@ -16,18 +16,18 @@ Im Rahmen dieser Bachelorarbeit wurde ein Datensatz  nach dem \textit{Sample of 
 \label{ch:Design:sec:studienplanung}
 Für die Studie wurde pro Teilnehmer ein Datensatz an 3 verschiedenen Positionen aufgezeichnet, auf dem Bauch, dem Rücken, sowie auf der Seite liegend.
 
-Eine Fragestellung der Studie war, wie ein Atemaussetzer {\glqq simuliert\grqq} werden soll. 
+Eine Frage, die sich bei der Studie gestellt hat, war, wie ein Atemaussetzer {\glqq simuliert\grqq} werden soll. 
 Es wurde entschieden, dass die Studie eine zentrale Schlafapnoe erkennen soll. 
 Demzufolge soll der Studienteilnehmer in einer vordefinierten Reihenfolge einen Atemaussetzer {\glqq simulieren\grqq}, indem er die Luft für eine gewisse Zeit anhält.
-Um unterschiedliche Längen von Atemaussetzern aufzuzeichnen, wurde eine Länge von $10\si{\s}$, $20\si{\s}$ und $30\si{\s}$ gewählt, in welchen der Teilnehmer die Luft anhalten soll. 
-Nun muss ein geeigneter Ablauf gewählt werden, wodurch sich die Ereignisse nicht überschneiden.
-Auf der Suche, wie lange die Regeneration dauere, nachdem eine Person die Luft angehalten hat, ergab sich durch das Schaubild \ref{fig_respiration_regeneration}, dass die Person circa die gleiche Zeit zur Regeneration benötigt, wie sie die Luft zuvor angehalten hat.
+Um unterschiedliche Längen von Atemaussetzern aufzuzeichnen, wurde der Teilnehmer dazu aufgerufen, über eine Zeitspanne von $10\si{\s}$, $20\si{\s}$ und $30\si{\s}$ die Luft anzuhalten.
+Nun muss ein geeigneter Ablauf gewählt werden, damit sich die Ereignisse nicht überschneiden.
+Schaubild \ref{fig_respiration_regeneration} zeigt, dass eine Person circa die gleiche Zeit zur Regeneration benötigt, wie sie zuvor die Luft angehalten hat.
 Diese Zeit wurde mit etwas Puffer nun zusätlich in der Studie mit eingebracht und daraus ergibt sich der Ablauf, welcher in Abbildung \ref{fig_study_flow} zu sehen ist.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.66\textwidth]{images/respiration/respiration_regeneration}
-    \caption{Regenerationsphase nach dem Luftanhalten \cite{beath_rebreathing}.}
+    \caption{Regenerationsphase nach dem Luftanhalten \cite{kobayasiBREAKINGPOINTBREATH1967}.}
     \label{fig_respiration_regeneration}
 \end{figure}
 
@@ -66,13 +66,22 @@ Jede \textit{View}, welche von einem Flow aufgerufen wird, hält ein \textit{Del
 Ein \textit{Delegate} ist ein Protokoll, womit dem \textit{Flow} eine Aktion auf der \textit{View} mitgeteilt werden kann.
 Somit wird bei jeder Aktion auf der View eine Funktion des FlowControllers aufgerufen, welcher die View gestartet hat.
 
-\todo{grafik hinzufügen (einfache Grafik anscheinend)}
-
 Das Framework \textit{Realm} ist eine Datenbank für mobile Systeme, die vollständig auf dem mobilen Endgerät läuft.
 Die Daten können direkt als \textit{Objekt} ausgelesen und verarbeitet werden.
-In der App wird die Datenbank verwendet, um eine Messung abzuspeichern (siehe Abbildung \ref{implementation:app:erModel}))
+In der App wird die Datenbank verwendet, um eine Messung abzuspeichern (siehe Abbildung \ref{implementation:app:erModel})
 
 Das Framework \textit{Mungohealer} stellt eine Möglichkeit dar, bessere Fehlerbenachrichtigungen erstellen zu können. 
 Der Standard, welcher von Apple bereitgestellt wird (\textit{NSERROR}), wird durch dieses Framework erweitert.
 Somit können Fehler in der Konsole genauer beschrieben werden. 
 In dieser App wird dies unter anderem verwendet, um Benachrichtigungen der Bluetoothverbindung zu den eSense-Earpods zu erhalten.
+
+In Abbildung \ref{systemdesign:appflow} ist der Aufbau der App beschrieben. 
+Die Grundlage ist eine Tabbar, welche 3 Sektionen der App verfügbar macht, die \textit{Chartansicht}, die \textit{Einstellungsansicht} und die \textit{Messungsansicht}.
+Der Messablauf wird detailliert in Kapitel \ref{ch:Implementierung:app:measurement_procedure} beschrieben.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{images/study/AppAblauf.pdf}
+  \caption{Ablauf der App-Screens: Nach dem Verbinden mit den eSense Earpods kann eine Messung gestartet werden, sofern die Nutzereingaben zuvor erfolgreich eingegeben wurden. Im Anschluss startet die Messung. Schlussendlich bietet sich in der ShareView die Möglichkeit, die Messung zu teilen.}
+  \label{systemdesign:appflow}
+ \end{figure}
