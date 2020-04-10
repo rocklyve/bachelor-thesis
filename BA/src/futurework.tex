@@ -7,7 +7,7 @@
 %% ==============================
 %
 
-Wie in der Evaluation zu sehen, ist noch nicht die perfekte Lösung gefunden worden, ein Schlafapnoe mittels der eSense Earpods zu ermitteln.
+Wie in der Evaluation zu sehen ist, wurde die perfekte Lösung, eine Schlafapnoe mittels er eSense-Earpods zu ermitteln, noch nicht gefunden.
 Es gibt Bereiche, in denen gute Resultate erzielt wurden, jedoch auch Bereiche, in denen Verbesserungspotenzial steckt. 
 
 Ein Problem liegt möglicherweise daran, ab welcher Grenze ein Fenster als positiv markiert gilt.
@@ -15,10 +15,10 @@ Es wurde ein Fenster als positiv markiert deklariert, falls mehr als 50\% der We
 Somit wurde das Modell auch auf Fenster trainiert, welche knapp über 50\% positiv markierte Daten beinhalten.
 Das betrifft die Regionen eines Übergangs zu einem Apnoeereignis oder von einem solchen weg.
 Eine Lösung wäre es, diese Fenster, welche den Übergang in ein Apnoeereignis beinhalten, zu verwerfen, wenn ein Modell trainiert wird. 
-Das wurde in dieser Bachelorarbeit nicht getan, da dies auch bedeutet, dass die Anzahl an positiv markierten Fenstern kleiner wird, worauf das Modell trainiert wird.
+Das wurde in dieser Bachelorarbeit nicht getan, da dies auch bedeutet, dass die Anzahl der positiv markierten Fenstern, worauf das Modell trainiert wird, kleiner wird.
 
 Der Ausblick wird in zwei Bereiche aufgeteilt.
-Der erste Bereich sind die Signale, welche zusätzlich in die Analyse mit aufgenommen werden können.
+Der erste Bereich befasst sich mit den Signalen, welche zusätzlich in die Analyse mit aufgenommen werden können.
 Im zweiten Bereich wird die Datenanalyse und Klassifikation genauer betrachtet.
 
 Zum ersten Bereich zählt das Mikrofonsignal, welches bei der Nutzerstudie zwar aufgezeichnet und persistiert wurde, jedoch in der Auswertung nicht mit eingeflossen ist. 
@@ -27,9 +27,9 @@ Mittels des Tonsignals direkt am Ohr können unter anderem die Atmung und auch d
 Diese Informationen können in die Auswertung mit einfließen und somit können die Erkenntnisse aus den IMU-Daten mit den Erkenntnissen des Mikrofonsignals zusammengeführt werden.
 
 Im zweiten Bereich des Ausblicks wird erläutert, wie die Auswertung der zur Verfügung stehenden Daten verbessert werden kann.
-Ein großer Nachteil der aktuellen Klassifikation eines Schlafapnoe-Ereignisses ist, dass die Fenster nicht in Abhängigkeit zueinander stehen. 
+Ein großer Nachteil der aktuellen Klassifikation eines Schlafapnoe-Ereignisses ist, dass die Fenster nicht abhängig voneinander betrachtet werden.
 Bei der aktuellen Klassifikation wird jedes Fenster separat und unabhängig von den anderen Fenstern klassifiziert.
-Ein LSTM (\textit{Long short-term Memory}) würde hier die vorherigen, bzw. nachfolgenden Fenster ebenfalls in Betracht ziehen und deren Entscheidung mit in die aktuelle Entscheidung einfließen lassen. 
+Ein LSTM (\textit{Long short-term Memory}) würde hier die vorherigen, bzw. nachfolgenden Fenster ebenfalls in Betracht ziehen und deren Entscheidung mit in die aktuelle Entscheidungsfindung einfließen lassen. 
 Somit wird die Fehlerquote verringert, da potenzielle Outlier vermieden werden.
 
 Zudem gibt es die Möglichkeit, die weiteren Features der IMU-Daten zu berechnen.
@@ -40,23 +40,23 @@ Diese beiden Signale können dann als Feature pro Fenster weitere Erkenntnisse l
 In der Abbildung \ref{futureWork:pulseSpo2} ist eine Beispielmessung eines Probanden zu sehen. 
 In Blau sind die Phasen zu sehen, in denen der Proband die Luft angehalten hat.
 Hier ist der Wert auf 1 gesetzt, wenn die Person die Luft angehalten hat, ansonsten ist der Wert auf 0. 
-In Grün ist das $SpO_2$ Signal zu sehen, in Orange das Pulssignal. 
-Das $SpO_2$ Signal zeigt einen Abstieg nach dem Luftanhalten, ebenso steigt der Puls nach dem Lufanhalten.
+In Grün ist das $SpO_2$-Signal zu sehen, in Orange das Pulssignal. 
+Das $SpO_2$-Signal zeigt einen Abstieg nach dem Luftanhalten, ebenso steigt der Puls nach dem Lufanhalten.
 Wenn dieses Signal mit in die Features mit aufgenommen wird, könnte ebenfalls die Genauigkeit der Klassifikation steigen. 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=1\textwidth]{futureWork/pulseSpo2_edited}
-    \caption{Darstellung des Puls und $SpO_2$ Signals einer Messung an einem Probanden. Beide Signale wurden aus den IMU-Daten der eSense-Earpods herausgefiltert. Das $SpO_2$ Signal zeit Einbrüche an genau den 3 Stellen, an denen der Proband die Luft angehalten hat. Der Puls ist ebenfalls minimal gestiegen in diesen Bereichen. In grün sind die Bereiche markiert, in denen der Proband die Luft angehalten hat.}
+    \caption{Darstellung des Puls und $SpO_2$-Signals einer Messung an einem Probanden. Beide Signale wurden aus den IMU-Daten der eSense-Earpods herausgefiltert. Das $SpO_2$-Signal zeigt Einbrüche an genau den 3 Stellen, an denen der Proband die Luft angehalten hat. Der Puls ist ebenfalls minimal gestiegen in diesen Bereichen. In grün sind die Bereiche markiert, in denen der Proband die Luft angehalten hat.}
     \label{futureWork:pulseSpo2}
 \end{figure}
 
 Eine weitere Möglichkeit bietet sich, indem die Zusatzinformationen der Nutzer mit in die Klassifikation eingebunden werden.
-Hier können Personen des gleichen Geschlechts, Gewichts oder des gleichen Schlafrythmusses in einem Modell trainiert werden.
+Hier können Personen des gleichen Geschlechts, Gewichts oder des gleichen Schlafrhythmusses in einem Modell trainiert werden.
 Dies könnte mögliche Einflussfaktoren elmininieren und das Ergebnis ebenfalls verbessern.
 
 Ein weiterer Ansatz zur Weiterarbeit an diesem Thema wird in \cite{perslevUTimeFullyConvolutional2019} behandelt.
-Dort wird der Ansatz, Convolutional Layer und Recurrent Layer zu kombinieren und daraus sinnvolle Features zu extrahieren. 
-Zudem werden zeitliche Beziehungen ermittelt, was jedoch schwer zu ermitteln ist. 
-Das Paper veröffentlicht \textit{U-Time}, einen zeichlichen, vollständiges Deep Learning Ansatz zur Analyse von physiologischen Zeitreihensegmenten. 
+Dort wird der Ansatz, Convolutional Layer und Recurrent Layer zu kombinieren und daraus sinnvolle Features zu extrahieren, betrachtet. 
+Zudem werden zeitliche Beziehungen gefunden, was jedoch schwer zu ermitteln ist. 
+Das Paper veröffentlicht \textit{U-Time}, einen zeichlichen, vollständigen Deep Learning Ansatz zur Analyse von physiologischen Zeitreihensegmenten. 
 \textit{U-Time} wurde explizit zur Analyse von Schlafdaten entwickelt.
-Jeder Zeitpunkt des Eingangssignals wird implizit klassifiziert, anschließend wird durch Aggregation dieser Klassifikation über feste Intervalle eine endgültigen Vorhersage gebildet.
+Jeder Zeitpunkt des Eingangssignals wird implizit klassifiziert, anschließend wird durch Aggregation dieser Klassifikation über feste Intervalle eine endgültige Vorhersage gebildet.
