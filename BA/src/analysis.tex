@@ -40,7 +40,7 @@ Hier wurde die Konfiguration ebenfalls auf den Standardwerten belassen, was bede
 \subsection{Was wird aufgezeichnet?}
 \label{ch:sa:ep:what_to_record}
 Zur vollständigen Aufzeichnung eines Datensatzes werden die Daten der IMU in einer Datenbank abgespeichert.
-Insgesamt werden hierbei pro empfangene Dateneinheit 6 Werte persistiert, die \textit{x-, y-} und \textit{z}-Richtung des Beschleunigungs- und Gyroskopsensors. 
+Insgesamt werden hierbei pro empfangener Dateneinheit 6 Werte persistiert, die \textit{x-, y-} und \textit{z}-Richtung des Beschleunigungs- und Gyroskopsensors. 
 Des Weiteren wird die aktuelle Zeit, die aktuell auszuführende Aktion des Studienablaufs und die Information, ob die LED des Smartphones an oder aus ist, zu jeder empfangenen Dateneinheit hinzugefügt.
 Der Ton wird ebenfalls über das Mikrofon aufgezeichnet und nach der Messsung abgespeichert.
 Vor dem Beginn einer Messung wird der Studienteilnehmer gebeten, ein paar Zusatzinformationen (siehe Kapitel \ref{ch:sa:additionalUserStudiesInformation}) anzugeben.
@@ -91,7 +91,7 @@ Im Folgenden werden alle Sensoren aufgelistet, welche für die Studie aufgezeich
 
 \begin{itemize}
     \item \textbf{Bauchsignal (\texttt{abdomen}) ($32 \si{\hertz}$)}: Gibt die Veränderung des Volumens am Bauch an.
-    \item \textbf{Lichtsignal (\texttt{light}) ($128 \si{\hertz}$)}: Misst das Umgebungslicht, was verwendet wird, um die Signale vom PSG-System und den eSense-Earpods zu synchronisieren.
+    \item \textbf{Lichtsignal (\texttt{light}) ($128 \si{\hertz}$)}: Es misst das Umgebungslicht, das verwendet wird, um die Signale vom PSG-System und den eSense-Earpods zu synchronisieren.
     \item \textbf{Drucksignal (\texttt{flow}) ($256 \si{\hertz}$)}: Hier wird der Druck gemessen, der durch die Nase kommt. Der Sensor ist direkt an der Nase befestigt.
     \item \textbf{Bewegungssignal (\texttt{movement}) ($32 \si{\hertz}$)}: Es misst die Bewegung anhand von Beschleunigungsdaten.
     \item \textbf{Sauerstoffsättigung (\texttt{pleth}) ($128 \si{\hertz}$)}: Sie gibt die Sauerstoffsättigung im Blut an.
@@ -99,7 +99,7 @@ Im Folgenden werden alle Sensoren aufgelistet, welche für die Studie aufgezeich
     \item \textbf{Schnarchmikrofonsignal (\texttt{schnarch}) ($256 \si{\hertz}$)}: Dieser Sensor wird am Kehlkopf befestigt und misst das Schnarchen.
     \item \textbf{Sauerstoffgehalt (\texttt{$SpO_2$}) ($32 \si{\hertz}$)}: Dieser wird anhand einer manschettenfreien kontinuierlichen Blutdruckmessung ermittelt.
     \item \textbf{Brustkorbsignal (\texttt{thorax}) ($32 \si{\hertz}$)}: Es gibt die Veränderung des Volumens am Brustkorb an.
-    \item \textbf{Brustkorb \& Bauchsignal (\texttt{thoraxabdomen}) ($32 \si{\hertz}$)}: Kombiniertes Signal von Brust- und Bauchsignal
+    \item \textbf{Brustkorb \& Bauchsignal (\texttt{thoraxabdomen}) ($32 \si{\hertz}$)}: Es handelt sich um ein kombiniertes Signal von Brust- und Bauchsignal.
     \item \textbf{EDF Informationen (\texttt{edfAnnotations}) ($60 \si{\hertz}$)}: Sie enthalten Anmerkungen als \textit{char}, z.B die Startzeit der Messung.
 \end{itemize}
 
@@ -122,7 +122,7 @@ Die Daten wurden nicht in die Klassifikation mit eingebunden und sind nur dazu g
 
 \section{Datensynchronisation}
 \label{ch:sa:data_synchronisation}
-Um sicherzugehen, dass das PSG-System sowie die Daten der eSense-Earpods zeitlich exakt übereinstimmt, wurden mit der App kurze Lichtblitze gesendet ($20 \si{\ms}$).
+Um sicherzugehen, dass das PSG-System sowie die Daten der eSense-Earpods zeitlich exakt übereinstimmen, wurden mit der App kurze Lichtblitze gesendet ($20 \si{\ms}$).
 Mit einem 3D-Drucker wurde eine Vorrichtung angefertigt, welche das Smartphone auf das PSG-System platziert, sodass die LED des Smartphones direkt auf den Lichtsensor zeigt (siehe Abbildung \ref{study:3d_print}).
 
 \begin{figure}[ht]

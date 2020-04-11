@@ -39,12 +39,12 @@ Einschließlich der Instruktionszeit, dem Export nach der Messung und den Positi
     \begin{subfigure}{0.3\textwidth}
         \includegraphics[width=1\textwidth]{study/study_proband_clean2.png}
     \end{subfigure}
-    \caption{Darstellung von Beispielprobanden der Nutzerstudie. Das PSG-System wurde mitsamt den Sensoren am Körper angebracht. Zudem wurde das Handy am PSG-System befestigt. Die Person ist nun bereit für die erste Messung.}
+    \caption{Darstellung von Beispielprobanden der Nutzerstudie. Das PSG-System wurde mitsamt der Sensoren am Körper angebracht. Zudem wurde das Handy am PSG-System befestigt. Die Person ist nun bereit für die erste Messung.}
     \label{implementation:study:measurement_example}
 \end{figure}
 
 Die Evaluation der Ergebnisse beginnt damit, die Daten der eSense Earpods in Fenster (\textit{windows}) einzuteilen.
-Auf diese Fenster werden anschließend \textit{Features} berechnet, welche die Grundlage für die Klassifizierung sind.
+Auf diese Fenster werden anschließend \textit{Features} berechnet, welche die Grundlage für die Klassifizierung bilden.
 
 \newpage 
 
@@ -59,8 +59,8 @@ Diese Fenster sind jeweils um $1\si{\s}$ verschoben, d.h. die aneinander grenzen
 Nun wird für jedes Fenster eine Featureberechnung ausgeführt, womit durch \texttt{tsfresh} ($\sim$ 6000) Features für jedes Fenster entstehen.
 Als Eingabe bekommt \texttt{tsfresh} die Daten der eSense Earpods, also die \textit{x-, y-} und \textit{z}-Achse der Gyroskop und Beschleunigungsdaten, die mit einem Zeitstempel versehen sind. 
 Die Abbildung \ref{evaluation:rawPlot} zeigt einen Ausschnitt einer Messung. 
-Die in Blau eingefärbte Linie stellt den absoluten Wert aus den Gyroskopdaten der $x$, $y$ und $z$-Achse dar.
-In Grün ist das Signal des Drucksensors, direkt unter der Nase befestigt, zu sehen, welches die Atmung repräsentiert.
+Die in blau eingefärbte Linie stellt den absoluten Wert aus den Gyroskopdaten der $x$, $y$ und $z$-Achse dar.
+In grün ist das Signal des Drucksensors, direkt unter der Nase befestigt, zu sehen, welches die Atmung repräsentiert.
 Der orange markierte Bereich ist jener Bereich, in dem der Proband die Luft angehalten hat. 
 Man erkennt bereits, dass die Signale während der Phase des Luftanhaltens wenig Ausschlag in einem Bereich haben.
 Wenn der Proband nicht die Luft anhält, erkennt man deutliche Bewegungen der Gyroskopdaten. 
@@ -70,12 +70,12 @@ Wenn der Proband nicht die Luft anhält, erkennt man deutliche Bewegungen der Gy
   \begin{subfigure}{0.7\textwidth}
       \includegraphics[width=1\textwidth]{data_analyzation/compare_raw_signal_with_flowDr_2.png}
     \end{subfigure}
-  \caption{Darstellung des Signals eines Probanden während einer Messung. In Grün ist das Signal des Drucksensors vom PSG-Gerät zu sehen, welcher an der Nase befestigt ist. Zudem ist der absolute Wert, welcher sich aus allen 3 Achsen des Gyroskopsignals berechnen lässt, in blau und das Apnoeereignis in orange zu sehen. Circa zwischen Sekunde 65 und 75 wurde ein Apnoeereignis simuliert. Es ist deutlich zu sehen, dass ein Apnoeereignis auch anhand der IMU-Werte zu erkennen ist. Die Berechnung des absoluten Werts ist $\sqrt{x^2+y^2+z^2}$. Beide Signale wurden normalisiert und so in der y-Achse verschoben, sodass sie vergleichbar sind.}
+  \caption{Darstellung des Signals eines Probanden während einer Messung. In grün ist das Signal des Drucksensors vom PSG-Gerät zu sehen, welcher an der Nase befestigt ist. Zudem ist der absolute Wert, welcher sich aus allen 3 Achsen des Gyroskopsignals berechnen lässt, in blau und das Apnoeereignis in orange zu sehen. Circa zwischen Sekunde 65 und 75 wurde ein Apnoeereignis simuliert. Es ist deutlich zu sehen, dass ein Apnoeereignis auch anhand der IMU-Werte zu erkennen ist. Die Berechnung des absoluten Werts ist $\sqrt{x^2+y^2+z^2}$. Beide Signale wurden normalisiert und so in der y-Achse verschoben, dass sie vergleichbar sind.}
   \label{evaluation:rawPlot}
 \end{figure}
 
 \section{Ablauf der Evaluierung}
-Im Kapitel \ref{ch:Implementierung:classification_pipeline} wurde beschrieben, wie die Features berechnet und persistiert wurden. 
+In Kapitel \ref{ch:Implementierung:classification_pipeline} wurde beschrieben, wie die Features berechnet und persistiert wurden. 
 Nun sind pro Studienteilnehmer für alle 3 Positionen Features berechnet worden. 
 Es sind jeweils die Features für ein Fenster von 5 Sekunden und 10 Sekunden berechnet worden.
 Zur Erinnerung: Jede Messung wurde in Fenster der Länge von 5, bzw. 10 Sekunden aufgeteilt, wobei jedes Fenster um eine Sekunde, bzw. 5 und 10 Sekunden verschoben ist.
@@ -98,7 +98,7 @@ Bei diesem Verfahren werden alle Daten in $k$ Partitionen aufgeteilt.
 Eine Partition wird als Testdatensatz und $k-1$ Partitionen werden als Trainingsdatensatz gewählt \cite{neumannMaschineLearningKIT2020}.
 Somit werden alle Personen zu einem Datensatz zusammengefasst und mit der Methode \texttt{test\_train\_split} in Trainingsdaten und Testdaten aufgeteilt.
 Hier wird eine Aufteilung von 70\% für die Trainingsdaten und 30\% für die Testdaten gewählt. 
-Daraus ergibt sich ein \textit{score}, welcher die mittlere Genauigkeit (\textit{mean accuracy}) auf den gegebenen Testdaten, welche 30\% des Datensatzes sind, angibt.
+Daraus ergibt sich ein \textit{score}, welcher die mittlere Genauigkeit (\textit{mean accuracy}) auf den gegebenen Testdaten, nämlich 30\% des Datensatzes, angibt.
 
 Die Resultate sind in Abbildung \ref{evaluation:within_subject_results} zu sehen.
 Die Tabelle zeigt die Ergebnisse verschiedener Klassifikationsalgorithmen mit verschiedenen Datensätzen.
@@ -175,7 +175,7 @@ Um einen kleinen Überblick zu bekommen, welche Features entscheidend für die E
 \end{itemize}
 Diese Features wurden mittels \texttt{tsfresh} berechnet und waren bei der Klassifikation des Kreuzvalidierungsverfahrens entscheidened \cite{TsfreshTsfresh12}.
 
-Die partielle Autokorrelationfunktion (\texttt{partial autocorrelation}) beschreibt die Abhänigkeit zwischen den Werten der Zeitreihen. 
+Die partielle Autokorrelationfunktion (\texttt{partial autocorrelation}) beschreibt die Abhängigkeit zwischen den Werten der Zeitreihen. 
 Zudem wird ein zeitlicher linearer Zusammenhang der verschiedenen Werte gemessen.
 Somit haben sich die Werte in diesem Fenster zwischen den Werten weniger verändert und ähneln somit eher den positiv markierten Trainingsdaten.
 
@@ -194,7 +194,7 @@ $\sigma$ und $\mu$ sind Schätzwerte für die Varianz und den Mittelwert.
 Ein weiteres Feature, welches ausschlaggebend für die Klassifikation ist, ist der Wechsel der Quantilwerte (\texttt{change\_quantiles}).
 Pro Fenster wird ein $q_l$ niedriges Quantil und ein $q_h$ hohes Quantil berechnet. 
 Anschließend wird der durchschnittliche, absolute Wert der aufeinanderfolgenden Änderungen der Reihe $x$ innerhalb dieser Quantile berechnet.
-Dadurch werden starke Veränderungen deutlich und zeigen, dass in diesem Fenster kein Apnoe stattfindet. 
+Dadurch werden starke Veränderungen deutlich und zeigen, dass in diesem Fenster keine Apnoe stattfindet. 
 
 \subsection{Vorverarbeitung durch einen Tiefpassfilter}
 Als weiterer Versuch wurde ein Tiefpassfilter auf die Gyroskop- und Beschleunigungsdaten angewandt. 
@@ -372,6 +372,6 @@ Dies ist darauf zurückzuführen, dass durch den Tiefpassfilter Informationen ve
   \end{minipage} 
     
   \end{tabular}
-  \caption{Zu sehen sind die Klassifikationsergebnisse mit dem Kreuzvalidierungsverfahren bei einer Fenstergröße von 5 bzw. 10 Sekunden, welche um 1 Sekunde verschoben wurden. Es wurde immer eine Person beim Trainieren des Modells ausgelassen. Für diese Person wurde anschließend eine Vorhersage getroffen. Jede Person wurde einmel in dem Modell außen vorgelassen und für dieses Modell vorhergesagt. Das zu sehende Resultat ist der Mittelwert aller Resultate des Kreuzvalidierungsverfahrens der einzelnen Positionen.}
+  \caption{Zu sehen sind die Klassifikationsergebnisse mit dem Kreuzvalidierungsverfahren bei einer Fenstergröße von 5 bzw. 10 Sekunden, welche um 1 Sekunde verschoben wurden. Es wurde immer eine Person beim Trainieren des Modells ausgelassen. Für diese Person wurde anschließend eine Vorhersage getroffen. Jede Person wurde einmal in dem Modell außen vorgelassen und für dieses Modell vorhergesagt. Das zu sehende Resultat ist der Mittelwert aller Resultate des Kreuzvalidierungsverfahrens der einzelnen Positionen.}
   \label{evaluation:loso_classification_results}  
 \end{table}

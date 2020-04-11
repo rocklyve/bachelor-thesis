@@ -10,7 +10,7 @@ Zuletzt wird die Struktur der Vorangehensweise beschrieben, um einen Einblick zu
 
 \section{Problem}
 Das in dieser Bachelorarbeit zu lösende Problem ist die Klassifizierung eines Atemaussetzers, welcher in verschiedenen Typen auftreten kann. 
-In Abbildung \ref{introduction:problem_description} sind drei verschieden Atmungsabläufe dargestellt. 
+In Abbildung \ref{introduction:problem_description} sind drei verschiedene Atmungsabläufe dargestellt. 
 Darunter ist der jeweilige Atemfluss als Signal des zugehörigen Atemwegs abgebildet.
 Bei verengten und geschlossenen Atemwegen ist eine deutliche Signaländerung vorhanden. 
 Der Standard zur Diagnose eines solchen respiratorischen Ereignisses während des Schlafs ist eine Analyse in einem Schlaflabor mittels vieler angeschlossener Sensoren. 
@@ -30,15 +30,15 @@ Da man oft bis zu drei Monate auf einen Termin warten muss und die Untersuchung 
 Die Idee ist nun solche Signaleinbrüche mit maschinellem Lernen zu erkennen (siehe Abbildung \ref{introduction:problem_description}). 
 Das Signal wird durch eine IMU (\textit{inertial measurement unit}) der eSense-Earpods geliefert.
 Dieses Signal besteht aus 6-Achsen, den \textit{x-}, \textit{y-} und \textit{z}-Achsen des Gyroskop- und Beschleunigungssensors.
-Durch eine Klassifikation, also ob in einem Zeitintervall ein Apnoeereignis vorgekommen ist, oder nicht, kann eine erste Diagnose eines respiratorischen Ereignisses bereits bequem von Zuhause erfolgen.
+Durch eine Klassifikation, also ob in einem Zeitintervall ein Apnoeereignis vorgekommen ist, oder nicht, kann eine erste Diagnose eines respiratorischen Ereignisses bereits bequem von Zuhause aus erfolgen.
 Da der Proband eine Messung mit den eSense-Earpods über viele Nächte durchführen kann, sind die Signale über einen deutlich längeren Zeitabschnitt verfügbar, als sie in einem Schlaflabor aufgezeichnet werden.
 
 \section{Struktur}
 Zu Beginn wird eine App konstruiert, welche sich mit den eSense-Earpods über BLE (\textit{Bluetooth Low Energy}) verbindet (siehe Abbildung \ref{introduction:ba_record}).
 Anschließend wird eine Nutzerstudie mit 7 Personen durchgeführt, um einen Datensatz zu generieren.
-Den Probanden wird über die Lautsprecher der eSense-Earpods mitgeteilt, wenn sie die Luft anhalten sollen, um ein zentrales Apnoe zu simulieren.
-Anhand dieses Datensatzes kann schlussendlich ein Klassifikator trainiert werden, womit eine zukünftige Vorraussage einer Messung getroffen werden kann.
-Im dritten Bild der Abbildung \ref{introduction:ba_record} ist das Signal des PSG-Geräts  und die Rohdaten der eSense Earpods dargestellt. 
+Den Probanden wird über die Lautsprecher der eSense-Earpods mitgeteilt, wenn sie die Luft anhalten sollen, um eine zentrale Apnoe zu simulieren.
+Anhand dieses Datensatzes kann schlussendlich ein Klassifikator trainiert werden, womit eine zukünftige Voraussage einer Messung getroffen werden kann.
+Im dritten Bild der Abbildung \ref{introduction:ba_record} sind das Signal des PSG-Geräts und die Rohdaten der eSense Earpods dargestellt. 
 Zusammen bilden diese Signale neben den Kameraaufnahmen, dem Mikrofonsignal und den Nutzerinformationen einen Datensatz.
 Das vierte Bild zeigt, dass nach der Klassifikation der Rohdaten, also den Gyroskop- und Beschleunigungsdaten der eSense Earpods, eine Entscheidung darüber getroffen wird, ob in der Messung ein Apnoeereignis stattfand, oder nicht.
 Die Messung wurde hierbei in viele Intervalle aufgeteilt, worauf jeweils eine individuelle Entscheidung getroffen wurde.

@@ -10,20 +10,20 @@
 Wie in der Evaluation zu sehen ist, wurde die perfekte Lösung, eine Schlafapnoe mittels er eSense-Earpods zu ermitteln, noch nicht gefunden.
 Es gibt Bereiche, in denen gute Resultate erzielt wurden, jedoch auch Bereiche, in denen Verbesserungspotenzial steckt. 
 
-Ein Problem liegt möglicherweise daran, ab welcher Grenze ein Fenster als positiv markiert gilt.
+Ein Problem liegt möglicherweise darin, ab welcher Grenze ein Fenster als positiv markiert gilt.
 Es wurde ein Fenster als positiv markiert deklariert, falls mehr als 50\% der Werte in diesem Fenster positiv markiert sind.
 Somit wurde das Modell auch auf Fenster trainiert, welche knapp über 50\% positiv markierte Daten beinhalten.
 Das betrifft die Regionen eines Übergangs zu einem Apnoeereignis oder von einem solchen weg.
 Eine Lösung wäre es, diese Fenster, welche den Übergang in ein Apnoeereignis beinhalten, zu verwerfen, wenn ein Modell trainiert wird. 
-Das wurde in dieser Bachelorarbeit nicht getan, da dies auch bedeutet, dass die Anzahl der positiv markierten Fenstern, worauf das Modell trainiert wird, kleiner wird.
+Das wurde in dieser Bachelorarbeit nicht getan, da dies auch bedeutet, dass die Anzahl der positiv markierten Fenster, worauf das Modell trainiert wird, kleiner wird.
 
 Der Ausblick wird in zwei Bereiche aufgeteilt.
 Der erste Bereich befasst sich mit den Signalen, welche zusätzlich in die Analyse mit aufgenommen werden können.
-Im zweiten Bereich wird die Datenanalyse und Klassifikation genauer betrachtet.
+Im zweiten Bereich wird die Datenanalyse und die Klassifikation genauer betrachtet.
 
 Zum ersten Bereich zählt das Mikrofonsignal, welches bei der Nutzerstudie zwar aufgezeichnet und persistiert wurde, jedoch in der Auswertung nicht mit eingeflossen ist. 
 Das Mikrofonsignal kann weitere Informationen zur Detektion einer Schlafapnoe liefern. 
-Mittels des Tonsignals direkt am Ohr können unter anderem die Atmung und auch den Puls herausgefiltert werden \cite{nomaWearableDataAcquisition2005}.
+Mittels des Tonsignals direkt am Ohr können unter anderem die Atmung und auch der Puls herausgefiltert werden \cite{nomaWearableDataAcquisition2005}.
 Diese Informationen können in die Auswertung mit einfließen und somit können die Erkenntnisse aus den IMU-Daten mit den Erkenntnissen des Mikrofonsignals zusammengeführt werden.
 
 Im zweiten Bereich des Ausblicks wird erläutert, wie die Auswertung der zur Verfügung stehenden Daten verbessert werden kann.
@@ -38,15 +38,15 @@ Es könnten weitere Features in die Auswertung mit einfließen.
 Es ist möglich, anhand der IMU-Daten das Puls- und $SPO_2$-Signal zu extrahieren. 
 Diese beiden Signale können dann als Feature pro Fenster weitere Erkenntnisse liefern.
 In der Abbildung \ref{futureWork:pulseSpo2} ist eine Beispielmessung eines Probanden zu sehen. 
-In Blau sind die Phasen zu sehen, in denen der Proband die Luft angehalten hat.
+In blau sind die Phasen zu sehen, in denen der Proband die Luft angehalten hat.
 Hier ist der Wert auf 1 gesetzt, wenn die Person die Luft angehalten hat, ansonsten ist der Wert auf 0. 
-In Grün ist das $SpO_2$-Signal zu sehen, in Orange das Pulssignal. 
+In grün ist das $SpO_2$-Signal zu sehen, in orange das Pulssignal. 
 Das $SpO_2$-Signal zeigt einen Abstieg nach dem Luftanhalten, ebenso steigt der Puls nach dem Lufanhalten.
 Wenn dieses Signal mit in die Features mit aufgenommen wird, könnte ebenfalls die Genauigkeit der Klassifikation steigen. 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=1\textwidth]{futureWork/pulseSpo2_edited}
-    \caption{Darstellung des Puls und $SpO_2$-Signals einer Messung an einem Probanden. Beide Signale wurden aus den IMU-Daten der eSense-Earpods herausgefiltert. Das $SpO_2$-Signal zeigt Einbrüche an genau den 3 Stellen, an denen der Proband die Luft angehalten hat. Der Puls ist ebenfalls minimal gestiegen in diesen Bereichen. In grün sind die Bereiche markiert, in denen der Proband die Luft angehalten hat.}
+    \caption{Darstellung des Pulses und $SpO_2$-Signals einer Messung an einem Probanden. Beide Signale wurden aus den IMU-Daten der eSense-Earpods herausgefiltert. Das $SpO_2$-Signal zeigt Einbrüche an genau den 3 Stellen, an denen der Proband die Luft angehalten hat. Der Puls ist in diesen Bereichen ebenfalls minimal gestiegen. In grün sind die Bereiche markiert, in denen der Proband die Luft angehalten hat.}
     \label{futureWork:pulseSpo2}
 \end{figure}
 

@@ -105,15 +105,15 @@ Die folgenden Tabelle zeigt die Unterschiede der verschiedenen Modelle bei \text
     \end{tabular}
 \end{center}
 
-Jeder Algorithmus, welcher in einem dieser Modelle des Maschinellen Lernverfahrens eingesetzt ist, besteht aus 3 Teilen: Zum einen der \textit{Representation}, der \textit{Evaluation} und der \textit{Optimization}. 
+Jeder Algorithmus, welcher in einem dieser Modelle des maschinellen Lernverfahrens eingesetzt ist, besteht aus 3 Teilen: Zum einen der \textit{Representation}, der \textit{Evaluation} und der \textit{Optimization}. 
 In der \textit{Representation} unterscheidet man nach dem zugrunde liegenden Modell, welches beispielsweise ein Entscheidungsbaum, ein neuronales Netz oder eine Support-Vektor-Maschine sein kann.
 Die \textit{Evaluation} behandelt die Frage, in welche Richtung die Entscheidung getroffen werden soll. 
 Beispiele hierfür wären die Genauigkeit, der Precision \& Recall, die Entropie oder der Likelihood-Schätzer.
 Beim dritten Teil, der \textit{Optimization}, wird eine Optimierung des Algorithmus angestrebt. 
 Dies kann unter anderem mit Methoden zweiter Ordnung, zufälliger Suche, einem absteigenden Gradienten oder der Methode der kleinsten Quadrate versucht werden.
 
-Das in dieser Bachelorarbeit verwendete Lernverfahren ist \textit{Supervised Learning} mit dem zugehörigen Modell, die \textit{Klassifikation}.
-Aus dem Datensatz werden hierbei Features berechnet, welche dann einen wichtigen Teil der Klassifikation sind.
+Das in dieser Bachelorarbeit verwendete Lernverfahren ist \textit{Supervised Learning} mit dem zugehörigen Modell: die \textit{Klassifikation}.
+Aus dem Datensatz werden hierbei Features berechnet, welche dann ein wichtiger Teil der Klassifikation sind.
 Ein Feature ist ein Merkmal eines Datensatzes, welches ein individuelles, messbares Attribut der Rohdaten ist.
 Pro Klassifikation werden üblicherweise eine Vielzahl an Features gesammelt, anhand derer der Klassifikator seine Entscheidungen trifft.
 
@@ -127,7 +127,7 @@ Zur Klassifikation werden markierte Daten vorausgesetzt, woraus eine gelernt mat
 Dieses Modell wird anschließend genutzt, um auf unmarkierten Daten eine Vorhersage zu treffen.
 Random Forest basiert auf Entscheidungsbäumen. 
 Das sind Bäume, bei welchen pro Ast eine Entscheidung getroffen wird.
-Sie lernen binäre Entscheidungsregeln, die einer logischen Ab folge entsprechen.
+Sie lernen binäre Entscheidungsregeln, die einer logischen Abfolge entsprechen.
 Jedoch sind einzelne Entscheidungsbäume nicht robust genug und neigen zu Overfitting.
 Random Forest nutzt deshalb viele Entscheidungsbäume und trainiert diese auf dem selben Trainingsdatensatz. 
 Der Zusammenschluss der Entscheidungen jedes Entscheidungsbaums repräsentiert die endgültige Entscheidung.
@@ -211,7 +211,7 @@ Zudem neigt SVM gerade im nichtlinearen Bereich schnell zu Overfitting.
 \section{Forschung von Klassifikation anhand von IMU-Daten}
 Es gibt bereits Ansätze, welche sich damit befassen, Alternativen zur Ermittlung von Schlafstörungen zu finden. 
 Somit könnte ein Besuch im Schlaflabor durch einen bequemen Test ersetzt werden. 
-Ein vielversprechender Ansatz ist es, mittels IMU-Daten die Bewegung des Körpers zu messen und anhand dieser Informationen unter anderem die Atmung herauszufiltern, um dann Rückschlüsse auf Schlafstörungen machen zu können.
+Ein vielversprechender Ansatz ist es, mittels IMU-Daten die Bewegung des Körpers zu messen und anhand dieser Informationen unter anderem die Atmung herauszufiltern, um dann Rückschlüsse auf Schlafstörungen folgern zu können.
 
 \subsection{Beschleunigungssensor am Brustkorb}
 Bereits 2018 gab es Forschung in diesem Bereich. \textit{Phan Duy Hung} hat sich damit befasst, einen Beschleunigungssensor (\textit{Accelerometer}) an den Brustkorb zu fixieren \cite{hungCentralSleepApnea2018}.
@@ -225,20 +225,20 @@ Die Rohdaten zeigen hierbei bereits die Herzfrequenz und die Atmung des Probande
     \label{imu_research_hung_rawData}
 \end{figure}
 
-Die Daten wurde nach der Aufzeichnung durch einen Bandpassfilter mit adaptiver Apassung optimiert, um die SNR (\textit{signal-noise-ratio}) zu verringern.
+Die Daten wurden nach der Aufzeichnung durch einen Bandpassfilter mit adaptiver Apassung optimiert, um die SNR (\textit{signal-noise-ratio}) zu verringern.
 Der Puls wurde ermittelt, indem Peaks (Max: \textit{V}-Peak, Min: \textit{R}-Peak) gefunden und als Herzschlag interpretiert wurden.
 Des Weiteren musste Signalrauschen, beispielsweise von der Reibung des T-Shirts und der Haut, aus dem Signal herausgefiltert werden. 
 Zudem wurden 3 Features anhand der Amplitude über die Zeit berechnet. 
 Das erste Feature ist das \textit{Spektralverhältnis (spectral ratio)}. 
 Hier wird ein Leistungsspektrum eines einminütigen Segments vom HR-Signal geschätzt. 
-Der Frequenzbreich zwischen [0,1] $\si{\hertz}$ wurde untersucht. 
+Der Frequenzbereich zwischen [0,1] $\si{\hertz}$ wurde untersucht. 
 Dieser Bereich spiegelt die Frequenzvariation zwischen zentraler Schlafapnoe und normaler Aktivität wieder.
 
-Im Bereich von [0,3,0,6] Hz zeigt sich das Maximum der spektralen Leistung.
-Dieser Wert wird normiert, indem er durch den Mittelwert der spektralen Leistung im Bereich [0,1,0,3] Hz geteilt wird. 
-Das Verhältnis der max(P) im Bereich von [0,3,0,6] Hz zum Mittelwert(P) in [0,1,0,3] Hz ist unabhängig von der Person.
+Im Bereich von [0.3,0.6] Hz zeigt sich das Maximum der spektralen Leistung.
+Dieser Wert wird normiert, indem er durch den Mittelwert der spektralen Leistung im Bereich [0.1,0.3] Hz geteilt wird. 
+Das Verhältnis der max(P) im Bereich von [0.3,0.6] Hz zum Mittelwert(P) in [0.1,0.3] Hz ist unabhängig von der Person.
 
-Das zweite Feature sind die \textit{Wavelet- Koeffizienten (wavelet coefficients)}, bei welchen die Analyse mit mehreren Auflösungen und guter Lokalisierungsfähigkeit im Zeit-Frequenz-Bereich häufig eine Wavelet-Transformation verwendet wird. 
+Das zweite Feature sind die \textit{Wavelet- Koeffizienten (wavelet coefficients)}, bei welchen für die Analyse mit mehreren Auflösungen und guter Lokalisierungsfähigkeit im Zeit-Frequenz-Bereich häufig eine Wavelet-Transformation verwendet wird. 
 Hierbei wird das Atemsignal in 5 Ebenen mit der db2-Wavelet zerlegt. Danach werden die Standardabweichungen der Detailkoeffizienten in den Ebenen 4 und 5 verwendet. 
 
 Das dritte Feature sind die \textit{linear prediction coefficients}. 
@@ -267,17 +267,17 @@ Bereits 2015 wurde versucht, durch Informationen des Google-Glass den Puls und d
 Der Vorteil hierbei ist die Position der Brille. 
 Da sie am Kopf platziert ist, liefert die Brille andere Werte im Vergleich zu IMU-Daten, die am Brustkorb aufgezeichnet werden.
 In Abbildung \ref{imu_research_google_glass} ist die Google-Glass Brille zu sehen.
-Der Gyroskop- und Beschleunigungssensor ist am rechten Seite angebracht, ebenso wie eine Kamera, einen Magnetometer, einen Lightsensor und ein Mikrofon. 
+Der Gyroskop- und Beschleunigungssensor ist an der rechten Seite angebracht, ebenso wie eine Kamera, einen Magnetometer, einen Lightsensor und ein Mikrofon. 
 Obwohl die Google-Glass Brille nicht entwickelt wurde, um physiologische Daten zu sammeln, kann sie dafür verwendet werden, da alle nötigen Sensoren darin verbaut sind.
 Die Resultate liefern einen mittleren absoluten Fehler (\textit{MAE}) von 0.82 Schlägen pro Minute (STD: 1.98) der Herzrate und 0.6 Atmungen pro Minute (STD: 1.19) bei der Atmung unter Betrachtung verschiedener Beobachtungsfenster und Kombinationen der Sensoren. 
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth / 2]{imu_research/googleGlass}
-    \caption{Darstellung der Google-Glass Brille: Die Brille hat einen Magnetometer, Gyroskop- und Beschleunigungssensor, eine Kamera, ein Mikofon und einen Lichtsensor verbaut. Diese Sensoren werden genutzt, um die Atmung und den Puls zu ermitteln. \cite{hernandezCardiacRespiratoryParameter}}
+    \caption{Darstellung der Google-Glass Brille: Die Brille hat einen Magnetometer, einen Gyroskop- und Beschleunigungssensor, eine Kamera, ein Mikofon und einen Lichtsensor verbaut. Diese Sensoren werden genutzt, um die Atmung und den Puls zu ermitteln. \cite{hernandezCardiacRespiratoryParameter}}
     \label{imu_research_google_glass}
 \end{figure}
-Die Herausforderung lag zudem daran, stromsparende Echtzeitberechnungen mit Algorithmen zu entwickeln, womit physiologische Parameter extrahiert werden. Der Nutzer soll das Gerät im Alltag normal weiternutzen können. 
+Die Herausforderung bestand zudem darin, stromsparende Echtzeitberechnungen mit Algorithmen zu entwickeln, womit physiologische Parameter extrahiert wurden. Der Nutzer soll das Gerät im Alltag normal weiternutzen können. 
 
 Es wurden 2 Techniken entwickelt, eine zur Ermittlung des Pulssignals, die andere für das Atemsignal.
 \subsubsection{Pulssignal}
@@ -297,7 +297,7 @@ Die Schätzung des Pulssignals wurde anhand einer Zeitreihe (\textit{Timeseries}
     \end{subfigure}
     \begin{subfigure}{.49\textwidth}
         \includegraphics[width=\textwidth]{imu_research/googleGlass_respiratory_fig3}
-      \caption{Beispiel einer Schätzung des Atemsignals anhand der Beschleunigungsdaten (blau) und des Ground-Truth-Signals (rot). Die beiden unteren Graphen zeigen das Fourierspektrum jedes Signal. (\textit{FFT: Fourier Spectrum, ACL: accelerometer, RESP: Respiration from chest band, RR: respiration rate, bpms: breaths per minute})}
+      \caption{Beispiel einer Schätzung des Atemsignals anhand der Beschleunigungsdaten (blau) und des Ground-Truth-Signals (rot). Die beiden unteren Graphen zeigen das Fourierspektrum jedes Signals. (\textit{FFT: Fourier Spectrum, ACL: accelerometer, RESP: Respiration from chest band, RR: respiration rate, bpms: breaths per minute})}
       \label{background:googleGlass:respiratory_wave}
     \end{subfigure}
     \caption{Herzrate- und Atemfrequenzanalyse}
@@ -316,7 +316,7 @@ Das Atemsignal wurde in mehreren Schritten berechnet:
     \item Da die verschiedenen Dimensionen der Sensoren nicht in Relation zu den Körperpositionen stehen, wurde eine Principal Component Analyse angewandt, um einen derartigen Einfluss zu reduzieren. Nach einer Fast Foiuriertransformation (FFT) auf jede Komponente wurde das Signal mit der Periode mit der maximalen Größe ausgewählt, welche innerhalb des zu betrachtenden Frequenzbereichs liegt.
 \end{itemize}
 
-Die Abbildung \ref{background:googleGlass:respiratory_wave} zeigt ein Beispiel einer Atemfrequenzschätzung der Beschleunigungsdaten eines Patienten. Wie zu sehen ist, sind die Daten sehr nahe an dem Referenzwert, einem Brustgurt, welcher als Ground Truth mit aufgezeichnet wurde.
+Die Abbildung \ref{background:googleGlass:respiratory_wave} zeigt ein Beispiel einer Atemfrequenzschätzung der Beschleunigungsdaten eines Patienten. Wie zu sehen ist, sind die Daten sehr nahe an dem Referenzwert, welcher als Ground Truth mit dem Brustgurt mit aufgezeichnet wurde.
 
 
 \subsection{Überwachung von Puls und Atmung mittels eSense-Earpods}

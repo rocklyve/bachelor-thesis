@@ -15,7 +15,7 @@ In Abbildung \ref{implementation:app:erModel} ist das ER-Diagramm der Datenbank 
 Das Gerät wird bei der ersten Kopplung mit dem Namen und dessen Identifikator in der Tabelle {\glqq Device\grqq} abgespeichert.
 Der Identifikator ist hierbei eine Repräsentation der MAC-Adresse, welche unter Swift nicht erreichbar ist.
 Für jeden Messwert wird ein Eintrag in der Tabelle {\glqq EsenseData\grqq} abgelegt sowie eine Referenz zu den \textit{x-}, \textit{y-} und \textit{z}-Achsenwerten der Gyroskop- und Beschleunigungsdaten, welche in der entsprechenden Tabelle abgelegt werden.
-Zudem wird für jede Messung ein Zeitstempel (\texttt{timestamp}), eine Messungs-ID (\texttt{measurementID}), die aktuell auszuführende Aufgabe (\texttt{task}) und die Information, ob die LED des Smarphones an ist oder nicht (\texttt{lightOn}), abgespeichert.
+Zudem wird für jede Messung ein Zeitstempel (\texttt{timestamp}), eine Messungs-ID (\texttt{measurementID}), die aktuell auszuführende Aufgabe (\texttt{task}) und die Information, ob die LED des Smartphones an ist, oder nicht (\texttt{lightOn}), abgespeichert.
 
 Die App ist in 3 Sektionen aufgeteilt, einer \textit{Chartansicht}, einer \textit{Messungsansicht} sowie einer \textit{Einstellungsansicht}. 
 (Abb. \ref{implementation:app:screenshots} Tabbar)
@@ -109,7 +109,7 @@ Die Ordnerstruktur kann der Abbildung \ref{implementation:folder_structure} entn
     \caption{Messung teilen}
     \label{implementation:app:screenshots:share}
   \end{subfigure}
-  \caption{Verlauf einer Messung mit der App: Zu Beginn wird eine Verbindung mit den eSense-Earpods hergestellt. Anschließend werden die Nutzerinformationen des Probanden abgefragt. Mit dem Klick auf \textit{Start Measurement} wird eine Messung gestartet. Der erste Timer läuft ab und über die Lautsprecher werden alle Information an den Probanden weitergegeben. Nach Ablauf des Timers beginnt der nächste Timer. Sobald der letzte Timer abgelaufen ist, kann die Messung geteilt werden. Zudem kann die Datenbank gelöscht werden und die nächste Messung kann beginnen. Der Ablauf einer Messung ist in Abbildung \ref{fig_study_flow} nachzusehen.}
+  \caption{Verlauf einer Messung mit der App: Zu Beginn wird eine Verbindung mit den eSense-Earpods hergestellt. Anschließend werden die Nutzerinformationen des Probanden abgefragt. Mit dem Klick auf \textit{Start Measurement} wird eine Messung gestartet. Der erste Timer läuft ab und über die Lautsprecher werden alle Informationen an den Probanden weitergegeben. Nach Ablauf des Timers beginnt der nächste Timer. Sobald der letzte Timer abgelaufen ist, kann die Messung geteilt werden. Zudem kann die Datenbank gelöscht werden und die nächste Messung kann beginnen. Der Ablauf einer Messung ist in Abbildung \ref{fig_study_flow} zu sehen.}
   \label{implementation:app:screenshots}
 \end{figure}
 
@@ -117,12 +117,12 @@ Die Ordnerstruktur kann der Abbildung \ref{implementation:folder_structure} entn
 \label{ch:Implementierung:data_sync}
 Da es nicht garantiert ist, dass der Timer des PSG-Systems zuverlässig arbeitet, wird jeder Peak des Lichtsensors mit dem Lichtsignal der Smartphone-Daten verglichen.
 Der Abstand jedes einzelnen Peaks wird nun ermittelt ebenso wie die durchschnittliche Distanz der Peaks.
-In der Abbildung \ref{implementation:synchronisation:before_light_peak} ist der Vergleich eines Lichtblitzes von Smartphone (blau) und dem PSG-System (orange) im zeitlichen Verlauf dargestellt (\texttt{time}).
+In der Abbildung \ref{implementation:synchronisation:before_light_peak} ist der Vergleich eines Lichtblitzes vom Smartphone (blau) und dem PSG-System (orange) im zeitlichen Verlauf dargestellt (\texttt{time}).
 Da die Verschiebung des Timers des PSG-Systems während einer 7-minütigen Messung im Mittel bei $0.3\si{\s}$ lag, wurde der Timer des PSG-Systems um die durchschnittliche Distanz der Peaks verschoben.
 Dies ist ausreichend, da die PSG-Daten in der Bachelorarbeit lediglich dem visuellen Vergleich dienen und in der Klassifikation nicht mit betrachtet werden. 
 Die zeitliche Verschiebung wird nun in jede \textit{csv}-Datei mit der Spalte \texttt{new\_time} eingearbeitet.
 In Abbildung \ref{implementation:synchronisation:after_light_peak} ist klar zu erkennen, dass mit dem neuen Zeitwert (\texttt{new\_time}) der Lichtwert des PSG-Signals (orange) direkt über dem Lichtwert des Smartphonesignals (blau) liegt.
-Nun ist garantiert, dass die Zeitwerte von PSG-System und dem Smartphone synchron sind. Die Daten sind nun bereit zur Analyse.
+Nun ist garantiert, dass die Zeitwerte des PSG-Systems und dem Smartphone synchron sind. Die Daten sind nun bereit zur Analyse.
 
 \begin{figure}[ht]
   \centering
