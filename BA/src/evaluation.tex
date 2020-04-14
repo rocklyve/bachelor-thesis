@@ -8,16 +8,16 @@ Zu Beginn der Evaluation wurde eine Nutzerstudie durchgeführt, womit ein Datens
 Anhand dieses Datensatzes wird anschließend ein Klassifikationsmodell erstellt, womit eine Vorhersage darüber getroffen wird, an welcher Stelle ein Apnoeereignis stattgefunden hat.
 
 \section{Studienablauf}
-In Kapitel \ref{ch:Design:sec:studienplanung} wurde eine einzelne Messung einer Studie detailliert beschrieben.
+In Abschnitt \ref{ch:Design:sec:studienplanung} wurde eine einzelne Messung einer Studie detailliert beschrieben.
 Es wurden nun 7 Probanden nach dem Prinzip des \textit{Sample of Convenience} ausgewählt.
 
 Dieser Ablauf (siehe Abb. \ref{fig_study_flow}) wurde nun pro Studienteilnehmer jeweils in den 3 Positionen durchgeführt, womit fast alle Schlaflagen abgedeckt sind.
 Zu Beginn der Studie fand eine kurze Einweisung statt, bei der der Proband erfuhr, was er zu tragen hat und wie er Anweisungen erhält, um dem Ablauf folgen zu können. 
 Die Kamera wurde auf dem Stativ platziert und so ausgelegt, dass sie das Ohr des Probanden filmt. 
-Das PSG-System wurde am Studienteilnehmer angebracht sowie alle nötigen Sensoren, die im Kapitel \ref{ch:sa:psg} beschrieben wurden.
+Das PSG-System wurde am Studienteilnehmer angebracht sowie alle nötigen Sensoren, die im Abschnitt \ref{ch:sa:psg} beschrieben wurden.
 Nachdem die passenden eSense-Earpodaufsätze gefunden wurden, war der Aufbau der Studie beendet.
 
-Nun wurde die Messung des PSG-Systems gestartet, sowie die Smartphone-App geöffnet. 
+Nun wurde die Messung des PSG-Systems gestartet sowie die Smartphone-App geöffnet. 
 Nach Eingabe der Nutzerinformationen kann der erste Durchgang, welcher abhängig vom Ablauf der 3 Positionen war, begonnen werden.
 Durch den Start der Messung am Smartphone beginnt die Messung. 
 Da zusätzlich der Ton durch das Mikrofon am eSense-Earpod mit aufgezeichnet wird, wird nach dem Start der Messung ein $4\si{\s}$ Zeitfenster gewählt, in dem der Teilnehmer in die Hände klatschen muss, um das Mikrofonsignal später synchronisieren zu können.
@@ -27,8 +27,8 @@ Der Export beinhaltet jegliche Smartphone-Daten. Die PSG-Daten werden als eine k
 Zudem wird die Kamera angehalten und eine neue Aufnahme kann gestartet werden.
 Anschließend beginnt die nächste Position. Der Proband kann nun die neue Position einnehmen, anschließend wird per App die neue Messung gestartet.
 Zum Abschluss aller 3 Positionen wird die Messung am PSG-System gestoppt und mittels eines vom PSG-System bereitgestellten Programms lässt sich die Messung als {\glqq \textit{edf}-Datei\grqq} exportieren.
-Weitere Informationen zum Export der Daten und zur Synchronisation sind in Kapitel \ref{ch:Implementierung:way_to_pipeline} zu finden.
-Pro Position dauert eine Messung ca. 7 Minuten, was bei 3 Personen eine Gesamtdauer von 21 Minuten bedeutet.
+Weitere Informationen zum Export der Daten und zur Synchronisation sind in Abschnitt \ref{ch:Implementierung:way_to_pipeline} zu finden.
+Pro Position dauert eine Messung circa 7 Minuten, was bei 3 Positionen eine Gesamtdauer von 21 Minuten bedeutet.
 Einschließlich der Instruktionszeit, dem Export nach der Messung und den Positionswechseln der Probanden beträgt die durchschnittliche Gesamtdauer einer Aufzeichnung circa 45-60 Minuten. 
 
 \begin{figure}[ht]
@@ -43,27 +43,26 @@ Einschließlich der Instruktionszeit, dem Export nach der Messung und den Positi
     \label{implementation:study:measurement_example}
 \end{figure}
 
-Die Evaluation der Ergebnisse beginnt damit, die Daten der eSense Earpods in Fenster (\textit{windows}) einzuteilen.
+Die Evaluation der Ergebnisse beginnt damit, die Daten der eSense-Earpods in Fenster (\textit{windows}) einzuteilen.
 Auf diese Fenster werden anschließend \textit{Features} berechnet, welche die Grundlage für die Klassifizierung bilden.
 
 \newpage 
 
 \section{Gibt es passende Features?}
-Die Suche nach passenden Features wird mit dem Python Package \texttt{tsfresh} angegangen.
-\texttt{tsfresh} berechnet automatisch Charakteristiken, sowie deren Relevanz anhand eines Zeitintervalls \cite{TsfreshTsfresh12}.
+Die Suche nach passenden Features wird mit dem Python Package \texttt{tsfresh} angegangen, das automatisch Charakteristiken sowie deren Relevanz anhand eines Zeitintervalls berechnet \cite{TsfreshTsfresh12}.
 Diese Charakteristiken werden fortan als \textit{Feature} bezeichnet.
 
-Wie in Kapitel \ref{ch:Implementierung:classification_pipeline} bereits erklärt, wird eine Messung in viele sich überlappende Fenster aufgeteilt. 
-Eine Messung wird in Fenster der Größe von $5\si{\s}$, bzw. $10\si{\s}$ eingeteilt.
-Diese Fenster sind jeweils um $1\si{\s}$ verschoben, d.h. die aneinander grenzenden Fenster überlappen sich um $4\si{\s}$, bzw. $9\si{\s}$.
+Wie in Abschnitt \ref{ch:Implementierung:classification_pipeline} bereits erklärt, wird eine Messung in viele sich überlappende Fenster aufgeteilt. 
+Eine Messung wird in Fenster der Größe von $5\si{\s}$ bzw. $10\si{\s}$ eingeteilt.
+Diese Fenster sind jeweils um $1\si{\s}$ verschoben, d.h. die aneinander grenzenden Fenster überlappen sich um $4\si{\s}$ bzw. $9\si{\s}$.
 Nun wird für jedes Fenster eine Featureberechnung ausgeführt, womit durch \texttt{tsfresh} ($\sim$ 6000) Features für jedes Fenster entstehen.
-Als Eingabe bekommt \texttt{tsfresh} die Daten der eSense Earpods, also die \textit{x-, y-} und \textit{z}-Achse der Gyroskop und Beschleunigungsdaten, die mit einem Zeitstempel versehen sind. 
+Als Eingabe bekommt \texttt{tsfresh} die Daten der eSense-Earpods, also die \textit{x-, y-} und \textit{z}-Achse der Gyroskop- und Beschleunigungsdaten, die mit einem Zeitstempel versehen sind. 
 Die Abbildung \ref{evaluation:rawPlot} zeigt einen Ausschnitt einer Messung. 
-Die in blau eingefärbte Linie stellt den absoluten Wert aus den Gyroskopdaten der $x$, $y$ und $z$-Achse dar.
-In grün ist das Signal des Drucksensors, direkt unter der Nase befestigt, zu sehen, welches die Atmung repräsentiert.
+Die in blau eingefärbte Linie stellt den absoluten Wert aus den Gyroskopdaten der $x-$, $y-$ und $z$-Achse dar.
+In grün ist das Signal des direkt unter der Nase befestigten Drucksensors zu sehen, welches die Atmung repräsentiert.
 Der orange markierte Bereich ist jener Bereich, in dem der Proband die Luft angehalten hat. 
-Man erkennt bereits, dass die Signale während der Phase des Luftanhaltens wenig Ausschlag in einem Bereich haben.
-Wenn der Proband nicht die Luft anhält, erkennt man deutliche Bewegungen der Gyroskopdaten. 
+Man erkennt bereits, dass die Signale während der Phase des Luftanhaltens eine geringere Amplitude im Vergleich zum Rest des Signals.
+Hier sind dann deutlichere Bewegungen der Gyroskopdaten zu beobachten. 
 
 \begin{figure}[ht]
   \centering
@@ -75,10 +74,10 @@ Wenn der Proband nicht die Luft anhält, erkennt man deutliche Bewegungen der Gy
 \end{figure}
 
 \section{Ablauf der Evaluierung}
-In Kapitel \ref{ch:Implementierung:classification_pipeline} wurde beschrieben, wie die Features berechnet und persistiert wurden. 
+In Abschnitt \ref{ch:Implementierung:classification_pipeline} wurde beschrieben, wie die Features berechnet und persistiert wurden. 
 Nun sind pro Studienteilnehmer für alle 3 Positionen Features berechnet worden. 
 Es sind jeweils die Features für ein Fenster von 5 Sekunden und 10 Sekunden berechnet worden.
-Zur Erinnerung: Jede Messung wurde in Fenster der Länge von 5, bzw. 10 Sekunden aufgeteilt, wobei jedes Fenster um eine Sekunde, bzw. 5 und 10 Sekunden verschoben ist.
+Zur Erinnerung: Jede Messung wurde in Fenster der Länge von 5 bzw. 10 Sekunden aufgeteilt, wobei jedes Fenster um eine Sekunde bzw. 5 und 10 Sekunden verschoben ist.
 
 \subsection{Data Labeling}
 Bei Supervised Learning mit Klassifikation müssen die Daten bereits markiert sein, um eine Entscheidung treffen zu können. 
@@ -95,15 +94,15 @@ Nun können die Resultate mit den Klassifikatoren verglichen werden.
 \subsubsection{Within Subject (\textit{k-fold cross validation})}
 Das erste Kreuzvalidierungsverfahren ist die \textit{k-fold cross validation}.
 Bei diesem Verfahren werden alle Daten in $k$ Partitionen aufgeteilt.
-Eine Partition wird als Testdatensatz und $k-1$ Partitionen werden als Trainingsdatensatz gewählt \cite{neumannMaschineLearningKIT2020}.
+Eine Partition wird als Testdatensatz und die restlichen $k-1$ Partitionen werden als Trainingsdatensatz gewählt \cite{neumannMaschineLearningKIT2020}.
 Somit werden alle Personen zu einem Datensatz zusammengefasst und mit der Methode \texttt{test\_train\_split} in Trainingsdaten und Testdaten aufgeteilt.
 Hier wird eine Aufteilung von 70\% für die Trainingsdaten und 30\% für die Testdaten gewählt. 
 Daraus ergibt sich ein \textit{score}, welcher die mittlere Genauigkeit (\textit{mean accuracy}) auf den gegebenen Testdaten, nämlich 30\% des Datensatzes, angibt.
 
-Die Resultate sind in Abbildung \ref{evaluation:within_subject_results} zu sehen.
+Die Resultate sind in Tabelle \ref{evaluation:within_subject_results} zu sehen.
 Die Tabelle zeigt die Ergebnisse verschiedener Klassifikationsalgorithmen mit verschiedenen Datensätzen.
-Pro Klassifikationsalgorithmus wurden alle Positionen, sowie jede Position einzeln betrachtet, d.h jede Position jeder Person.
-Jede Kombination aus Klassifikationsalgorithmus und gewähltem Datensatz wurde nun mit den Fenstergrößen von $5\si{\s}$ und $10\si{\s}$ mit einer Verschiebung von $1\si{\s}$ und einer Verschiebung der Fenstergröße evaluiert.
+Pro Klassifikationsalgorithmus wurden alle Positionen sowie jede Position einzeln betrachtet, d.h jede Position jeder Person.
+Jede Kombination aus Klassifikationsalgorithmus und gewähltem Datensatz wurde nun mit den Fenstergrößen von $5\si{\s}$ und $10\si{\s}$ mit einer Verschiebung von $1\si{\s}$ und einer Verschiebung um die Fenstergröße evaluiert.
 Somit wurden die Fenstergrößen mit und ohne überlappende Fenster getestet.
 Die Resultate zeigen, dass der \textit{score} mit überlappenden Fenstern deutlich höher ist.
 Dies könnte daran liegen, dass deutlich mehr Fenster pro Datensatz existieren, falls eine Überlappung der aneinanderfolgenden Fenster stattfindet.
@@ -137,12 +136,12 @@ Dadurch ist der überlappende Teil eventuell in den Trainingsdaten vorhanden und
     \end{minipage}
   \end{tabular}
 
-  \caption{Ergebnisse des Kreuzvalidierungsverfahrens innerhalb eines Subjects mit einer Aufteilung von 70\% Trainings- und 30\% Testdaten. Alle Personen der Nutzerstudie wurden verwendet. $w$ steht für die Fenstergröße, $d$ für die Verschiebung der aneinanderfolgenden Fenster.}
+  \caption{Ergebnisse des Kreuzvalidierungsverfahrens innerhalb eines \textit{Subjects} mit einer Aufteilung von 70\% Trainings- und 30\% Testdaten. Alle Personen der Nutzerstudie wurden verwendet ($w=$ Fenstergröße, $d=$ Verschiebung der Fenster).}
   \label{evaluation:within_subject_results}
 \end{table}
 
 \subsubsection{Leave One Subject Out (LOSO)}
-Neben dem k-fachen Kreuzvalidierungsverfahren wird das \textit{Leave One Subject Out} (\textit{LOSO}) Kreuzvalidierungsverfahren hinzugezogen. 
+Neben dem $k$-fachen Kreuzvalidierungsverfahren wird das \textit{Leave One Subject Out} (\textit{LOSO}) Kreuzvalidierungsverfahren hinzugezogen. 
 Hierbei wird ein Modell anhand der Daten der Studienteilnehmer trainiert, jedoch wird ein Datensatz eines Studienteilnehmers ausgelassen. 
 Dieser eine Datensatz wird schließlich verwendet, um eine Vorhersage anhand der Trainingsdaten zu treffen, ohne durch interne Trainingsdaten optimiert sein zu können.
 Im Folgenden wurde das LOSO Kreuzvalidierungsverfahren mit den beiden Klassifikationsalgorithmen \textit{Random Forest} und \textit{XGBoost} durchgeführt. 
@@ -150,11 +149,11 @@ Es wurde jede Person einmal ausgelassen und auf den Trainingsdatensatz vorherges
 Somit entstehen 7 Resultate, von denen nun der Mittelwert gebildet wurde.
 Die Resultate sind in den Abbildungen \ref{evaluation:random_forest_loso:person6} und \ref{evaluation:xgboost_loso:person6} beispielhaft an Person 6 dargestellt.
 Im Anhang sind weitere Abbildungen anderer Personen zu finden.
-Die Abbildungen listen die Häufigkeit der Vorhersagen für jede einzelne Sekunde auf. 
+Die Abbildungen listen die Anzahl der vorhergesagten Einsen für jede einzelne Sekunde auf. 
 Da eine Sekunde aufgrund der überlappenden Fenster in mehreren Fenstern vorkommt, summieren sich die Vorhersagen pro Sekunde maximal auf die Fenstergröße.
-Zu Erkennen ist, dass die Fenstergröße von $10\si{\s}$ deutlich bessere Ergebnisse liefert, als eine Fenstergröße von $5\si{\s}$. 
+Zu Erkennen ist, dass die Fenstergröße von $10\si{\s}$ deutlich bessere Ergebnisse liefert als eine Fenstergröße von $5\si{\s}$. 
 XGBoost neigt bei einer Fenstergröße von $5\si{\s}$ zum Overfitting, ebenso wie Random Forest. 
-Alle Ergebnisse des LOSO Kreuzvalidierungsverfahrens sind im \textit{Precision} und \textit{Recall} der unterliegenden Tabelle der Beispiele bei Person 6 mit dem Mittelwert zusammengetragen worden. 
+Alle Ergebnisse des LOSO Kreuzvalidierungsverfahrens sind mit dem \textit{Precision}, \textit{Recall} und dem \textit{f1-score} in der darunterliegenden Tabelle mit dem Mittelwert zusammengetragen worden. 
 Zu sehen ist, dass XGBoost bessere Ergebnisse liefert als Random Forest.
 % \todo{schreibe darüber, was die ergebnisse von LOSO aussagen} \newline
 Des Weiteren, um mögliche Positionsabhängigkeiten zu erkennen, wurde dasselbe erneut evaluiert, jedoch nur mit den einzelnen Positionsdaten der jeweiligen Person. 
@@ -179,22 +178,22 @@ Die partielle Autokorrelationfunktion (\texttt{partial autocorrelation}) beschre
 Zudem wird ein zeitlicher linearer Zusammenhang der verschiedenen Werte gemessen.
 Somit haben sich die Werte in diesem Fenster zwischen den Werten weniger verändert und ähneln somit eher den positiv markierten Trainingsdaten.
 
-Die \textit{Schnelle Fourier-Transformation} berechnet effizient die diskrete Fourier-Transformation.
+Die Schnelle Fourier"=Transformation berechnet effizient die diskrete Fourier"=Transformation.
 Damit können zeitdiskrete Signale in Frequenzanteile zerlegt werden. 
-Es wird aus einer Darstellung, bestehend aus einem Zeit- und Abtastwert in einer Darstellung, bestehend aus einem Frequenzanteil, einer Amplitude und einer Phase überführt.
+Es wird eine Darstellung, bestehend aus einem Zeit- und Abtastwert, in eine neue Darstellung, bestehend aus einem Frequenzanteil, einer Amplitude und einer Phase, überführt.
 Die Funktion \texttt{fft\_coefficient} in \texttt{tsfresh} berechnet die Fourier Koeffizienten einer eindimensionalen diskreten Fouriertransformation für eine reale Eingabe mit dem Algorithmus der Fast-Fourier-Transformation:
-\[A_k = \sum_{m=0}^{n-1} a_m \exp ^ {-2\pi i \frac{mk}{n}}, \hspace{1cm} k = 0,\dots,n-1\]
+\[A_k = \sum_{m=0}^{n-1} a_m \exp ^ {-2\pi i \frac{mk}{n}}, \hspace{1cm} k = 0,\dots,n-1.\]
 Die bei der Apnoephase geringe Amplitude ist hier erkennbar und detektierbar, womit eine Klassifikation ermöglicht wird.
 
 Die Aggregation \texttt{agg\_autocorrelation} berechnet den Wert der Autokorrelationsfunktion $f_{agg}$ (beispielsweise die Varianz oder den Mittelwert) über die Autokorrelation $R(l)$ für die verschiedenen Fenster. 
 \[R(l) = \frac{1}{(n-l)\sigma ^2} \sum_{t=1}^{n-l} (X_t - \mu) (X_{t+l} - \mu)\]
-$X_i$ sind hierbei  die Werte der Zeitreihe (\textit{Timeseries}), $n$ deren Länge. 
-$\sigma$ und $\mu$ sind Schätzwerte für die Varianz und den Mittelwert.
+$X_i$ sind hierbei  die Werte der Zeitreihe (\textit{Timeseries}), $n$ deren Länge, $\sigma$ und $\mu$ sind Schätzwerte für die Varianz und den Mittelwert.
 
 Ein weiteres Feature, welches ausschlaggebend für die Klassifikation ist, ist der Wechsel der Quantilwerte (\texttt{change\_quantiles}).
-Pro Fenster wird ein $q_l$ niedriges Quantil und ein $q_h$ hohes Quantil berechnet. 
+Pro Fenster wird ein niedriges Quantil $q_l$ und ein hohes Quantil $q_h$ berechnet. 
 Anschließend wird der durchschnittliche, absolute Wert der aufeinanderfolgenden Änderungen der Reihe $x$ innerhalb dieser Quantile berechnet.
-Dadurch werden starke Veränderungen deutlich und zeigen, dass in diesem Fenster keine Apnoe stattfindet. 
+Dadurch werden starke Veränderungen deutlich.
+Dies zeigt, dass in diesem Fenster keine Apnoe stattfindet. 
 
 \subsection{Vorverarbeitung durch einen Tiefpassfilter}
 Als weiterer Versuch wurde ein Tiefpassfilter auf die Gyroskop- und Beschleunigungsdaten angewandt. 
@@ -326,7 +325,7 @@ Dies ist darauf zurückzuführen, dass durch den Tiefpassfilter Informationen ve
       \caption{XGBoost mit dem Kreuzvalidierungsverfahren (LOSO): Die Tabelle zeigt den Mittelwert aller Vorhersagen der einzelnen Personen.}
       \label{implementation:app:screenshots:user_studies_information}
   \end{subfigure}
-    \caption{Das Kreuzvalidierungsverfahren (LOSO) mit dem Klassifikationsalgorithmus XG Boost: Das Modell wurde auf allen Personen, exklusive einer Person trainiert. Auf alle Positionen dieser einen Person wurde eine Vorhersage getroffen. Am Beispiel hier sind die Resultate von Person 6 zu sehen. Die blauen Bereiche sind die, in denen die Luft angehalten wurde, die orange Kurve zeigt die Vorhersage ($w=$ Fenstergröße, $d=$ Verschiebung der Fenster).}
+    \caption{Das Kreuzvalidierungsverfahren (LOSO) mit dem Klassifikationsalgorithmus XG Boost: Das Modell wurde auf allen Personen, exklusive einer Person, trainiert. Auf alle Positionen dieser einen Person wurde eine Vorhersage getroffen. Am Beispiel hier sind die Resultate von Person 6 zu sehen. Die blauen Bereiche sind die, in denen die Luft angehalten wurde, die orange Kurve zeigt die Vorhersage ($w=$ Fenstergröße, $d=$ Verschiebung der Fenster).}
 \label{evaluation:xgboost_loso:person6}
 \end{figure}
 
@@ -372,6 +371,6 @@ Dies ist darauf zurückzuführen, dass durch den Tiefpassfilter Informationen ve
   \end{minipage} 
     
   \end{tabular}
-  \caption{Zu sehen sind die Klassifikationsergebnisse mit dem Kreuzvalidierungsverfahren bei einer Fenstergröße von 5 bzw. 10 Sekunden, welche um 1 Sekunde verschoben wurden. Es wurde immer eine Person beim Trainieren des Modells ausgelassen. Für diese Person wurde anschließend eine Vorhersage getroffen. Jede Person wurde einmal in dem Modell außen vorgelassen und für dieses Modell vorhergesagt. Das zu sehende Resultat ist der Mittelwert aller Resultate des Kreuzvalidierungsverfahrens der einzelnen Positionen.}
+  \caption{Zu sehen sind die Klassifikationsergebnisse mit dem Kreuzvalidierungsverfahren bei einer Fenstergröße von 5 bzw. 10 Sekunden, welche um eine Sekunde verschoben wurden. Es wurde immer eine Person beim Trainieren des Modells ausgelassen. Für diese Person wurde anschließend eine Vorhersage getroffen. Jede Person wurde einmal in dem Modell außen vorgelassen und für dieses Modell vorhergesagt. Das zu sehende Resultat ist der Mittelwert aller Resultate des Kreuzvalidierungsverfahrens der einzelnen Positionen.}
   \label{evaluation:loso_classification_results}  
 \end{table}

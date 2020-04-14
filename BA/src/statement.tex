@@ -14,26 +14,26 @@
 \end{center}
 \par
 Weltweit leiden 15\% der Menschen unter Atemaussetzern während des Schlafs, von denen 85\% undiagnostiziert sind. 
-Es gibt diverse Arten von Atemaussetzern, wie zum Beispiel der zentraler Apnoe, die ein wichtiger Bestandteil dieser Bachelorarbeit ist.
-Bei zentralem Apnoe setzt die Atmung bei geöffneten Atemwegen für mindestens 10 Sekunden aus. Der Grund für den Atemaussetzer ist, dass das Gehirn in dieser Zeit dem Körper keine Signale zum Atmen weitergibt.
+Es gibt diverse Arten von Atemaussetzern, wie zum Beispiel der zentralen Apnoe, die ein wichtiger Bestandteil dieser Bachelorarbeit ist.
+Bei zentraler Apnoe setzt die Atmung bei geöffneten Atemwegen für mindestens 10 Sekunden aus. Der Grund für den Atemaussetzer ist, dass das Gehirn in dieser Zeit dem Körper keine Signale zum Atmen weitergibt.
 Heutige Methoden, die es zur Klassifikation solcher respiratorischer Ereignisse gibt, sind aufwendig und kostspielig. 
 Spezialisierte Schlaflabore sind hier der Standard zur Ermittlung von Apnoeereignissen, jedoch ist dies mit einigen Nachteilen verbunden.
 Die durchschnittliche Wartezeit beträgt circa drei Monate und die Patienten verbringen meist nicht länger als zwei Tage im Schlaflabor.
 Dies führt dazu, dass der Datenbestand unzufriedenstellend ist und eine genaue Diagnose nur beschränkt möglich ist.
 
-Diese Bachelorarbeit zielt darauf ab, mittels intelligenter Kopfhörer, sogenannten Earables, eine solche zentrale Apnoe zu klassifizieren.
-Die eSense Earpods dienen hier als Grundlage, da diese eine inertiale Messeinheit (IMU) beinhalten, womit die nötigen Signale aufgezeichnet werden können. 
-Der Sensor ist nicht am Oberkörper, sondern im Ohr platziert und ohne weitere Verkabelung einsetzbar.
+Diese Bachelorarbeit zielt darauf ab, mittels intelligenter Kopfhörer, sogenannter Earables, eine solche zentrale Apnoe zu klassifizieren.
+Die eSense-Earpods dienen hier als Grundlage, da diese eine inertiale Messeinheit (IMU) beinhalten, womit die nötigen Signale aufgezeichnet werden können. 
+Der Sensor ist im Ohr platziert und ohne weitere Verkabelung einsetzbar.
 Somit ist eine Möglichkeit geboten, ein Apnoeereignis im eigenen Bett zuhause zu erkennen.
 Als Ground-Truth dient ein Polysomnographie-Gerät, womit Vorhersagen anhand der IMU-Daten verifiziert werden können.
-Zu Beginn der Arbeit wurde eine App erstellt, welche Messergebnisse mit den eSense Earpods während einer Nutzerstudie aufzeichnet, bei denen die Teilnehmer an bestimmten Zeitpunkten die Luft für 10, 20 und 30 Sekunden anhalten.
+Zu Beginn der Arbeit wurde eine App erstellt, welche Messergebnisse mit den eSense-Earpods während einer Nutzerstudie aufzeichnet, bei der die Teilnehmer an bestimmten Zeitpunkten die Luft für 10, 20 und 30 Sekunden anhalten.
 Dies simuliert ein zentrales Apnoeereignis und stellt die Grundlage dar, unter welchen der Klassifikator seine Entscheidung trifft.
 
 In der Evaluation wird mit verschiedenen maschinellen Lernverfahren zur Klassifikation das Kreuzvalidierungsverfahren durchgeführt.
 Mit dem Kreuzvalidierungsverfahren {\glqq Within Subject\grqq} wurde ein \textit{score} von bis zu 95\% erreicht, mit dem Kreuzvalidierungsverfahren {\glqq Leave One Subject Out\grqq} ergab sich eine hohe Varianz in den Ergebnissen von Studienteilnehmer zu Studienteilnehmer.
 Hier wurde ein \textit{f1-score} von bis zu 86\% erreicht, ein Fenster ohne Apnoeereignis vorherzusagen. 
 Ein Fenster als Apnoeereignis zu deklarieren ergab einen \textit{f1-score} von bis zu 55\%. 
-Im Mittel ergab das Kreuzvalidierungsverfahren {\glqq Within Subject\grqq} einen \textit{score} von 94\% mit XGBoost und einer Fenstergröße von $10\si{\s}$ und einer Verschiebung der Fenster von $1\si{\s}$.
+Im Mittel ergab das Kreuzvalidierungsverfahren {\glqq Within Subject\grqq} einen \textit{score} von 94\% mit XGBoost und einer Fenstergröße von $10\si{\s}$ und einer Verschiebung der Fenster um $1\si{\s}$.
 Das Kreuzvalidierungsverfahren {\glqq Leave One Subject Out\grqq} ergab im Mittel einen \textit{f1-score} von 79\% bei der Klassifikation eines Fensters ohne Apnoeereignis und 47\% eines Fensters mit Apnoeereignis.
 Aufgrund der hohen Anzahl an Features pro Fenster (circa 6000) neigt das Modell zu Overfitting, was die Varianz der Resultate erklärt.
 
@@ -52,25 +52,25 @@ Zudem würde ein maschinelles Lernverfahren, welches vorherige und nachfolgende 
 	\textbf{Abstract}
 \end{center}
 
-Nearly 15\% of the human population suffer from breathing difficulties during sleep, 85\% of which are undiagnosed. 
+Nearly 15\% of the human population suffer from breathing difficulties during sleep, of which 85\% are undiagnosed. 
 There are several types of breathing interruptions, such as central apnea, which is an important part of this thesis. 
 In central apnea, breathing stops with open airways for at least 10 seconds. 
 The reason for not breathing is the brain sending no signals to the body at this timeslice.
 Current methods for classifying such respiratory events are complex and expensive. 
-Specialized sleep laboratories are the standard for determining apnea events, but this come up with some disadvantages. 
+Specialized sleep laboratories are the standard for determining apnea events, but these come up with some disadvantages. 
 The average waiting time is about three months and patients usually do not spend more than two days in the sleep laboratory. 
 This leads to an unsatisfactory data set and a precise diagnosis is only possible to a limited extent.
 
 This bachelor thesis focuses on classifying such a central apnea with the use of intelligent headphones, so-called earables. 
 The eSense-Earpods have a build-in inertial measurement unit (IMU), with which the necessary signals can be recorded. 
 In contrast to other approaches, the sensor is not placed on the upper body.
-The sensor is placed directly in earand can be used without any further cabling. 
+The sensor is placed directly in the ear and can be used without any further cabling. 
 This offers the possibility detecting an apnea event in your own bed at home. 
 A polysomnography device serves as a ground truth, which allows predictions to be verified using IMU data. 
 
-Firstly an app was created in the practical part of the thesis, which records measurement results using the eSense Earpods during a user study. 
+Firstly an app was created in the practical part of the thesis, which records measurement results using the eSense-Earpods during a user study. 
 Furthermore, study participants are asked to hold their breath for 10, 20 and 30 seconds at certain points in time. 
-This simulates a central apnea event and provides the basis for the classifier and their decision.
+This simulates a central apnea event and provides the basis for the classifier and its decision.
 
 In the evaluation, various machine learning methods for classification are used to perform a cross-validation procedure. 
 With the cross-validation procedure {\glqq Within Subject\grqq} a score of up to 95\% was achieved, with the cross-validation procedure {\glqq Leave One Subject Out\grqq} there was a high variance in the results from participant to participant. 
@@ -78,7 +78,7 @@ An f1-score of up to 86\% was achieved to predict that no apnea event occurred i
 Declaring a window as an apnea event resulted in an f1-score of up to 55\%.
 On average, the cross-validation procedure {\glqq Within Subject\grqq} resulted in a score of 94\% with XGBoost and a window size of $10\si{\s}$ and a shifting window of $1\si{\s}$. 
 The cross-validation procedure {\glqq Leave One Subject Out\grqq} resulted in an average f1-score of 79\% for the classification of a window without apnea event and 47\% for a window with apnea event. 
-Due to the high number of features per window (around 6000), the model tends to overfitting, which explains the variance of the results.
+Due to the high number of features per window (around 6000), the model tends to overfitting which explains the variance of the results.
 Since only the gyroscope and acceleration data were taken in the current feature calculation, the results are expected to be optimized in an extended feature calculation, for example by considering pulse and $SpO_2$ signals. 
 In addition, a machine learning procedure that includes previous and subsequent windows in the decision would provide an improvement of the signals.
 % \par

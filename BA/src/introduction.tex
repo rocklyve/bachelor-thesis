@@ -9,7 +9,7 @@ Anschließend wird die Idee beschrieben, wie dieses Problem in dieser Bachelorar
 Zuletzt wird die Struktur der Vorangehensweise beschrieben, um einen Einblick zu geben, welchen Umfang die Bachelorarbeit hat.
 
 \section{Problem}
-Das in dieser Bachelorarbeit zu lösende Problem ist die Klassifizierung eines Atemaussetzers, welcher in verschiedenen Typen auftreten kann. 
+Das in dieser Bachelorarbeit zu lösende Problem ist die Klassifizierung eines Atem"-aus"-set"-zers, welcher in verschiedenen Typen auftreten kann. 
 In Abbildung \ref{introduction:problem_description} sind drei verschiedene Atmungsabläufe dargestellt. 
 Darunter ist der jeweilige Atemfluss als Signal des zugehörigen Atemwegs abgebildet.
 Bei verengten und geschlossenen Atemwegen ist eine deutliche Signaländerung vorhanden. 
@@ -20,7 +20,7 @@ Da man oft bis zu drei Monate auf einen Termin warten muss und die Untersuchung 
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.55\textwidth]{introduction/was-passiert-bei-schlafapnoe}  
-  \caption{Die Darstellung zeigt die Querschnittsansicht einer Person und deren Atemwege und darunter der Atemfluss als Signal, welches Veränderungen während einer Atmungsstörung zeigt \cite{DeutscheFamilienversicherungSchlafapnoesyndrom}.}
+  \caption{Die Darstellung zeigt die Querschnittsansicht einer Person und derer Atemwege. Darunter ist der Atemfluss als Signal, welches Veränderungen während einer Atmungsstörung zeigt \cite{DeutscheFamilienversicherungSchlafapnoesyndrom}.}
   \label{introduction:problem_description}
 \end{figure}
 
@@ -38,14 +38,14 @@ Zu Beginn wird eine App konstruiert, welche sich mit den eSense-Earpods über BL
 Anschließend wird eine Nutzerstudie mit 7 Personen durchgeführt, um einen Datensatz zu generieren.
 Den Probanden wird über die Lautsprecher der eSense-Earpods mitgeteilt, wenn sie die Luft anhalten sollen, um eine zentrale Apnoe zu simulieren.
 Anhand dieses Datensatzes kann schlussendlich ein Klassifikator trainiert werden, womit eine zukünftige Voraussage einer Messung getroffen werden kann.
-Im dritten Bild der Abbildung \ref{introduction:ba_record} sind das Signal des PSG-Geräts und die Rohdaten der eSense Earpods dargestellt. 
+Im dritten Bild der Abbildung \ref{introduction:ba_record} sind das Signal des PSG-Geräts und die Rohdaten der eSense-Earpods dargestellt. 
 Zusammen bilden diese Signale neben den Kameraaufnahmen, dem Mikrofonsignal und den Nutzerinformationen einen Datensatz.
-Das vierte Bild zeigt, dass nach der Klassifikation der Rohdaten, also den Gyroskop- und Beschleunigungsdaten der eSense Earpods, eine Entscheidung darüber getroffen wird, ob in der Messung ein Apnoeereignis stattfand, oder nicht.
+Das vierte Bild zeigt, dass nach der Klassifikation der Rohdaten, also der Gyroskop- und Beschleunigungsdaten der eSense-Earpods, eine Entscheidung darüber getroffen wird, ob in der Messung ein Apnoeereignis stattfand, oder nicht.
 Die Messung wurde hierbei in viele Intervalle aufgeteilt, worauf jeweils eine individuelle Entscheidung getroffen wurde.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=1\textwidth]{ba_record}
-  \caption{Darstellung des Ablaufs der Bachelorarbeit: Zu Beginn soll eine App erstellt werden, welche anschließend zur Datensammlung einer Nutzerstudie dient. Daraufhin wird ein Datensatz erstellt, welcher neben den Daten der eSense Earpods auch den Ground Truth beinhaltet. Anschließend wird eine Klassifikation anhand der Rohdaten der eSense Earpods getroffen, ob ein Apnoeereignis in einem Intervall vorkommt, oder nicht.}
+  \includegraphics[width=1\textwidth]{ba_record_2}
+  \caption{Darstellung des Ablaufs der Bachelorarbeit: Zu Beginn soll eine App erstellt werden, welche anschließend zur Datensammlung einer Nutzerstudie dient. Daraufhin wird ein Datensatz erstellt, welcher neben den Daten der eSense-Earpods auch den Ground-Truth beinhaltet. Anschließend wird eine Klassifikation anhand der Rohdaten der eSense-Earpods getroffen, ob ein Apnoeereignis in einem Intervall vorkommt, oder nicht.}
   \label{introduction:ba_record}
 \end{figure}
