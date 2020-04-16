@@ -1,16 +1,16 @@
-%% LaTeX2e Formatklasse für Diplom-, Studien- oder Doktorarbeit    -*-Mode: LaTeX;-*-
+%% LaTeX2e Formatklasse fï¿½r Diplom-, Studien- oder Doktorarbeit    -*-Mode: LaTeX;-*-
 %% Autor: Roland Bless 1996-2006 bless <at> tm.uka.de
 %% --
 %% (falls die Umlaute nicht richtig dargestellt werden: 
 %%  der benutzte Zeichensatz ist ISO 8859-1!)
-%% Hinweis für Literatur zu LaTeX 2e:
+%% Hinweis fï¿½r Literatur zu LaTeX 2e:
 %% 1. Leslie Lamport: "Das LaTeX-Handbuch", Addison-Wesley
 %% 2. Goosens, Mittelbach, Samarin: "Der LaTeX-Begleiter"
-%% Referenz und Grundbefehle sind in 1. zu finden, 2. erklärt
+%% Referenz und Grundbefehle sind in 1. zu finden, 2. erklï¿½rt
 %% Zusatz-Pakete, die einem Dokument ein individuelleres Aussehen verleihen
-%% können.
+%% kï¿½nnen.
 %%
-%% Zusatzpakete und LaTeX können von ftp://ftp.dante.de bezogen werden
+%% Zusatzpakete und LaTeX kï¿½nnen von ftp://ftp.dante.de bezogen werden
 %% Fragen zu LaTeX: siehe FAQ auf http://www.dante.de
 %%
 %% $Id: wissdoc.cls 46 2009-12-10 11:48:52Z bless $
@@ -20,18 +20,18 @@
 \LoadClass[a4paper,12pt,titlepage]{book} % diese Klasse basiert auf ``book''
 \RequirePackage{ngerman}[1998/07/08] % (V2.5e) Neue Rechtschreibung!
 %\RequirePackage{german}[1998/07/08] % alte Rechtschreibung (>=V2.5e von german.sty)
-\usepackage[T1]{fontenc}      % T1-encoded fonts: auch Wörter mit Umlauten trennen
+\usepackage[T1]{fontenc}      % T1-encoded fonts: auch Wï¿½rter mit Umlauten trennen
 \usepackage[latin1]{inputenc}   % Eingabe nach ISO 8859-1
 \usepackage{ae}               % almost european, virtueller T1-Font
 \usepackage[final]{graphicx}  % um Graphiken einzubinden
 \usepackage{makeidx}          % wir wollen auch einen Index
-\usepackage[a4paper]{geometry} % Seitenränder einstellen leichtgemacht
+\usepackage[a4paper]{geometry} % Seitenrï¿½nder einstellen leichtgemacht
 \usepackage{fancyhdr}         % definiere einfache Headings (mindestens V 1.99c
                               % notwendig)
-\usepackage{array}          % fuer aufwändigere Tabellen
-\usepackage{xcolor}	    % Farbunterstützung
+\usepackage{array}          % fuer aufwï¿½ndigere Tabellen
+\usepackage{xcolor}	    % Farbunterstï¿½tzung
 \usepackage{colortbl}       % farbige Tabellen (v. D. Carlisle)
-\usepackage{longtable}      % seitenübergreifende Tabellen
+\usepackage{longtable}      % seitenï¿½bergreifende Tabellen
 
 \usepackage[T1]{url} % much like \verb allow line breaks for paths and URLs
 
@@ -46,18 +46,18 @@
 % \usepackage{varioref}
 % \usepackage{verbatim}
 % \usepackage{subfigure}
-% \usepackage{shadow} % für schattierte Boxen etc.
+% \usepackage{shadow} % fï¿½r schattierte Boxen etc.
 % \usepackage{tabularx} % automatische Spaltenbreite
 % \usepackage{supertab} % mehrseitige Tabellen
 %% ---------------- end of usepackages -------------
 
 %% Options
 % Optionen:
-% draft - Läßt Titelseite, Inhaltsverzeichnis, Index, etc. weg.
-%         Dafür muß allerdings die Unterstützung in der LaTeX Hauptdatei
+% draft - Lï¿½ï¿½t Titelseite, Inhaltsverzeichnis, Index, etc. weg.
+%         Dafï¿½r muï¿½ allerdings die Unterstï¿½tzung in der LaTeX Hauptdatei
 %         vorhanden sein (\ifnotdraft{\include{bla...}}).
-% relaxed - erlaubt etwas unschönere Abstände für automatische Zeilenumbrüche
-% pdf     - setzt Optionen für pdf (wird aber automatisch bei pdflatex aktiviert)
+% relaxed - erlaubt etwas unschï¿½nere Abstï¿½nde fï¿½r automatische Zeilenumbrï¿½che
+% pdf     - setzt Optionen fï¿½r pdf (wird aber automatisch bei pdflatex aktiviert)
 \DeclareOption{draft}{\let\@draft\@empty}
 \DeclareOption{relaxed}{\tolerance=1500 \emergencystretch=12pt}
 \DeclareOption{pdf}{\@usepdfttrue}
@@ -66,7 +66,7 @@
 \newif\if@usepdf \@usepdffalse % not pdf ready
 \ProcessOptions
 
-\setcounter{secnumdepth}{3} % Numerierung auch für \subsubsection
+\setcounter{secnumdepth}{3} % Numerierung auch fï¿½r \subsubsection
 \setcounter{tocdepth}{3}    % nimm auch \subsubsections ins Inhaltsverz. auf
 
 %% Schusterjungen und Hurenkinder verhindern.
@@ -80,7 +80,7 @@
 \newcommand{\ifnotdraftelse}[2]{\ifx\@draft\@undefined #1 \else #2 \fi}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% PDF dependent stuff (inspired by Frank Pählke)
+%% PDF dependent stuff (inspired by Frank Pï¿½hlke)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \ifx\pdftexversion\@undefined % kein PDFTeX aktiv
 \else
@@ -89,7 +89,7 @@
 
 \if@usepdf
  \usepackage{ae}      % erzeuge lesbare Schriften (mit cmps-Fonts)
- \usepackage{color}   % für farbige Hyperlinks benötigt
+ \usepackage{color}   % fï¿½r farbige Hyperlinks benï¿½tigt
  \usepackage[raiselinks=true,%
              bookmarks=true,%
              bookmarksopenlevel=1,%
@@ -98,7 +98,7 @@
              hyperindex=true,% 
              plainpages=false,% correct hyperlinks
              pdfpagelabels=true,% view TeX pagenumber in PDF reader
-             pdfborder={0 0 0.5}]{hyperref} % erzeuge Hyperlinks z.B. für pdflatex
+             pdfborder={0 0 0.5}]{hyperref} % erzeuge Hyperlinks z.B. fï¿½r pdflatex
 %\usepackage[CJKbookmarks]{hyperref}
  \usepackage[pdftex]{thumbpdf}
  \pdfcompresslevel=9   % scheint zwar nichts zu bringen, aber was soll's
@@ -118,12 +118,12 @@
 % sonst klappt die PDF-Ausgabe nicht:
 %\usepackage{float} %z.B. \floatstyle{ruled}
 
-%% Seitengröße mit geometry-Paket einstellen
+%% Seitengrï¿½ï¿½e mit geometry-Paket einstellen
 \geometry{left=3cm,right=3cm,top=23mm,bottom=25mm,head=14.5pt}
 
 %% Stil
-\parindent 0cm                     % Absatzanfang wird nicht eingerückt
-\parskip1.5ex plus0.5ex minus0.5ex % Abstand zwischen zwei Absätzen
+\parindent 0cm                     % Absatzanfang wird nicht eingerï¿½ckt
+\parskip1.5ex plus0.5ex minus0.5ex % Abstand zwischen zwei Absï¿½tzen
 
 %\newcommand{\headfont}{\fontfamily{ppl}\selectfont}
 %\newcommand{\headfont}{\sffamily}
@@ -154,11 +154,11 @@
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Linien für Bilder (benötigt float.sty)
+% Linien fï¿½r Bilder (benï¿½tigt float.sty)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Achtung! Folgende Änderungen sind evtl. vom benutzten float.sty abhängig,
-% d.h. bei Änderungen des float.sty sind folgende Makros nicht mehr definiert
-% oder unwirksam. In diesem Fall muß erneut angepaßt werden.
+% Achtung! Folgende ï¿½nderungen sind evtl. vom benutzten float.sty abhï¿½ngig,
+% d.h. bei ï¿½nderungen des float.sty sind folgende Makros nicht mehr definiert
+% oder unwirksam. In diesem Fall muï¿½ erneut angepaï¿½t werden.
 %\newlength{\float@capnamewd}   % neu
 %\newlength{\float@cparwidth}   % neu
 %\newsavebox{\float@capnamebox} % neu
@@ -223,7 +223,7 @@
 \newlength{\chapnolen}
 \newlength{\chapparlen}
 \newsavebox{\chapno}
-%% Kein ``Kapitel'' bei Kapitelüberschrift
+%% Kein ``Kapitel'' bei Kapitelï¿½berschrift
 % \renewcommand{\@chapapp}{} allein reicht nicht!
 %% \chapter{...}
 \renewcommand{\@makechapterhead}[1]{%

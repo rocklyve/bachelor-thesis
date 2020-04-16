@@ -198,7 +198,7 @@ src/anhang
 %% ++++++++++++++++++++++++++++++++++++++++++
 \ifnotdraft{
 {\parskip 0pt\tableofcontents} % toc bitte einzeilig
-\pagenumbering{roman}
+%\pagenumbering{roman}
 %\cleardoublepage
 %\addcontentsline{toc}{chapter}{\listfigurename}
 %\listoffigures
@@ -225,10 +225,10 @@ src/anhang
 \graphicspath{{images/}}
 
 \mainmatter
-\null
-\newpage
-\pagenumbering{arabic}
-\include{src/statement}  % Einleitung
+%\null
+\blankpage
+%\include{src/statement}  % Einleitung
+\setcounter{page}{1}
 \include{src/introduction}  % Einleitung
 \include{src/background}  % Grundlagen
 \include{src/analysis}     % Analyse
