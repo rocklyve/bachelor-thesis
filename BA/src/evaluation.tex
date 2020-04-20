@@ -153,7 +153,9 @@ Die Abbildungen listen die Anzahl der vorhergesagten Einsen für jede einzelne S
 Da eine Sekunde aufgrund der überlappenden Fenster in mehreren Fenstern vorkommt, summieren sich die Vorhersagen pro Sekunde maximal auf die Fenstergröße.
 Zu Erkennen ist, dass die Fenstergröße von $10\si{\s}$ deutlich bessere Ergebnisse liefert als eine Fenstergröße von $5\si{\s}$. 
 XGBoost neigt bei einer Fenstergröße von $5\si{\s}$ zum Overfitting, ebenso wie Random Forest. 
-Alle Ergebnisse des LOSO Kreuzvalidierungsverfahrens sind mit dem \textit{Precision}, \textit{Recall} und dem \textit{f1-score} in der darunterliegenden Tabelle mit dem Mittelwert zusammengetragen worden. 
+Alle Ergebnisse des LOSO Kreuzvalidierungsverfahrens sind in Form von dem jeweiligen Mittelwert von \textit{Precision} und \textit{Recall} in der unterliegenden Tabelle mit dem daraus berechnenden \textit{f1"=score} zusammengetragen worden.
+Dieser berechnet sich mit der Formel
+\[\text{\textit{f1"=score}} = 2 \cdot \frac{\text{\textit{precision}} \cdot \text{\textit{recall}}}{\text{\textit{precision}} + \text{\textit{recall}}}\text{ .}\]
 Zu sehen ist, dass XGBoost bessere Ergebnisse liefert als Random Forest.
 % \todo{schreibe darüber, was die ergebnisse von LOSO aussagen} \newline
 Des Weiteren, um mögliche Positionsabhängigkeiten zu erkennen, wurde dasselbe erneut evaluiert, jedoch nur mit den einzelnen Positionsdaten der jeweiligen Person. 
@@ -222,13 +224,12 @@ Dies ist darauf zurückzuführen, dass durch den Tiefpassfilter Informationen ve
             \begin{tabular}{ | l | c | c | r | }
               \hline
                & precision & recall & f1-score\\ \hline
-              0 & 0.92 & 0.75 & 0.81 \\ \hline
-              1 & 0.75 & 0.67 & 0.47 \\
+              0 & 0.92 & 0.75 & 0.83 \\ \hline
+              1 & 0.4  & 0.67 & 0.5 \\
               \hline
             \end{tabular}
         \end{center}
-        \caption{Random Forest mit dem Kreuzvalidierungsverfahren (LOSO): Die Tabelle zeigt den Mittelwert aller Vorhersagen der einzelnen Personen.}
-        \label{implementation:app:screenshots:user_studies_information}
+        %\caption{Random Forest mit dem Kreuzvalidierungsverfahren (LOSO): Die Tabelle zeigt den Mittelwert aller Vorhersagen der einzelnen Personen.}
     \end{subfigure}
     \newline
     \vspace*{1 cm}
@@ -252,15 +253,14 @@ Dies ist darauf zurückzuführen, dass durch den Tiefpassfilter Informationen ve
           \begin{tabular}{ | l | c | c | r | }
             \hline
              & precision & recall & f1-score\\ \hline
-            0 & 0.92 & 0.77 & 0.83\\ \hline
-            1 & 0.77 & 0.67 & 0.5\\
+            0 & 0.92 & 0.76 & 0.83\\ \hline
+            1 & 0.43 & 0.69 & 0.53\\
             \hline
           \end{tabular}
       \end{center}
-      \caption{Random Forest mit dem Kreuzvalidierungsverfahren (LOSO): Die Tabelle zeigt den Mittelwert aller Vorhersagen der einzelnen Personen.}
-      \label{implementation:app:screenshots:user_studies_information}
+      %\caption{Random Forest mit dem Kreuzvalidierungsverfahren (LOSO): Die Tabelle zeigt den Mittelwert aller Vorhersagen der einzelnen Personen.}
   \end{subfigure}
-    \caption{Das Kreuzvalidierungsverfahren (LOSO) mit dem Klassifikationsalgorithmus Random Forest. Das Modell wurde auf allen Personen, exklusive einer Person, trainiert. Auf alle Positionen dieser einen Person wurde eine Vorhersage getroffen. Beim Beispiel hier sind die Resultate von Person 6 zu sehen. Die blauen Bereiche sind die, in denen die Luft angehalten wurde, die orange Kurve zeigt die Vorhersage ($w=$ Fenstergröße, $d=$ Verschiebung der Fenster).}
+    \caption{Das Kreuzvalidierungsverfahren (LOSO) mit dem Klassifikationsalgorithmus Random Forest. Das Modell wurde auf allen Personen, exklusive einer Person, trainiert. Auf alle Positionen dieser einen Person wurde eine Vorhersage getroffen. Die Grafiken stellen die Resultate von Person 6 dar. Die blauen Bereiche sind die, in denen die Luft angehalten wurde, die orange Kurve zeigt die Vorhersage ($w=$ Fenstergröße, $d=$ Verschiebung der Fenster). Die jeweils darunter liegende Tabelle zeigt den Mittelwert der Resultate (\textit{precision} \& \textit{recall}) des Kreuzvalidierungsverfahrens aller Personen sowie der daraus berechnete \textit{f1-score}.}
 \label{evaluation:random_forest_loso:person6}
 \end{figure}
 
@@ -287,13 +287,12 @@ Dies ist darauf zurückzuführen, dass durch den Tiefpassfilter Informationen ve
             \begin{tabular}{ | l | c | c | r | }
               \hline
                & precision & recall & f1-score \\ \hline
-              0 & 0.93 & 0.71 & 0.79 \\ \hline
-              1 & 0.72 & 0.69 & 0.47 \\
+              0 & 0.93 & 0.71 & 0.8 \\ \hline
+              1 & 0.35 & 0.71 & 0.47 \\
               \hline
             \end{tabular}
         \end{center}
-        \caption{XGBoost mit dem Kreuzvalidierungsverfahren (LOSO): Die Tabelle zeigt den Mittelwert aller Vorhersagen der einzelnen Personen.}
-        \label{implementation:app:screenshots:user_studies_information}
+        %\caption{XGBoost mit dem Kreuzvalidierungsverfahren (LOSO): Die Tabelle zeigt den Mittelwert aller Vorhersagen der einzelnen Personen.}
     \end{subfigure}
     \newline
     \vspace*{1 cm}
@@ -317,13 +316,12 @@ Dies ist darauf zurückzuführen, dass durch den Tiefpassfilter Informationen ve
           \begin{tabular}{ | l | c | c | r | }
             \hline
              & precision & recall & f1-score \\ \hline
-            0 & 0.93 & 0.74 & 0.8 \\ \hline
-            1 & 0.74 & 0.75 & 0.5 \\
+            0 & 0.92 & 0.77 & 0.84 \\ \hline
+            1 & 0.44 & 0.7  & 0.54 \\
             \hline
           \end{tabular}
       \end{center}
-      \caption{XGBoost mit dem Kreuzvalidierungsverfahren (LOSO): Die Tabelle zeigt den Mittelwert aller Vorhersagen der einzelnen Personen.}
-      \label{implementation:app:screenshots:user_studies_information}
+      %\caption{XGBoost mit dem Kreuzvalidierungsverfahren (LOSO): Die Tabelle zeigt den Mittelwert aller Vorhersagen der einzelnen Personen.}
   \end{subfigure}
     \caption{Das Kreuzvalidierungsverfahren (LOSO) mit dem Klassifikationsalgorithmus XG Boost: Das Modell wurde auf allen Personen, exklusive einer Person, trainiert. Auf alle Positionen dieser einen Person wurde eine Vorhersage getroffen. Am Beispiel hier sind die Resultate von Person 6 zu sehen. Die blauen Bereiche sind die, in denen die Luft angehalten wurde, die orange Kurve zeigt die Vorhersage ($w=$ Fenstergröße, $d=$ Verschiebung der Fenster).}
 \label{evaluation:xgboost_loso:person6}
@@ -337,33 +335,33 @@ Dies ist darauf zurückzuführen, dass durch den Tiefpassfilter Informationen ve
           \begin{tabular}{ | l | c | c | c | c | c | r | }
             \hline
             Klassifikation & Fenstergröße & Position & & precision & recall & f1-score \\ \hline
-            Random Forest & 5s & Seite & 0 & 0.86 & 0.76 & 0.81 \\ 
-                          &    &       & 1 & 0.76 & 0.57 & 0.48 \\ \hline
-                          &    & Rücken& 0 & 0.90 & 0.79 & 0.83 \\ 
-                          &    &       & 1 & 0.83 & 0.52 & 0.39 \\ \hline
-                          &    & Bauch & 0 & 0.92 & 0.72 & 0.70 \\ 
-                          &    &       & 1 & 0.72 & 0.69 & 0.52 \\ \hline
+            Random Forest & 5s & Seite & 0 & 0.84 & 0.71 & 0.77 \\ 
+                          &    &       & 1 & 0.39 & 0.55 & 0.46 \\ \hline
+                          &    & Rücken& 0 & 0.9  & 0.84 & 0.87 \\ 
+                          &    &       & 1 & 0.46 & 0.47 & 0.46 \\ \hline
+                          &    & Bauch & 0 & 0.89 & 0.67 & 0.76 \\ 
+                          &    &       & 1 & 0.53 & 0.73 & 0.61 \\ \hline
             \hline
-            XG Boost & 5s & Seite & 0 & 0.91 & 0.67 & 0.71 \\
-                     &    &       & 1 & 0.67 & 0.61 & 0.35 \\ \hline
-                     &    & Rücken& 0 & 0.90 & 0.74 & 0.80 \\ 
-                     &    &       & 1 & 0.75 & 0.57 & 0.38 \\ \hline
-                     &    & Bauch & 0 & 0.94 & 0.71 & 0.74 \\ 
-                     &    &       & 1 & 0.71 & 0.72 & 0.55 \\ \hline
+            XG Boost & 5s & Seite & 0 & 0.85 & 0.69 & 0.76 \\
+                     &    &       & 1 & 0.37 & 0.54 & 0.44 \\ \hline
+                     &    & Rücken& 0 & 0.89 & 0.8  & 0.84 \\ 
+                     &    &       & 1 & 0.4  & 0.49 & 0.44 \\ \hline
+                     &    & Bauch & 0 & 0.91 & 0.6  & 0.72 \\ 
+                     &    &       & 1 & 0.45 & 0.76 & 0.57 \\ \hline
             \hline
-            Random Forest & 10s & Seite & 0 & 0.89 & 0.77 & 0.83 \\ 
-                          &     &       & 1 & 0.80 & 0.67 & 0.5 \\ \hline
-                          &     & Rücken& 0 & 0.89 & 0.83 & 0.85 \\
-                          &     &       & 1 & 0.82 & 0.52 & 0.41 \\ \hline
-                          &     & Bauch & 0 & 0.93 & 0.71 & 0.74 \\
-                          &     &       & 1 & 0.71 & 0.70 & 0.49 \\ \hline
+            Random Forest & 10s & Seite & 0 & 0.89 & 0.79 & 0.84 \\ 
+                          &     &       & 1 & 0.41 & 0.53 & 0.46 \\ \hline
+                          &     & Rücken& 0 & 0.89 & 0.82 & 0.85 \\
+                          &     &       & 1 & 0.52 & 0.48 & 0.5  \\ \hline
+                          &     & Bauch & 0 & 0.94 & 0.7  & 0.8  \\
+                          &     &       & 1 & 0.46 & 0.73 & 0.56 \\ \hline
             \hline
-            XGBoost & 10s & Seite & 0 & 0.90 & 0.78 & 0.78 \\
-                    &     &       & 1 & 0.78 & 0.71 & 0.47 \\ \hline
-                    &     & Rücken& 0 & 0.90 & 0.85 & 0.86 \\
-                    &     &       & 1 & 0.85 & 0.50 & 0.44 \\ \hline
-                    &     & Bauch & 0 & 0.94 & 0.72 & 0.75 \\
-                    &     &       & 1 & 0.72 & 0.70 & 0.53 \\ \hline
+            XGBoost & 10s & Seite & 0 & 0.89 & 0.68 & 0.77 \\
+                    &     &       & 1 & 0.37 & 0.62 & 0.47 \\ \hline
+                    &     & Rücken& 0 & 0.89 & 0.84 & 0.86 \\
+                    &     &       & 1 & 0.53 & 0.5  & 0.52 \\ \hline
+                    &     & Bauch & 0 & 0.94 & 0.7  & 0.8  \\
+                    &     &       & 1 & 0.51 & 0.73 & 0.6  \\ \hline
           \end{tabular}
           \smallskip
       \end{center}
@@ -371,6 +369,6 @@ Dies ist darauf zurückzuführen, dass durch den Tiefpassfilter Informationen ve
   \end{minipage} 
     
   \end{tabular}
-  \caption{Zu sehen sind die Klassifikationsergebnisse mit dem Kreuzvalidierungsverfahren bei einer Fenstergröße von 5 bzw. 10 Sekunden, welche um eine Sekunde verschoben wurden. Es wurde immer eine Person beim Trainieren des Modells ausgelassen. Für diese Person wurde anschließend eine Vorhersage getroffen. Jede Person wurde einmal in dem Modell außen vorgelassen und für dieses Modell vorhergesagt. Das zu sehende Resultat ist der Mittelwert aller Resultate des Kreuzvalidierungsverfahrens der einzelnen Positionen.}
+  \caption{Zu sehen sind die Klassifikationsergebnisse mit dem Kreuzvalidierungsverfahren bei einer Fenstergröße von 5 bzw. 10 Sekunden, welche um eine Sekunde verschoben wurden. Jede Person wurde einmal beim Trainieren des Modells ausgelassen. Für diese Person wurde anschließend eine Vorhersage getroffen. Das zu sehende Ergebnis ist der Mittelwert der Resultate (\textit{precision} \& \textit{recall}) des Kreuzvalidierungsverfahrens aller Personen bezüglich der jeweiligen Positionen sowie der daraus berechnete \textit{f1-score}.}
   \label{evaluation:loso_classification_results}  
 \end{table}

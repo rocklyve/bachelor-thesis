@@ -44,7 +44,7 @@ Während dieses Ablaufs wird ein Objekt erstellt, welches die Messung verwaltet.
 \subsection{Messung}
 \label{ch:Implementierung:app:measurement}
 Eine Messung wird im Code in einem \textit{Measurement} Objekt persistiert.
-Durch ein Observer-Pattern wird der \textit{MeasurementFlow} über jegliche Änderung informiert und kann entsprechende Handlungen durchführen.
+Durch ein Observer-Pattern wird der \textit{MeasurementFlow} über jegliche Änderung informiert und kann entsprechende Handlungen durchführen. \\
 Durch die Funktionen \texttt{startMeasurement} und \texttt{stopMeasurement} kann eine Messung gestartet beziehungsweise gestoppt werden.
 Mit der Funktion \texttt{startMeasurement} wird das IMU-Sampling per BLE sowie die Audioaufnahme gestartet. 
 Ebenso wird der erste Timer gestartet und ein doppeltes Lichtsignal wird gesendet. 

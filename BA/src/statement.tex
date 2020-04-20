@@ -32,7 +32,7 @@ Dies simuliert ein zentrales Apnoeereignis und stellt die Grundlage dar, unter w
 In der Evaluation wird mit verschiedenen maschinellen Lernverfahren zur Klassifikation das Kreuzvalidierungsverfahren durchgeführt.
 Mit dem Kreuzvalidierungsverfahren {\glqq Within Subject\grqq} wurde ein \textit{score} von bis zu 95\% erreicht, mit dem Kreuzvalidierungsverfahren {\glqq Leave One Subject Out\grqq} ergab sich eine hohe Varianz in den Ergebnissen von Studienteilnehmer zu Studienteilnehmer.
 Hier wurde ein \textit{f1-score} von bis zu 86\% erreicht, ein Fenster ohne Apnoeereignis vorherzusagen. 
-Ein Fenster als Apnoeereignis zu deklarieren ergab einen \textit{f1-score} von bis zu 55\%. 
+Ein Fenster als Apnoeereignis zu deklarieren ergab einen \textit{f1-score} von bis zu 61\%. 
 Im Mittel ergab das Kreuzvalidierungsverfahren {\glqq Within Subject\grqq} einen \textit{score} von 94\% mit XGBoost und einer Fenstergröße von $10\si{\s}$ und einer Verschiebung der Fenster um $1\si{\s}$.
 Das Kreuzvalidierungsverfahren {\glqq Leave One Subject Out\grqq} ergab im Mittel einen \textit{f1-score} von 79\% bei der Klassifikation eines Fensters ohne Apnoeereignis und 47\% eines Fensters mit Apnoeereignis.
 Aufgrund der hohen Anzahl an Features pro Fenster (circa 6000) neigt das Modell zu Overfitting, was die Varianz der Resultate erklärt.
