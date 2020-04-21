@@ -32,21 +32,21 @@ Bei der aktuellen Klassifikation wird jedes Fenster separat und unabhängig von 
 Ein LSTM (\textit{Long short-term Memory}) würde hier die vorherigen bzw. nachfolgenden Fenster ebenfalls in Betracht ziehen und deren Entscheidung mit in die aktuelle Entscheidungsfindung einfließen lassen. 
 Somit wird die Fehlerquote verringert, da potenzielle Outlier vermieden werden.
 
-Zudem gibt es die Möglichkeit, die weiteren Features der IMU-Daten zu berechnen.
+Zudem gibt es die Möglichkeit, weiteren Features zu berechnen.
 In dieser Bachelorarbeit wurden alle Features aus \texttt{tsfresh} mit in Betracht gezogen. 
 Es könnten weitere Features in die Auswertung mit einfließen.
-Es ist möglich, anhand der IMU-Daten das Puls- und $SPO_2$-Signal zu extrahieren. 
+Mittels eines Pulsoximeters im Ohr könnte das Puls- und $SPO_2$-Signal extrahiert werden. 
 Diese beiden Signale können dann als Feature pro Fenster weitere Erkenntnisse liefern.
+Ein Pulsoximeter ist in den eSense-Earpods nicht verbaut, jedoch existiert mit dem \textit{cosinuss\textdegree -Earpod} ein entsprechendes Earable, welches die nötigen Signale liefern kann.
 In der Abbildung \ref{futureWork:pulseSpo2} ist eine Beispielmessung eines Probanden zu sehen. 
-In blau sind die Phasen zu sehen, in denen der Proband die Luft angehalten hat.
-Hier ist der Wert auf 1 gesetzt, wenn die Person die Luft angehalten hat, ansonsten ist der Wert auf 0. 
-In grün ist das $SpO_2$-Signal zu sehen, in orange das Pulssignal. 
+In grün sind die Phasen zu sehen, in denen der Proband die Luft angehalten hat.
+In orange ist das $SpO_2$-Signal zu sehen, in blau das Pulssignal. 
 Das $SpO_2$-Signal zeigt einen Abstieg nach dem Luftanhalten, ebenso steigt der Puls nach dem Luftanhalten.
 Wenn dieses Signal mit in die Features mit aufgenommen wird, könnte ebenfalls die Genauigkeit der Klassifikation steigen. 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=1\textwidth]{futureWork/pulseSpo2_edited}
-    \caption{Darstellung des Pulses und $SpO_2$-Signals einer Messung an einem Probanden. Beide Signale wurden aus den IMU-Daten der eSense-Earpods herausgefiltert. Das $SpO_2$-Signal zeigt Einbrüche an genau den 3 Stellen, an denen der Proband die Luft angehalten hat. Der Puls ist in diesen Bereichen ebenfalls minimal gestiegen. In grün sind die Bereiche markiert, in denen der Proband die Luft angehalten hat.}
+    \caption{Darstellung des Pulses und $SpO_2$-Signals einer Messung an einem Probanden. Beide Signale wurden aus den Sensoren des PSG"=Systems herausgefiltert. Das $SpO_2$-Signal zeigt Einbrüche an genau den 3 Stellen, an denen der Proband die Luft angehalten hat. Der Puls ist in diesen Bereichen ebenfalls minimal gestiegen. In grün sind die Bereiche markiert, in denen der Proband die Luft angehalten hat.}
     \label{futureWork:pulseSpo2}
 \end{figure}
 

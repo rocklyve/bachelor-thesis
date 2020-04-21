@@ -27,14 +27,14 @@ Da man oft bis zu drei Monate auf einen Termin warten muss und die Untersuchung 
 \newpage
 
 \section{Idee}
-Die Idee ist nun solche Signaleinbrüche mit maschinellem Lernen zu erkennen (siehe Abbildung \ref{introduction:problem_description}). 
+Die Idee ist nun solche Signaleinbrüche mit maschinellem Lernen zu erkennen (siehe Abb. \ref{introduction:problem_description}). 
 Das Signal wird durch eine IMU (\textit{inertial measurement unit}) der eSense-Earpods geliefert.
 Dieses Signal besteht aus 6-Achsen, den \textit{x-}, \textit{y-} und \textit{z}-Achsen des Gyroskop- und Beschleunigungssensors.
 Durch eine Klassifikation, also ob in einem Zeitintervall ein Apnoeereignis vorgekommen ist, oder nicht, kann eine erste Diagnose eines respiratorischen Ereignisses bereits bequem von Zuhause aus erfolgen.
 Da der Proband eine Messung mit den eSense-Earpods über viele Nächte durchführen kann, sind die Signale über einen deutlich längeren Zeitabschnitt verfügbar, als sie in einem Schlaflabor aufgezeichnet werden.
 
 \section{Struktur}
-Zu Beginn wird eine App konstruiert, welche sich mit den eSense-Earpods über BLE (\textit{Bluetooth Low Energy}) verbindet (siehe Abbildung \ref{introduction:ba_record}).
+Zu Beginn wird eine App konstruiert, welche sich mit den eSense-Earpods über BLE (\textit{Bluetooth Low Energy}) verbindet (siehe Abb. \ref{introduction:ba_record}).
 Anschließend wird eine Nutzerstudie mit 7 Personen durchgeführt, um einen Datensatz zu generieren.
 Den Probanden wird über die Lautsprecher der eSense-Earpods mitgeteilt, wenn sie die Luft anhalten sollen, um eine zentrale Apnoe zu simulieren.
 Anhand dieses Datensatzes kann schlussendlich ein Klassifikator trainiert werden, womit eine zukünftige Voraussage einer Messung getroffen werden kann.
