@@ -153,7 +153,7 @@ Die Abbildungen listen die Anzahl der vorhergesagten Einsen für jede einzelne S
 Da eine Sekunde aufgrund der überlappenden Fenster in mehreren Fenstern vorkommt, summieren sich die Vorhersagen pro Sekunde maximal auf die Fenstergröße.
 Zu Erkennen ist, dass die Fenstergröße von $10\si{\s}$ deutlich bessere Ergebnisse liefert als eine Fenstergröße von $5\si{\s}$. 
 XGBoost neigt bei einer Fenstergröße von $5\si{\s}$ zum Overfitting, ebenso wie Random Forest. 
-Alle Ergebnisse des LOSO Kreuzvalidierungsverfahrens sind in Form von dem jeweiligen Mittelwert von \textit{Precision} und \textit{Recall} in der unterliegenden Tabelle mit dem daraus berechnenden \textit{f1"=score} zusammengetragen worden.
+Alle Ergebnisse des LOSO Kreuzvalidierungsverfahrens sind in Form von dem jeweiligen Mittelwert von \textit{Precision} und \textit{Recall} in der darunterliegenden Tabelle mit dem daraus folgenden \textit{f1"=score} zusammengetragen.
 Dieser berechnet sich mit der Formel
 \[\text{\textit{f1"=score}} = 2 \cdot \frac{\text{\textit{precision}} \cdot \text{\textit{recall}}}{\text{\textit{precision}} + \text{\textit{recall}}}\text{ .}\]
 Zu sehen ist, dass XGBoost bessere Ergebnisse liefert als Random Forest.
@@ -323,7 +323,7 @@ Dies ist darauf zurückzuführen, dass durch den Tiefpassfilter Informationen ve
       \end{center}
       %\caption{XGBoost mit dem Kreuzvalidierungsverfahren (LOSO): Die Tabelle zeigt den Mittelwert aller Vorhersagen der einzelnen Personen.}
   \end{subfigure}
-    \caption{Das Kreuzvalidierungsverfahren (LOSO) mit dem Klassifikationsalgorithmus XG Boost: Das Modell wurde auf allen Personen, exklusive einer Person, trainiert. Auf alle Positionen dieser einen Person wurde eine Vorhersage getroffen. Am Beispiel hier sind die Resultate von Person 6 zu sehen. Die blauen Bereiche sind die, in denen die Luft angehalten wurde, die orange Kurve zeigt die Vorhersage ($w=$ Fenstergröße, $d=$ Verschiebung der Fenster).}
+    \caption{Das Kreuzvalidierungsverfahren (LOSO) mit dem Klassifikationsalgorithmus XG Boost: Das Modell wurde auf allen Personen, exklusive einer Person, trainiert. Auf alle Positionen dieser einen Person wurde eine Vorhersage getroffen. Am Beispiel hier sind die Resultate von Person 6 zu sehen. Die blauen Bereiche sind die, in denen die Luft angehalten wurde, die orange Kurve zeigt die Vorhersage ($w=$ Fenstergröße, $d=$ Verschiebung der Fenster). Die jeweils darunter liegende Tabelle zeigt den Mittelwert der Resultate (\textit{precision} \& \textit{recall}) des Kreuzvalidierungsverfahrens aller Personen sowie der daraus berechnete \textit{f1-score}.}
 \label{evaluation:xgboost_loso:person6}
 \end{figure}
 

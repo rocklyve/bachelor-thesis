@@ -14,8 +14,9 @@ Jeder Messwert wird in der Datenbank abgespeichert.
 In Abbildung \ref{implementation:app:erModel} ist das ER"=Diagramm der Datenbank beschrieben.
 Das Gerät wird bei der ersten Kopplung mit dem Namen und dessen Identifikator in der Tabelle {\glqq Device\grqq} abgespeichert.
 Der Identifikator ist hierbei eine Repräsentation der MAC-Adresse, welche unter Swift nicht erreichbar ist.
-Für jeden Messwert wird ein Eintrag in der Tabelle {\glqq EsenseData\grqq} abgelegt sowie eine Referenz zu den \textit{x-}, \textit{y-} und \textit{z}-Achsenwerten der Gyroskop- und Beschleunigungsdaten, welche in der entsprechenden Tabelle abgelegt werden.
-Zudem wird für jede Messung ein Zeitstempel (\texttt{timestamp}), eine Messungs"=ID (\texttt{measurementID}), die aktuell auszuführende Aufgabe (\texttt{task}) und die Information, ob die LED des Smartphones an ist, oder nicht (\texttt{lightOn}), abgespeichert.
+Für jeden Messwert wird ein Eintrag in der Tabelle {\glqq EsenseData\grqq} abgelegt sowie eine Referenz zu den \textit{x-}, \textit{y-} und \textit{z}-Achsenwerten der Gyroskop- und Beschleunigungsdaten, welche in der entsprechenden Tabelle abgelegt werden. \\
+Zudem wird für jede Messung ein Zeitstempel (\texttt{timestamp}), eine Messungs"=ID \\ 
+(\texttt{measurementID}), die aktuell auszuführende Aufgabe (\texttt{task}) und die Information, ob die LED des Smartphones an ist, oder nicht (\texttt{lightOn}), abgespeichert.
 
 Die App ist in 3 Sektionen aufgeteilt, einer \textit{Chartansicht}, einer \textit{Messungsansicht} sowie einer \textit{Einstellungsansicht} (Abb. \ref{implementation:app:screenshots} Tabbar).
 Im Weiteren wird nur die \textit{Messungsansicht} genauer erläutert, da die anderen Ansichten im Rahmen der Bachelorarbeit nicht relevant sind.
@@ -132,7 +133,7 @@ Nun ist garantiert, dass die Zeitwerte des PSG-Systems und des Smartphones synch
   \end{subfigure}
   \begin{subfigure}{.49\textwidth}
     \includegraphics[width=1\textwidth]{data_analyzation/light_peak_detail_before.png}
-    \caption{Zeitlicher Lichtpeakvergleich vor der Synchronisation. Der Lichtpeak des PSG-Geräts (orange) ist weniger als 1s vom Signal der eSense-Earpods (blau) entfernt. Der Zeitwert ist in $\si{\ms}$ angegeben. Die Lichtsignale wurden skaliert, um diese vergleichen zu können. }
+    \caption{Zeitlicher Lichtpeakvergleich vor der Synchronisation. Der Lichtpeak des PSG-Geräts (orange) ist weniger als 1s vom Si"-gnal der eSense-Earpods (blau) entfernt. Der Zeitwert ist in $\si{\ms}$ angegeben. Die Licht"-si"-gnale wurden skaliert, um diese vergleichen zu können. }
     \label{implementation:synchronisation:before_light_peak}
   \end{subfigure}
   \begin{subfigure}{.49\textwidth}

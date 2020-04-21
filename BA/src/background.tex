@@ -165,7 +165,7 @@ Somit werden schwierige Fälle besonders beachtet, da die Anpassung der Gewichtu
 Das Trainieren auf Teilmengen wird auch als stochastisches Gradient Boosting bezeichnet und verringert die Wahrscheinlichkeit für Overfitting.
 Zudem wird eine bessere Generalisierbarkeit erreicht.
 
-Zu Beginn wird ein Basismodell bestehend aus den Entscheidungsbäumen gewählt, worauf anschließend Vorhersagen anhand der Trainingsdaten getroffen werden.
+Zu Beginn wird ein Basismodell bestehend aus den Entscheidungsbäumen gewählt, worauf anschließend Vorhersagen anhand der Trainingsdaten getroffen werden. \\
 Daraufhin werden die Gewichte je nach der getroffenen Vorhersage angepasst.
 Aus dem Basismodell mit den nun angepassten Gewichten wird eine Teilmenge gewählt, womit erneut Entscheidungsbäume entstehen und Vorhersagen getroffen werden können.
 Bei Gradient Boosting wird nun mittels Gradienten der Fehler der verschiedenen Ensembles minimiert.
@@ -320,7 +320,7 @@ Die Abbildung \ref{background:googleGlass:respiratory_wave} zeigt ein Beispiel e
 \subsection{Überwachung von Puls und Atmung mittels eSense-Earpods}
 Im Jahr 2019 wurde von \textit{Tobias Röddiger}, \textit{Daniel Wolffram} und \textit{David Laubenstein} nachgewiesen, dass es möglich ist, mittels den eSense-Earpods die Atmung und den Puls annähernd zu ermitteln \cite{roddigerRespirationRateMonitoring2019}. 
 Dies gelang etwas genauer als das Monitoring von \textit{J. Hernandez} mit dem Google Glass \cite{hernandezCardiacRespiratoryParameter}.
-Es wurde hierbei eine Studie mit 12 Personen aufgezeichnet, welche in 3 Positionen (liegend, stehend, sitzend) jeweils vor beziehungsweise nach einer sportlichen Bewegungsphase einen einminütigen Atemablauf durchgeführt haben. 
+Es wurde hierbei eine Studie mit 12 Personen aufgezeichnet, welche in 3 Positionen (liegend, stehend, sitzend) jeweils vor beziehungsweise nach einer sportlichen Bewegungsphase einen einminütigen Atem"-ab"-lauf durchgeführt haben. 
 Die Analyse der Daten erfolgte im Anschluss der Studie.
 Dabei wurden die Daten in einer Pipeline verarbeitet, welche zuerst das Rauschen reduzierte, anschließend einen Triangle-Filter der Breite $2\si{\s}$ anwendete und danach eine PCA (engl. \textit{principal component analysis}) ausführte, um die Daten unabhängig von deren Achse zu bewerten.
 Nun wurden Fenster mit der Größe von $20\si{\s}$ extrahiert, anhand welchen Atmung und Puls berechnet wurde.
@@ -334,7 +334,7 @@ Anschließend wurde eine kubische Splineinterpolation auf den Datensatz angewand
 Falls zuviel Bewegung in einem Fenster zu erkennen ist, wurde das Fenster verworfen \cite{sunSleepMonitorMonitoringRespiratory2017}.
 Daraufhin wurde ein Bandpass-Butterworth-Filter der 4. Ordnung auf den Datensatz angewandt, um das Rauschen zu entfernen.
 Zum weiteren Glätten der Signale wurde ein Dreiecksfilter angewandt \cite{haotianMindfulWatch2017}, worauf schließlich eine Hauptkomponentenanalyse (PCA) durchgeführt wurde.
-Auf jede Hauptkomponente wurde nun eine Spektralanalyse mithilfe einer Fourier-Transformation (FFT) angewandt. 
+Auf jede Hauptkomponente wurde nun eine Spektralanalyse mithilfe einer Fourier"=Transformation (FFT) angewandt. 
 Die Frequenz, welche dem Peak mit der höchsten Magnitude entspricht, resultiert schlussendlich als Atemfrequenz.
 
 \begin{figure}[ht]
