@@ -75,7 +75,7 @@ This simulates a central apnea event and provides the basis for the classifier a
 In the evaluation, various machine learning methods for classification are used to perform a cross-validation procedure. 
 With the cross-validation procedure {\glqq Within Subject\grqq} a score of up to 95\% was achieved, with the cross-validation procedure {\glqq Leave One Subject Out\grqq} there was a high variance in the results from participant to participant. 
 An f1-score of up to 86\% was achieved to predict that no apnea event occurred in this window. 
-Declaring a window as an apnea event resulted in an f1-score of up to 55\%.
+Declaring a window as an apnea event resulted in an f1-score of up to 61\%.
 On average, the cross-validation procedure {\glqq Within Subject\grqq} resulted in a score of 94\% with XGBoost and a window size of $10\si{\s}$ and a shifting window of $1\si{\s}$. 
 The cross-validation procedure {\glqq Leave One Subject Out\grqq} resulted in an average f1-score of 79\% for the classification of a window without apnea event and 47\% for a window with apnea event. 
 Due to the high number of features per window (around 6000), the model tends to overfitting which explains the variance of the results.
