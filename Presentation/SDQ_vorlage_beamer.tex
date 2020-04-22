@@ -18,6 +18,9 @@
 % for widescreen slides (16:9), use 'beamerthemekitwide'
 % for widescreen slide without sidebar use 'beamerthemekitwidenosidebar'
 
+\usepackage{xkeyval}
+\usepackage{todonotes}
+\presetkeys{todonotes}{inline}{}
 \usepackage{templates/beamerthemekit}
 %\usepackage{templates/beamerthemekitwide}
 %\usepackage{templates/beamerthemekitwidenosidebar}
@@ -86,23 +89,95 @@
 \subsection{Problem}
 \begin{frame}{Problem}
 \begin{itemize}
-\item PCM, Citation: \cite{becker2008a} %\language
-\pause
-\item Bullet point 2
+\item \todo{info about sleep and sleep apnea}
+\item \todo{solution: schlaflabor, füge noch bild hinzu}
 \item \dots
 \end{itemize}
 \end{frame}
 
 \subsection{Idee}
 \begin{frame}{Idee}
-\begin{block}{Block 1}
 \begin{itemize}
-\item Bullet point 1
-\pause
-\item Bullet point 2
-\item \dots
+\item nehme Earables und verscuhe ein Apnoeereignis zu klassifizieren
+\item eSense-Earpods mit IMU
+\item Ground-Truth: Polysomnographie-Gerät
+\item \todo{add pictures of Earables and psg}
 \end{itemize}
-\end{block}
+\end{frame}
+
+\section{Ablauf}
+\begin{frame}{Ablauf}
+\begin{itemize}
+    \item 3 Schritte
+    \begin{itemize}
+        \item App
+        \item Nutzerstudie $/$ Datensatz
+        \item Analyse
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame} {Ablauf: App}
+    \todo{Add Pictures of app}
+\end{frame}
+
+\section{Nutzerstudie}
+\begin{frame}{Nutzerstudie$/$ Datensatz}
+\begin{itemize}
+    \item Nutzerstudie
+    \begin{itemize}
+        \item 7 Personen 
+        \item 3 Positionen (Bauch, Seite, Rücken)
+    \end{itemize}
+    \item Was wird aufgezeichnet?
+    \begin{itemize}
+        \item eSense-Earpods (\textbf{IMU, Mikrofon})
+        \item PSG-System, 11 Sensoren, unter anderem:
+        \begin{itemize}
+            \item Pulssensor am Finger
+            \item \dots \todo{fill with rest of sensors}
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Klassifikation}
+\begin{frame}{Klassifikation}
+\begin{itemize}
+    \item Idee
+    \begin{itemize}
+        \item Teile Messung in \textit{windows} auf
+        \item Pro \textit{window} werden Features berechnet
+        \item Klassifikation anhand der Features
+    \end{itemize}
+    \begin{itemize}
+        \item Evaluation mit dem Kreuzvalidierungsverfahren
+        \begin{itemize}
+            \item Within Subject
+            \item Leave One Subject Out (LOSO)
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame} {Within Subject}    
+    \todo{was ist das, was habe ich alles angeschaut, 94\% war das beste mit XGBoost und 10s mit 1s verschiebung}
+\end{frame}
+
+\begin{frame} {Leave One Subject Out}
+    \todo{was ist LOSO, was wurde alles betrachtet}
+    \todo{Add plots with good results, but also with bad results}
+\end{frame}
+
+\section{Aussicht}
+\begin{frame}{Potenzial / Aussicht}
+    \todo{Puls und SPO2 mit  Pulsoxiometer}
+    \todo{Klassifikation: Betrachtung vorangehender und nachfolgender \textit{windows}}
+    \todo{Nutzerinformationen mit einbeziehen (Gewicht, Geschlecht)}
+\end{frame}
+
+\begin{frame} {Zusammenfassung}    
+    \tableofcontents
 \end{frame}
 
 % \section{Section 2}
